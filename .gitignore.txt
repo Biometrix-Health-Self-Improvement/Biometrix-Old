@@ -1,0 +1,7 @@
+#Recommended gitignore for Android Studio 1.0 and later, http://stackoverflow.com/questions/16736856/what-should-be-in-my-gitignore-for-an-android-studio-project
+.gradle
+/local.properties
+/.idea/workspace.xml
+/.idea/libraries
+.DS_Store
+/build
