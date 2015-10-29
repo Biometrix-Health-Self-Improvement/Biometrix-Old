@@ -25,13 +25,13 @@ import java.sql.Statement;
 import android.os.AsyncTask;
 
 //How the database connection task is called
-new DatabaseConnector().execute();
+new DatabaseLoginConnect().execute();
 
 //Has to extend AsyncTask as AndroidStudio does not let you run a network
 //connection in the main thread.
 //The Void, Void, ResultSet are the return types of the 3 functions you can
 //override in this class (the others are along the line of preExecute and postExecute?)
-class DatabaseConnector extends AsyncTask<Void, Void, ResultSet>
+class DatabaseLoginConnect extends AsyncTask<Void, Void, ResultSet>
 {
 
     //Required method, this is the main method for doing the asynchronous task

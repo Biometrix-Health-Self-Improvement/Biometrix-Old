@@ -112,7 +112,8 @@
                 android:text="OK"
                 android:id="@+id/loginOKButton"
                 android:textAlignment="center"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:onClick="okayButtonClick" />
 
             <Space
                 android:layout_width="wrap_content"
