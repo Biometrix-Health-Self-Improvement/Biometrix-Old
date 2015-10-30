@@ -29,6 +29,11 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.rocket.biometrix.InitialActivityWithPulloutMenu" />
         </activity>
+        <activity
+            android:name=".SelectDate_EmotionRater"
+            android:label="Calendar and Emotion Rater Activity"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
     </application>
 
 </manifest>
