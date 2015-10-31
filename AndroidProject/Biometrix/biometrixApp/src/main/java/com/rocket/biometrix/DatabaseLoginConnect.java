@@ -2,6 +2,7 @@ package com.rocket.biometrix;
 
 /**
  * Created by TJ on 10/28/2015.
+ *
  */
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -38,21 +39,20 @@ public class DatabaseLoginConnect extends AsyncTask<String, Void, Void>
     protected Void doInBackground(String... params)
     {
         try {
-            //Gets the database driver from the jtds jar file in the same path
+            String dbName = "Test";
+            String server = "rocketjpserver.cktljt0phf7d.us-west-2.rds.amazonaws.com:1433";
+            String userName = "ReadOnlyTest";
+            String password = "ReadTest";
+
+            String connectionUrl = "jdbc:jtds:sqlserver://"+server+";" +"databaseName="+dbName+";user="+userName+";password="+password;
             Class.forName("net.sourceforge.jtds.jdbc.Driver").newInstance();
 
-            //The credentials of a test user made in this database. It only has read permissions to the server
-            String sqlUsername = "ReadOnlyTest";
-            String sqlPassword = "ReadTest";
-
-            //The rather complex server string. It is
-            //"driver://servername:port#/DATABASE;user=username;password=password;instance=InstanceType
-            Connection DbConnection = DriverManager.getConnection("jdbc:jtds:sqlserver://rocketjpserver.cktljt0phf7d.us-west-2.rds.amazonaws.com:1433/Test;user=" + sqlUsername + ";password=" + sqlPassword + ";instance=SQLEXPRESS");
+            Connection dbConnection = DriverManager.getConnection(connectionUrl);
 
             Log.w("Connection", "open");
 
             //Creates an SQL statement object.
-            Statement sqlStatement = DbConnection.createStatement();
+            Statement sqlStatement = dbConnection.createStatement();
 
             //Gets a result set from the executed query that is passed.
             String queryString = "select * from Biometrix.dbo.LoginTable";
@@ -77,7 +77,7 @@ public class DatabaseLoginConnect extends AsyncTask<String, Void, Void>
                 loginSuccess = false;
             }
 
-            DbConnection.close();
+            dbConnection.close();
 
         } catch (Exception e)
         {
