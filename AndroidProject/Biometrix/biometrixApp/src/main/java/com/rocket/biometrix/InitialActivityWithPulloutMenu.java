@@ -15,13 +15,23 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 public class InitialActivityWithPulloutMenu extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    protected String username;
+    protected String password;
+
+    static final int GET_LOGIN_REQUEST = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        username = null;
+        password = null;
+
         setContentView(R.layout.activity_initial_activity_with_pullout_menu);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -102,7 +112,7 @@ public class InitialActivityWithPulloutMenu extends AppCompatActivity
         {
             Intent loginIntent = new Intent(this, GetLoginActivity.class);
 
-            startActivity(loginIntent);
+            startActivityForResult(loginIntent, GET_LOGIN_REQUEST);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -112,6 +122,25 @@ public class InitialActivityWithPulloutMenu extends AppCompatActivity
 
 
     public void onClickActivtyCalendarEmotionRater(View v){
-         startActivity(new Intent(this,SelectDate_EmotionRater.class));
+         startActivity(new Intent(this, SelectDate_EmotionRater.class));
     }
+
+    /**
+     * Retrieves the data from a child activity that needs to return data.
+     * @param requestCode Should be identified by a public static int above e.g. GET_LOGIN_REQUEST
+     * @param resultCode An int enumeration of different codes e.g. RESULT_OK
+     * @param data An intent containing any needed data
+     */
+    protected void onActivityResult(int requestCode, int resultCode,
+                                    Intent data) {
+        if (requestCode == GET_LOGIN_REQUEST) {
+            if (resultCode == RESULT_OK) {
+                username = data.getStringExtra("username");
+                password = data.getStringExtra("password");
+
+                ((TextView) findViewById(R.id.textGreeting)).setText("Hello " + username);
+            }
+        }
+    }
+
 }

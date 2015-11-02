@@ -12,7 +12,7 @@
 
     <TextView android:text="Hello World!" android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView2" />
+        android:id="@+id/textGreeting" />
 
     <Button
 
@@ -21,7 +21,7 @@
         android:text="Calendar and Emtion Rater Activity"
         android:id="@+id/buttonSwitchToCalendarEmotion"
         android:layout_marginTop="159dp"
-        android:layout_below="@+id/textView2"
+        android:layout_below="@+id/textGreeting"
         android:layout_centerHorizontal="true"
         android:onClick="onClickActivtyCalendarEmotionRater"/>
 </RelativeLayout>

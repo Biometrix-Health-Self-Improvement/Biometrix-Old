@@ -97,7 +97,8 @@
                 android:layout_height="wrap_content"
                 android:text="Cancel"
                 android:id="@+id/loginCancelButton"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:onClick="cancelButtonClick" />
 
             <Space
                 android:layout_width="wrap_content"
@@ -121,6 +122,49 @@
                 android:layout_weight=".5"
                 style="@style/AppTheme" />
         </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="0.20" />
+
+        <EditText
+            style="@style/AppTheme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/confirmPasswordText"
+            android:layout_gravity="center_horizontal"
+            android:text="Create a new login - Confirm Password"
+            android:textAlignment="center"
+            android:inputType="none"
+            android:editable="false"
+            android:textIsSelectable="false"
+            android:enabled="true"
+            android:focusable="false" />
+
+        <EditText
+            style="@style/AppTheme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:ems="10"
+            android:id="@+id/confirmPasswordEditText"
+            android:editable="true"
+            android:enabled="true"
+            android:focusable="true"
+            android:clickable="true"
+            android:layout_gravity="center_horizontal" />
+
+        <Button
+            style="@style/AppTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Create Login WIth Current Username and Password"
+            android:id="@+id/button"
+            android:textAlignment="center"
+            android:layout_gravity="center_horizontal"
+            android:onClick="newLoginButtonClick" />
 
     </LinearLayout>
 </RelativeLayout>

@@ -1,5 +1,7 @@
 package com.rocket.biometrix;
 
+import android.app.ActionBar;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -13,8 +15,9 @@ public class GetLoginActivity extends AppCompatActivity implements AsyncResponse
 
     private Boolean loginSuccessful;
 
-
-
+    private String username;
+    private String password;
+    private String confirmedPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -24,25 +27,18 @@ public class GetLoginActivity extends AppCompatActivity implements AsyncResponse
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        loginSuccessful = false;
+        username = null;
+        password = null;
+        confirmedPassword = null;
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        loginSuccessful = false;
     }
 
 
     public void okayButtonClick(View view)
     {
-        String username = null;
-        String password = null;
-
         EditText usernameEdit =  (EditText) findViewById(R.id.usernameEditText);
         username = usernameEdit.getText().toString();
 
@@ -51,7 +47,35 @@ public class GetLoginActivity extends AppCompatActivity implements AsyncResponse
 
         //loginSuccessful = tryLogin(username, password);
 
-        new DatabaseLoginConnect(this).execute(username, password);
+        new DatabaseLoginConnect(this).execute(DatabaseConnectionTypes.LOGIN_CHECK,username, password);
+
+    }
+
+    public void cancelButtonClick(View view)
+    {
+        this.onBackPressed();
+    }
+
+    public void newLoginButtonClick(View view)
+    {
+        EditText usernameEdit =  (EditText) findViewById(R.id.usernameEditText);
+        username = usernameEdit.getText().toString();
+
+        EditText passwordEdit = (EditText) findViewById(R.id.passwordEditText);
+        password = passwordEdit.getText().toString();
+
+        EditText passwordConfirmEdit = (EditText) findViewById(R.id.confirmPasswordEditText);
+        confirmedPassword = passwordConfirmEdit.getText().toString();
+
+        if (password.equals(confirmedPassword))
+        {
+            new DatabaseLoginConnect(this).execute(DatabaseConnectionTypes.LOGIN_CREATE,username, password);
+        }
+        else
+        {
+            Toast.makeText(getApplicationContext(), "Passwords do not match", Toast.LENGTH_LONG).show();
+        }
+
     }
 
     @Override
@@ -69,6 +93,15 @@ public class GetLoginActivity extends AppCompatActivity implements AsyncResponse
         if (loginSuccessful)
         {
             Toast.makeText(getApplicationContext(), "Login Succeeded", Toast.LENGTH_LONG).show();
+
+            //Create's an "intent" to passback user information with keys username and password.
+            Intent dataPassback = new Intent();
+            dataPassback.putExtra("username", username);
+            dataPassback.putExtra("password", password);
+
+            setResult(RESULT_OK, dataPassback);
+            finish();
+
         }
         else
         {
