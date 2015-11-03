@@ -8,17 +8,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.TextView;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class SelectDate_EmotionRater extends AppCompatActivity {
-    final static String dateFormat = "EEE, MM/dd/yyyy";
+    final static String _dateFormat = "EEE, MM/dd/yyyy";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +69,7 @@ public class SelectDate_EmotionRater extends AppCompatActivity {
         TextView textDate = (TextView)findViewById(R.id.textDate);
         //TODO: Check to make sure date is not in the future, if it is, display error and do not change date
         Calendar c = new GregorianCalendar(year, month, day);
-        String str = new SimpleDateFormat(dateFormat).format(c.getTime());
+        String str = new SimpleDateFormat(_dateFormat).format(c.getTime());
         textDate.setText(str);
     }
 

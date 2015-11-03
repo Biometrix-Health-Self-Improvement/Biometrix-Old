@@ -23,34 +23,25 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="match_parent"
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Emotion"
+        android:id="@+id/emotionText"
+        android:layout_gravity="center_vertical"
+        android:textAlignment="inherit"
         android:layout_centerVertical="true"
-        android:layout_toEndOf="@+id/textDate"
-        android:showDividers="beginning|middle|end"
-        android:textAlignment="viewStart">
+        android:layout_alignParentStart="false" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="left"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Emotion"
-            android:id="@+id/emotionText"
-            android:layout_gravity="center_vertical"
-            android:textAlignment="inherit" />
-
-        <SeekBar
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/emotionBar"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="1"
-            android:max="10"
-            android:progress="1"
-            android:indeterminate="false" />
-    </LinearLayout>
+    <RatingBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ratingBar"
+        android:stepSize=".5"
+        android:numStars="5"
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>
