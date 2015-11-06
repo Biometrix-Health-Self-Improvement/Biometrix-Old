@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.rocket.biometrix" >
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/sproutsmaller"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".InitialActivityWithPulloutMenu"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <intent-filter>
+                <action android:name=".InitialActivityWithPulloutMenu" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".GetLoginActivity"
+            android:label="@string/title_activity_get_login"
+            android:parentActivityName=".InitialActivityWithPulloutMenu"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.rocket.biometrix.InitialActivityWithPulloutMenu" />
+        </activity>
+        <activity
+            android:name=".SelectDate_EmotionRater"
+            android:label="Calendar and Emotion Rater Activity"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".HomeScreen"
+            android:label="@string/title_activity_home_screen"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ExerciseParent"
+            android:label="@string/title_activity_exercise_parent"
+            android:parentActivityName=".HomeScreen"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.rocket.biometrix.HomeScreen" />
+        </activity>
+        <activity
+            android:name=".exercise_EntryFS"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_exercise__entry_fs"
+            android:parentActivityName=".ExerciseParent"
+            android:theme="@style/FullscreenTheme" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.rocket.biometrix.ExerciseParent" />
+        </activity>
+    </application>
+
+</manifest>

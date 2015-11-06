@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="bg_color">#FBFBFB</color>
+    <color name="top_bar_color">#B0B0B0</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="button_color">#83CDBC</color>
+    <color name="activity_header">#83CDBC</color>
+    <color name="enabled_color">#DD2eB1</color>
+    <color name="disabled_color">#000000</color>
+
+    <color name="black_overlay">#66000000</color>
+</resources>
