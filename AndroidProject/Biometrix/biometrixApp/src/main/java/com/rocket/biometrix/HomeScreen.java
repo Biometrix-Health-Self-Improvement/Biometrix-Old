@@ -9,6 +9,7 @@ import android.widget.Button;
 
 public class HomeScreen extends AppCompatActivity {
     private static Button mood_button;
+    private static Button exercise_button; //keeping code style the same
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +27,20 @@ public class HomeScreen extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-    }
+
+        //@EXERCISE BUTTON
+        exercise_button = (Button)findViewById(R.id.exercise_button);
+        exercise_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent Launch_ExerciseParent = new Intent(HomeScreen.this, ExerciseParent.class);
+                startActivity(Launch_ExerciseParent);
+                //finish(); //keep Home running
+            }});
+
+    }//end OnClickButtonListener()
+
+
 }
 
 
