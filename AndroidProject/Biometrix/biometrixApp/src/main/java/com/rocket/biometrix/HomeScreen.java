@@ -9,7 +9,13 @@ import android.widget.Button;
 
 public class HomeScreen extends AppCompatActivity {
     private static Button mood_button;
-    private static Button exercise_button; //keeping code style the same
+    private static Button diet_button;
+    private static Button medications_button;
+    private static Button exercise_button;
+    private static Button sleep_button;
+    private static Button analytics_button;
+    private static Button login_button;
+    private static Button createLogin_button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,12 +25,33 @@ public class HomeScreen extends AppCompatActivity {
     }
 
     public void OnClickButtonListener(){
+        //@MOOD BUTTON
         mood_button = (Button)findViewById(R.id.mood_button);
         mood_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(".InitialActivityWithPulloutMenu");
-                startActivity(intent);
+                Intent Launch_Mood = new Intent(HomeScreen.this, HomeScreen.class);
+                startActivity(Launch_Mood);
+            }
+        });
+
+        //@DIET BUTTON
+        diet_button = (Button)findViewById(R.id.diet_button);
+        diet_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent Launch_Diet = new Intent(HomeScreen.this, HomeScreen.class);
+                startActivity(Launch_Diet);
+            }
+        });
+
+        //@MEDICATIONS BUTTON
+        medications_button = (Button)findViewById(R.id.medications_button);
+        medications_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent Launch_Medications = new Intent(HomeScreen.this, HomeScreen.class);
+                startActivity(Launch_Medications);
             }
         });
 
@@ -35,10 +62,49 @@ public class HomeScreen extends AppCompatActivity {
             public void onClick(View v) {
                 Intent Launch_ExerciseParent = new Intent(HomeScreen.this, ExerciseParent.class);
                 startActivity(Launch_ExerciseParent);
-                //finish(); //keep Home running
-            }});
+            }
+        });
 
-    }//end OnClickButtonListener()
+        //@SLEEP BUTTON
+        sleep_button = (Button)findViewById(R.id.sleep_button);
+        sleep_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent Launch_Sleep = new Intent(HomeScreen.this, HomeScreen.class);
+                startActivity(Launch_Sleep);
+            }
+        });
+
+        //@ANALYTICS BUTTON
+        analytics_button = (Button)findViewById(R.id.analytics_button);
+        analytics_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent Launch_Analytics = new Intent(HomeScreen.this, HomeScreen.class);
+                startActivity(Launch_Analytics);
+            }
+        });
+
+        //@LOGIN BUTTON
+        login_button = (Button)findViewById(R.id.login_button);
+        login_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent Launch_Login = new Intent(HomeScreen.this, HomeScreen.class);
+                startActivity(Launch_Login);
+            }
+        });
+
+        //@CREATELOGIN BUTTON
+        createLogin_button = (Button)findViewById(R.id.createLogin_button);
+        createLogin_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent Launch_CreateLogin = new Intent(HomeScreen.this, HomeScreen.class);
+                startActivity(Launch_CreateLogin);
+            }
+        });
+    }
 
 
 }

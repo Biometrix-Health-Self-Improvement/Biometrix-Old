@@ -1,6 +1,5 @@
 package com.rocket.biometrix;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -13,26 +12,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 
-public class InitialActivityWithPulloutMenu extends AppCompatActivity
+public class NavigationDrawer extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
-    protected String username;
-    protected String password;
-
-    static final int GET_LOGIN_REQUEST = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        username = null;
-        password = null;
-
-        setContentView(R.layout.activity_initial_activity_with_pullout_menu);
+        setContentView(R.layout.activity_navigation_drawer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -68,7 +55,7 @@ public class InitialActivityWithPulloutMenu extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_blank, menu);
+        getMenuInflater().inflate(R.menu.navigation_drawer, menu);
         return true;
     }
 
@@ -107,40 +94,8 @@ public class InitialActivityWithPulloutMenu extends AppCompatActivity
 
         }
 
-        //Testing for the login activity. Should likely be moved later
-        else if (id == R.id.login_test)
-        {
-            Intent loginIntent = new Intent(this, GetLoginActivity.class);
-
-            startActivityForResult(loginIntent, GET_LOGIN_REQUEST);
-        }
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
-
-    public void onClickActivtyCalendarEmotionRater(View v){
-         startActivity(new Intent(this, SelectDate_EmotionRater.class));
-    }
-
-    /**
-     * Retrieves the data from a child activity that needs to return data.
-     * @param requestCode Should be identified by a public static int above e.g. GET_LOGIN_REQUEST
-     * @param resultCode An int enumeration of different codes e.g. RESULT_OK
-     * @param data An intent containing any needed data
-     */
-    protected void onActivityResult(int requestCode, int resultCode,
-                                    Intent data) {
-        if (requestCode == GET_LOGIN_REQUEST) {
-            if (resultCode == RESULT_OK) {
-                username = data.getStringExtra("username");
-                password = data.getStringExtra("password");
-
-                ((TextView) findViewById(R.id.textGreeting)).setText("Hello " + username);
-            }
-        }
-    }
-
 }
