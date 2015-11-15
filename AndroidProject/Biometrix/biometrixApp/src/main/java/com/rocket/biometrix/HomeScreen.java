@@ -30,7 +30,7 @@ public class HomeScreen extends AppCompatActivity {
         mood_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent Launch_Mood = new Intent(HomeScreen.this, HomeScreen.class);
+                Intent Launch_Mood = new Intent(HomeScreen.this, MoodMainPage.class);
                 startActivity(Launch_Mood);
             }
         });
