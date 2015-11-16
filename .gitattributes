@@ -12,8 +12,5 @@
 *.sln    text merge=union eol=crlf
 
 *.docx   diff=astextplain
-<<<<<<< HEAD
 *.DOCX   diff=astextplain
-=======
 *.DOCX   diff=astextplain
->>>>>>> refs/remotes/origin/master
