@@ -44,6 +44,18 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.rocket.biometrix.ExerciseParent" />
         </activity>
+        <activity android:name=".SleepParent" >
+        </activity>
+        <activity
+            android:name=".CreateLoginActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".GetLoginActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity android:name=".SleepEntry" >
+        </activity>
         <activity
             android:name=".MoodMainPage"
             android:label="@string/title_activity_mood_main_page"

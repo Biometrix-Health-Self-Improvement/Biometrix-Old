@@ -13,3 +13,4 @@
 
 *.docx   diff=astextplain
 *.DOCX   diff=astextplain
+*.DOCX   diff=astextplain

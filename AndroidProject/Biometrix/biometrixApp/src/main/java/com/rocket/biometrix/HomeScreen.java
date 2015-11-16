@@ -70,7 +70,7 @@ public class HomeScreen extends AppCompatActivity {
         sleep_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent Launch_Sleep = new Intent(HomeScreen.this, HomeScreen.class);
+                Intent Launch_Sleep = new Intent(HomeScreen.this, SleepParent.class);
                 startActivity(Launch_Sleep);
             }
         });
@@ -90,7 +90,7 @@ public class HomeScreen extends AppCompatActivity {
         login_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent Launch_Login = new Intent(HomeScreen.this, HomeScreen.class);
+                Intent Launch_Login = new Intent(HomeScreen.this, GetLoginActivity.class);
                 startActivity(Launch_Login);
             }
         });
@@ -100,7 +100,7 @@ public class HomeScreen extends AppCompatActivity {
         createLogin_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent Launch_CreateLogin = new Intent(HomeScreen.this, HomeScreen.class);
+                Intent Launch_CreateLogin = new Intent(HomeScreen.this, CreateLoginActivity.class);
                 startActivity(Launch_CreateLogin);
             }
         });
