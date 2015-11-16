@@ -12,6 +12,15 @@
 
 
     <string name="title_activity_navigation_drawer">NavigationDrawer</string>
+
+
     <string name="title_activity_mood_main_page">Mood Tracker</string>
     <string name="title_activity_mood_creat_entry">Create Entry</string>
+    <string name="mood_rating_none">None</string>
+    <string name="mood_rating_mild">Mild</string>
+    <string name="mood_rating_mod">Moderate</string>
+    <string name="mood_rating_sev">Severe</string>
+    <string name="mood_rating_vsev">Very Severe</string>
+    <string name="mood_details">Enter notes...</string>
+
 </resources>
