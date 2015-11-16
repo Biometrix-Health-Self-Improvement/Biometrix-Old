@@ -44,6 +44,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.rocket.biometrix.ExerciseParent" />
         </activity>
+<<<<<<< HEAD
         <activity android:name=".SleepParent" >
         </activity>
         <activity
@@ -56,6 +57,18 @@
         </activity>
         <activity android:name=".SleepEntry" >
         </activity>
+=======
+        <activity
+            android:name=".MoodMainPage"
+            android:label="@string/title_activity_mood_main_page"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".MoodCreatEntry"
+            android:label="@string/title_activity_mood_creat_entry"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+>>>>>>> refs/remotes/origin/master
     </application>
 
 </manifest>

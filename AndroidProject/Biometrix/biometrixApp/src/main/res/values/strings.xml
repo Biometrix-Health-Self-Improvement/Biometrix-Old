@@ -10,14 +10,23 @@
     <string name="title_activity_home_screen">HomeScreen</string>
     <string name="title_activity_exercise_parent">ExerciseParent</string>
 
-    <!--Exercise Module Strings-->
-    <string name="newEntryButton">+ New Entry</string>
 
-    <string name="title_activity_exercise__entry_fs">exercise_EntryFS</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="title_activity_navigation_drawer">NavigationDrawer</string>
+<<<<<<< HEAD
     <string name="new_sleep_entry_text">+ New Sleep Entry</string>
 
     <string name="sleep_file_name">SleepEntries.txt</string>
+=======
+
+
+    <string name="title_activity_mood_main_page">Mood Tracker</string>
+    <string name="title_activity_mood_creat_entry">Create Entry</string>
+    <string name="mood_rating_none">None</string>
+    <string name="mood_rating_mild">Mild</string>
+    <string name="mood_rating_mod">Moderate</string>
+    <string name="mood_rating_sev">Severe</string>
+    <string name="mood_rating_vsev">Very Severe</string>
+    <string name="mood_details">Enter notes...</string>
+
+>>>>>>> refs/remotes/origin/master
 </resources>

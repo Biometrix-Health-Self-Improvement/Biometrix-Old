@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--Exercise Module Strings-->
+    <string name="newEntryButton">+ Add Exercise</string>
+
+    <!--Add New Entry-->
+    <string name="title_activity_exercise__entry_fs">exercise_EntryFS</string>
+    <string name="ex_ok">O K</string>
+    <string name="ex_title"> </string>
+
+    <!--Default full screen-->
+    <string name="dummy_button">placeholder</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+
+
+</resources>
