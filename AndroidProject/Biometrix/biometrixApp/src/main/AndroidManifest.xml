@@ -49,6 +49,11 @@
             android:label="@string/title_activity_mood_main_page"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
+        <activity
+            android:name=".MoodCreatEntry"
+            android:label="@string/title_activity_mood_creat_entry"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
     </application>
 
 </manifest>

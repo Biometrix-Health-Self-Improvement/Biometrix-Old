@@ -1,5 +1,6 @@
 package com.rocket.biometrix;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -27,11 +28,20 @@ public class MoodMainPage extends AppCompatActivity {
         });
 
 
-
+        createEntryButtonOnClickListener();
+        
     }
 
     void createEntryButtonOnClickListener(){
         Button createEntry = (Button) findViewById(R.id.createEntryButton);
+        createEntry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent CreateEntryMood = new Intent(MoodMainPage.this, MoodCreatEntry.class);
+                startActivity(CreateEntryMood);
+            }
+        });
     }
+
 
 }
