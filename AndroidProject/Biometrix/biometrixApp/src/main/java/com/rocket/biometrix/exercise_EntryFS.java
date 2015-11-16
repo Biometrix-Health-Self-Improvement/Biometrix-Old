@@ -47,9 +47,10 @@ public class exercise_EntryFS extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
+        //must have all three
         mVisible = true;
-        mControlsView = findViewById(R.id.fullscreen_content_controls);
-        mContentView = findViewById(R.id.fullscreen_content);
+        mControlsView = findViewById(R.id.ex_fullscreen_content_controls);
+        mContentView = findViewById(R.id.ex_fullscreen_content);
 
 
         // Set up the user interaction to manually show or hide the system UI.

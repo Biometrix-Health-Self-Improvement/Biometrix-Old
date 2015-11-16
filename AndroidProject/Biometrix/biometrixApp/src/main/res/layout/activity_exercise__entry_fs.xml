@@ -1,22 +1,30 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:background="#0099cc"
+    android:layout_height="match_parent" android:background="#a7fff2"
+    android:id="@+id/ex_fullscreen_content"
     tools:context="com.rocket.biometrix.exercise_EntryFS">
 
     <!-- The primary full-screen view. This can be replaced with whatever view
          is needed to present your content, e.g. VideoView, SurfaceView,
          TextureView, etc. -->
-    <TextView android:id="@+id/fullscreen_content" android:layout_width="match_parent"
-        android:layout_height="match_parent" android:keepScreenOn="true" android:textColor="#33b5e5"
-        android:textStyle="bold" android:textSize="50sp" android:gravity="center"
-        android:text="@string/dummy_content" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="@string/ex_title"
+        android:ems="10"
+        android:id="@+id/ex_Title"
+        android:layout_gravity="center_horizontal|top"
+        android:hint="Enter Exercise Name" />
 
     <!-- This FrameLayout insets its children based on system windows using
          android:fitsSystemWindows. -->
+
     <FrameLayout android:layout_width="match_parent" android:layout_height="match_parent"
         android:fitsSystemWindows="true">
 
-        <LinearLayout android:id="@+id/fullscreen_content_controls" style="?metaButtonBarStyle"
+        <LinearLayout android:id="@+id/ex_fullscreen_content_controls" style="?metaButtonBarStyle"
             android:layout_width="match_parent" android:layout_height="wrap_content"
             android:layout_gravity="bottom|center_horizontal"
             android:background="@color/black_overlay" android:orientation="horizontal"
@@ -24,9 +32,41 @@
 
             <Button android:id="@+id/dummy_button" style="?metaButtonBarButtonStyle"
                 android:layout_width="0dp" android:layout_height="wrap_content"
-                android:layout_weight="1" android:text="@string/dummy_button" />
+                android:layout_weight="1" android:text="@string/ex_ok" />
 
         </LinearLayout>
+
+        <RadioGroup
+            android:layout_width="121dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|top">
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Light"
+                android:id="@+id/ex_rb_light"
+                android:layout_gravity="left" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cardio"
+                android:id="@+id/ex_rb_cardio" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Strength"
+                android:id="@+id/ex_rb_strength" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Heavy"
+                android:id="@+id/ex_rb_heavy" />
+        </RadioGroup>
+
     </FrameLayout>
 
 </FrameLayout>
