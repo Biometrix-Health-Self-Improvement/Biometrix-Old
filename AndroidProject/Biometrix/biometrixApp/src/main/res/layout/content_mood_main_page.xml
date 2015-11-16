@@ -18,11 +18,16 @@
         android:layout_centerHorizontal="true">
 
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="120dp"
+            android:layout_height="35dp"
             android:text="Create Entry"
             android:id="@+id/createEntryButton"
-            android:gravity="right"
-            android:layout_gravity="right" />
+            android:background="@color/button_color"
+            android:gravity="center"
+            android:layout_gravity="right"
+            android:textAlignment="center" />
+
+
+
     </LinearLayout>
 </RelativeLayout>
