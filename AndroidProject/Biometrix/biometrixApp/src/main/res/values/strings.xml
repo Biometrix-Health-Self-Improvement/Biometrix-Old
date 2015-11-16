@@ -17,4 +17,7 @@
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="title_activity_navigation_drawer">NavigationDrawer</string>
+    <string name="new_sleep_entry_text">+ New Sleep Entry</string>
+
+    <string name="sleep_file_name">SleepEntries.txt</string>
 </resources>

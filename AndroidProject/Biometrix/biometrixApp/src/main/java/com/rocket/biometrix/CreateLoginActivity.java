@@ -11,23 +11,25 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class GetLoginActivity extends AppCompatActivity implements AsyncResponse {
+public class CreateLoginActivity extends AppCompatActivity implements AsyncResponse {
 
     private Boolean loginSuccessful;
 
     private String username;
     private String password;
+    private String confirmedPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_get_login);
+        setContentView(R.layout.activity_create_login);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         username = null;
         password = null;
+        confirmedPassword = null;
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -43,10 +45,17 @@ public class GetLoginActivity extends AppCompatActivity implements AsyncResponse
         EditText passwordEdit = (EditText) findViewById(R.id.passwordEditText);
         password = passwordEdit.getText().toString();
 
-        //loginSuccessful = tryLogin(username, password);
+        EditText passwordConfirmEdit = (EditText) findViewById(R.id.confirmPasswordEditText);
+        confirmedPassword = passwordConfirmEdit.getText().toString();
 
-        new DatabaseLoginConnect(this).execute(DatabaseConnectionTypes.LOGIN_CHECK,username, password);
-
+        if (password.equals(confirmedPassword))
+        {
+            new DatabaseLoginConnect(this).execute(DatabaseConnectionTypes.LOGIN_CREATE,username, password);
+        }
+        else
+        {
+            Toast.makeText(getApplicationContext(), "Passwords do not match", Toast.LENGTH_LONG).show();
+        }
     }
 
     public void cancelButtonClick(View view)
@@ -86,3 +95,4 @@ public class GetLoginActivity extends AppCompatActivity implements AsyncResponse
 
     }
 }
+
