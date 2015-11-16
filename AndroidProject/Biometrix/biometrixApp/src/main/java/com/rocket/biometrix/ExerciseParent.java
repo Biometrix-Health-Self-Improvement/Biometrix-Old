@@ -30,7 +30,7 @@ public class ExerciseParent extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
-        //Submit button to start QuestAnswer activity
+
         Button addNewEntry = (Button) findViewById(R.id.exNewEntry);
         addNewEntry.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -38,7 +38,7 @@ public class ExerciseParent extends AppCompatActivity {
                 Intent LaunchNewEntry = new Intent(ExerciseParent.this, exercise_EntryFS.class);
                 //start new activity
                 startActivity(LaunchNewEntry);
-                finish();
+                //finish();
             }
         }); //end addNewEntry on click listener
 
