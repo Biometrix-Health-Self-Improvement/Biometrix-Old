@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sleep_start_text">Start Time: None. Click Here!</string>
+    <string name="sleep_start_base">Start Time: \u0020 </string>
+
+    <string name="sleep_end_base">End Time: \u0020 </string>
+
+    <string name="new_sleep_entry_text">+ New Sleep Entry</string>
+
+    <string name="sleep_file_name">SleepEntries.txt</string>
+</resources>

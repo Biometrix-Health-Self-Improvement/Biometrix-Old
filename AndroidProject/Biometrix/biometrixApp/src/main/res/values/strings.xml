@@ -11,9 +11,6 @@
     <string name="title_activity_exercise_parent">ExerciseParent</string>
 
     <string name="title_activity_navigation_drawer">NavigationDrawer</string>
-    <string name="new_sleep_entry_text">+ New Sleep Entry</string>
-
-    <string name="sleep_file_name">SleepEntries.txt</string>
 
 
     <string name="title_activity_mood_main_page">Mood Tracker</string>
@@ -24,5 +21,6 @@
     <string name="mood_rating_sev">Severe</string>
     <string name="mood_rating_vsev">Very Severe</string>
     <string name="mood_details">Enter notes...</string>
+    <string name="title_activity_get_date_time">GetDateTime</string>
 
 </resources>

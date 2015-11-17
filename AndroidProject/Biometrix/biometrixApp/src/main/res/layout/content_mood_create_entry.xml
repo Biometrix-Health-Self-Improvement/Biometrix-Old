@@ -75,7 +75,8 @@
                 android:id="@+id/moodDepressedRating"
                 android:layout_column="1"
                 android:max="4"
-                style="@style/mood_rating_col_2_style" />
+                style="@style/mood_rating_col_2_style"
+                android:indeterminate="false" />
 
             <TextView
                 style="@style/mood_rating_col_3_style"
