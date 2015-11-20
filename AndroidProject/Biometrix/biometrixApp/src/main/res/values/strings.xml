@@ -22,5 +22,6 @@
     <string name="mood_rating_vsev">Very Severe</string>
     <string name="mood_details">Enter notes...</string>
     <string name="title_activity_get_date_time">GetDateTime</string>
+    <string name="title_activity_exercise_entry">exercise_entry</string>
 
 </resources>

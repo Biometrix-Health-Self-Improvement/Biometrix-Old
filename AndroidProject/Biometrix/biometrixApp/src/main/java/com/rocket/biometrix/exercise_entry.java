@@ -1,21 +1,18 @@
 package com.rocket.biometrix;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 
-public class ExerciseParent extends AppCompatActivity {
+public class exercise_entry extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_exercise_parent);
+        setContentView(R.layout.activity_exercise_entry);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -28,19 +25,6 @@ public class ExerciseParent extends AppCompatActivity {
             }
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
 
-
-
-        Button addNewEntry = (Button) findViewById(R.id.exNewEntry);
-        addNewEntry.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                //start new intent (Parent activity start with capital, child don't have capital)
-                Intent LaunchNewEntry = new Intent(ExerciseParent.this, exercise_entry.class);
-                //start new activity
-                startActivity(LaunchNewEntry);
-                //finish();
-            }
-        }); //end addNewEntry on click listener
-
-    } //end OnCreate of ExerciseParent
 }

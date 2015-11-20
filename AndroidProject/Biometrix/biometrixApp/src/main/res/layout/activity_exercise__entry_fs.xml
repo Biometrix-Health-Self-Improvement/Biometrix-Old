@@ -8,16 +8,6 @@
          is needed to present your content, e.g. VideoView, SurfaceView,
          TextureView, etc. -->
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:text="@string/ex_title"
-        android:ems="10"
-        android:id="@+id/ex_Title"
-        android:layout_gravity="center_horizontal|top"
-        android:hint="Enter Exercise Name" />
-
     <!-- This FrameLayout insets its children based on system windows using
          android:fitsSystemWindows. -->
 
@@ -66,6 +56,16 @@
                 android:text="Heavy"
                 android:id="@+id/ex_rb_heavy" />
         </RadioGroup>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:text="@string/ex_title"
+            android:ems="10"
+            android:id="@+id/ex_Title"
+            android:layout_gravity="center_horizontal|top"
+            android:hint="Enter Exercise Name" />
 
     </FrameLayout>
 
