@@ -6,8 +6,12 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 public class exercise_entry extends AppCompatActivity {
+
+    Spinner minuteSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +29,16 @@ public class exercise_entry extends AppCompatActivity {
             }
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    }
+
+
+        //@Filling contents of Minutes: Slide down menu
+        minuteSpinner = (Spinner) findViewById(R.id.ex_min_spinner);
+
+        ArrayAdapter minSpin = ArrayAdapter.createFromResource(
+                this, R.array.ex_min_array,android.R.layout.simple_spinner_item);
+
+        minuteSpinner.setAdapter(minSpin);
+
+    }//END onCreate()
 
 }

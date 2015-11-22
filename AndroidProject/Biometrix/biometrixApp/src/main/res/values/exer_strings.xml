@@ -6,8 +6,24 @@
 
     <!--Add New Entry-->
     <string name="title_activity_exercise__entry_fs">exercise_EntryFS</string>
-    <string name="ex_ok">O K</string>
+    <string name="ex_ok">D O N E</string>
     <string name="ex_title"> </string>
+    <string name="ex_when">+ WHEN</string>
+    <string name="ex_time">Minutes:</string>
+    <string-array name="ex_min_array">
+        <item>5</item>
+        <item>10</item>
+        <item>15</item>
+        <item>30</item>
+        <item>45</item>
+        <item>60</item>
+        <item>75</item>
+        <item>90</item>
+        <item>105</item>
+        <item>120</item>
+        <item>120+</item>
+    </string-array>
+
 
     <!--Default full screen-->
     <string name="dummy_button">placeholder</string>
