@@ -20,6 +20,7 @@ public class exercise_entry extends AppCompatActivity implements AdapterView.OnI
     private View view;
     private int position;
     private long id;
+    boolean toasted = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +59,7 @@ public class exercise_entry extends AppCompatActivity implements AdapterView.OnI
                 }
 
                 String selected = parentView.getItemAtPosition(position).toString();
-                boolean toasted = false;
+
                 if(selected.equals("5") || selected.equals("10"))
                 {
                     if (!toasted) {
