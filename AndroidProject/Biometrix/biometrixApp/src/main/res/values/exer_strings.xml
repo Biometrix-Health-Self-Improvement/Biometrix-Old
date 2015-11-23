@@ -10,6 +10,7 @@
     <string name="ex_title"> </string>
     <string name="ex_when">+ WHEN</string>
     <string name="ex_time">Minutes:</string>
+    <string name="ex_prompt">How many minutes Exercised? :)</string>
     <string-array name="ex_min_array">
         <item>5</item>
         <item>10</item>
@@ -23,6 +24,8 @@
         <item>120</item>
         <item>120+</item>
     </string-array>
+    <string name="ex_reps">+ REPS / LAPS</string>
+    <string name="ex_weight">+ WEIGHT / INTENSITY</string>
 
 
     <!--Default full screen-->
