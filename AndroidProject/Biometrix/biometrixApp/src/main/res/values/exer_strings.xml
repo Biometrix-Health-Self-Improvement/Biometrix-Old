@@ -7,7 +7,10 @@
     <!--Add New Entry-->
     <string name="title_activity_exercise__entry_fs">exercise_EntryFS</string>
     <string name="ex_ok">D O N E</string>
-    <string name="ex_title"> </string>
+    <string name="ex_et_title"> </string>
+    <string name="ex_et_notes"> </string>
+    <string name="ex_et_reps"> </string>
+    <string name="ex_et_weight"> </string>
     <string name="ex_when">+ WHEN</string>
     <string name="ex_time">Minutes:</string>
     <string name="ex_prompt">How many minutes Exercised? :)</string>
@@ -24,8 +27,9 @@
         <item>120</item>
         <item>120+</item>
     </string-array>
-    <string name="ex_reps">+ REPS / LAPS</string>
-    <string name="ex_weight">+ WEIGHT / INTENSITY</string>
+    <string name="ex_reps">REPS / LAPS</string>
+    <string name="ex_weight">WEIGHT / INTENSITY</string>
+    <string name="ex_plan">Add To Plan?</string>
 
 
     <!--Default full screen-->

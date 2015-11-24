@@ -61,7 +61,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
-            android:text="@string/ex_title"
+            android:text="@string/ex_et_title"
             android:ems="10"
             android:id="@+id/ex_Title"
             android:layout_gravity="center_horizontal|top"

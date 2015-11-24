@@ -16,11 +16,7 @@ import android.widget.Toast;
 public class exercise_entry extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     Spinner minuteSpinner;
-    private AdapterView<?> parent;
-    private View view;
-    private int position;
-    private long id;
-    boolean toasted = false;
+    boolean toasted = false; //Used to display encouraging messages ONCE in minuteSpinner.
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,46 +25,43 @@ public class exercise_entry extends AppCompatActivity implements AdapterView.OnI
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+//            }
+//        });
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //@Filling contents of Minutes: Slide down menu
         minuteSpinner = (Spinner) findViewById(R.id.ex_min_spinner);
-
+        //Array adapter from exer_strings resource
         ArrayAdapter minSpin = ArrayAdapter.createFromResource(
                 this, R.array.ex_min_array,android.R.layout.simple_spinner_item);
 
         minuteSpinner.setAdapter(minSpin);
 
-        minuteSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
-        {
-            protected Adapter initializedAdapter=null;
+        //Listener for selected minute taps and getting the tapped minutes as strings.
+        minuteSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            protected Adapter initializedAdapter = null;
 
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id)
-            {
-                if(initializedAdapter !=parentView.getAdapter() ) {
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                if (initializedAdapter != parentView.getAdapter()) {
                     initializedAdapter = parentView.getAdapter();
                     return;
                 }
 
                 String selected = parentView.getItemAtPosition(position).toString();
 
-                if(selected.equals("5") || selected.equals("10"))
-                {
+                if (selected.equals("5") || selected.equals("10")) {
                     if (!toasted) {
                         Toast.makeText(getApplicationContext(), "Keep it up :)", Toast.LENGTH_LONG).show();
                         toasted = true;
                     }
-                }
-                else
-                {
+                } else {
                     if (!toasted) {
                         Toast.makeText(getApplicationContext(), "Nice!", Toast.LENGTH_LONG).show();
                         toasted = true;
@@ -84,6 +77,10 @@ public class exercise_entry extends AppCompatActivity implements AdapterView.OnI
                 // default to 5 min
             }
         });
+
+        //@Corrections for 'next' ime button //I'm too stupid to figure out how to use.
+//        TextView nextField = (TextView)currentField.focusSearch(View.FOCUS_RIGHT);
+//        nextField.requestFocus();
 
 
     }//END onCreate()
