@@ -13,7 +13,7 @@
         <activity
             android:name=".NavigationDrawer"
             android:label="@string/title_activity_navigation_drawer"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".HomeScreen"
             android:label="@string/title_activity_home_screen"
@@ -43,26 +43,26 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.rocket.biometrix.ExerciseParent" />
         </activity>
-        <activity android:name=".SleepParent"></activity>
+        <activity android:name=".SleepParent" />
         <activity
             android:name=".CreateLoginActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".GetLoginActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".SleepEntry"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".SleepEntry" />
         <activity
             android:name=".MoodMainPage"
             android:label="@string/title_activity_mood_main_page"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".MoodCreatEntry"
             android:label="@string/title_activity_mood_creat_entry"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".GetDateTime"
             android:label="@string/title_activity_get_date_time"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".exercise_entry"
             android:label="@string/title_activity_exercise_entry"
@@ -72,6 +72,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.rocket.biometrix.ExerciseParent" />
         </activity>
+        <activity android:name=".exercise_entry_when"></activity>
     </application>
 
 </manifest>

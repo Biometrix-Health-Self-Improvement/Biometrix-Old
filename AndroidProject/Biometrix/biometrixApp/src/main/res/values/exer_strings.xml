@@ -30,7 +30,12 @@
     <string name="ex_reps">REPS / LAPS</string>
     <string name="ex_weight">WEIGHT / INTENSITY</string>
     <string name="ex_plan">Add To Plan?</string>
+    <string name="ex_now">I Just Now Exercised</string>
+    <string name="ex_update">Logging Exercise at This Time:</string>
+    <string name="ex_tp">Change Time</string>
+    <string name="ex_dp">Change Date</string>
 
+    <string name="ex_date"> </string>
 
     <!--Default full screen-->
     <string name="dummy_button">placeholder</string>

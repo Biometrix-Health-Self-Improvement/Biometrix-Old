@@ -1,5 +1,6 @@
 package com.rocket.biometrix;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -81,6 +83,17 @@ public class exercise_entry extends AppCompatActivity implements AdapterView.OnI
         //@Corrections for 'next' ime button //I'm too stupid to figure out how to use.
 //        TextView nextField = (TextView)currentField.focusSearch(View.FOCUS_RIGHT);
 //        nextField.requestFocus();
+
+
+        Button addNewEntry = (Button) findViewById(R.id.ex_b_when);
+        addNewEntry.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                //start new intent (Parent activity start with capital, child don't have capital)
+                Intent LaunchNewEntry = new Intent(exercise_entry.this, exercise_entry_when.class);
+                //start new activity
+                startActivity(LaunchNewEntry);
+            }
+        });
 
 
     }//END onCreate()
