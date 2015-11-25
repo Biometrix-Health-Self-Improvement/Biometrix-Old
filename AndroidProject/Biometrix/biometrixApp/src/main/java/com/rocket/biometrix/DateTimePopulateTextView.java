@@ -17,8 +17,18 @@ import java.util.TimeZone;
 
 /**
  * Created by JP on 11/25/2015.
- *
- *
+ *A class that populates 2 TextViews with user-selected date and time.
+        * How to use:
+ * 1) Have two TextViews http://developer.android.com/reference/android/widget/TextView.html
+ * @see exercise_entry
+ * 2) Make an instance of this class inside your activity, pass it a context and two int ids
+        * <pre>
+*DateTimePopulateTextView DTPTV = new DateTimePopulateTextView(YOUR_CLASS.this, R.id.YOUR_DATE_TEXTVIEW, R.id.YOUR_TIME_TEXTVIEW);
+        * </pre>
+* 3)Now call the Populate method on the class instance you just made. (Good place to call is in the OnCreate() of your activity)
+ * * <pre>
+ *DTPTV.Populate();
+ * </pre>
  */
 public class DateTimePopulateTextView extends AppCompatActivity {
 
@@ -27,27 +37,33 @@ public class DateTimePopulateTextView extends AppCompatActivity {
     int dateID;
     int timeID;
     Context ParentContext;
+    protected AppCompatActivity context;
 
     //Fill up this constructor with the Context (probs ur activity), and the TextView IDs (R.id.YOUR_ID_HERE)
     DateTimePopulateTextView(Context ParentContext, int dateID, int timeID){
         this.ParentContext = ParentContext;
+        this.context = (AppCompatActivity) ParentContext;
         this.dateID = dateID;
         this.timeID = timeID;
     }
 
-//    setDatetimeOnPage();
-//    Calendar current = Calendar.getInstance(TimeZone.getDefault());
-//    setDate(current.get(Calendar.YEAR), current.get(Calendar.MONTH), current.get(Calendar.DAY_OF_MONTH));
-//    setTime(current.get(Calendar.HOUR_OF_DAY), current.get(Calendar.MINUTE));
+    //Seeds all TextVies and calls setDatetimeOnPage
+    public void Populate(){
+            setDatetimeOnPage();
+    Calendar current = Calendar.getInstance(TimeZone.getDefault());
+    setDate(current.get(Calendar.YEAR), current.get(Calendar.MONTH), current.get(Calendar.DAY_OF_MONTH));
+    setTime(current.get(Calendar.HOUR_OF_DAY), current.get(Calendar.MINUTE));
+    }
+
 
 
     //Sets the default date and time values on the activity and sets the onClickListener for the time and date views
     //dateID is TextView id you want to have filled.
     private void setDatetimeOnPage(){
-        TextView textDate = (TextView)findViewById(dateID);
-        TextView textTime = (TextView)findViewById(timeID);
+//        TextView textDate = (TextView)findViewById(dateID);
+//        TextView textTime = (TextView)findViewById(timeID);
 
-        textDate.setOnClickListener(new View.OnClickListener() {
+        exercise_entry.dateTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -57,7 +73,7 @@ public class DateTimePopulateTextView extends AppCompatActivity {
                 int mDay = current.get(Calendar.DAY_OF_MONTH);
 
                 //creates the date picker and sets the listener to call setDate whenever the date is changed
-                DatePickerDialog mDatePicker = new DatePickerDialog(ParentContext, new DatePickerDialog.OnDateSetListener() {
+                DatePickerDialog mDatePicker = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
                     public void onDateSet(DatePicker datepicker, int year, int month, int day) {
                         setDate(year, month, day);
                     }
@@ -67,13 +83,13 @@ public class DateTimePopulateTextView extends AppCompatActivity {
             }
         });
 
-        textTime.setOnClickListener(new View.OnClickListener() {
+        exercise_entry.timeTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Calendar current = Calendar.getInstance(TimeZone.getDefault());
                 int mHour = current.get(Calendar.HOUR_OF_DAY);
                 int mMinute = current.get(Calendar.MINUTE);
-                TimePickerDialog time = new TimePickerDialog(ParentContext, new TimePickerDialog.OnTimeSetListener() {
+                TimePickerDialog time = new TimePickerDialog(context, new TimePickerDialog.OnTimeSetListener() {
                     public void onTimeSet(TimePicker timepicker, int hourOfDay, int minute) {
                         setTime(hourOfDay, minute);
                     }
@@ -84,25 +100,24 @@ public class DateTimePopulateTextView extends AppCompatActivity {
         });
     }
     private void setDate(int year, int month, int day) {
-        TextView textDate = (TextView) findViewById(dateID);
+        //TextView textDate = (TextView) findViewById(dateID);
 
         Calendar c = new GregorianCalendar(year, month, day);
         if (!c.after(Calendar.getInstance(TimeZone.getDefault()))) {
             String str = new SimpleDateFormat(_dateFormat).format(c.getTime());
-            textDate.setText("Date: " + str);
+            exercise_entry.dateTV.setText("Date: " + str);
         }
     }
     private void setTime(int hour, int minute){
-        TextView textTime = (TextView)findViewById(timeID);
+        //TextView textTime = (TextView)findViewById(timeID);
 
         Calendar current = Calendar.getInstance(TimeZone.getDefault());
         Calendar c = new GregorianCalendar(current.get(Calendar.YEAR), current.get(Calendar.MONTH),current.get(Calendar.DAY_OF_MONTH),
                 hour, minute);
         if (!c.after(Calendar.getInstance(TimeZone.getDefault()))) {
             String str = new SimpleDateFormat(_timeFormat).format(c.getTime());
-            textTime.setText("Time: " + str);
+            exercise_entry.timeTV.setText("Time: " + str);
         }
     }
-
 
 }

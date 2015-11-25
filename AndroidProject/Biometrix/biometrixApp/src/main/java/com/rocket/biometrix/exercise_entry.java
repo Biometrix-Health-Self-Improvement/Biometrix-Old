@@ -21,6 +21,9 @@ public class exercise_entry extends AppCompatActivity implements AdapterView.OnI
     Spinner minuteSpinner;
     boolean toasted = false; //Used to display encouraging messages ONCE in minuteSpinner.
 
+    public static TextView timeTV;
+    public static TextView dateTV;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,8 +79,13 @@ public class exercise_entry extends AppCompatActivity implements AdapterView.OnI
 //        TextView nextField = (TextView)currentField.focusSearch(View.FOCUS_RIGHT);
 //        nextField.requestFocus();
 
+        timeTV = (TextView) findViewById(R.id.ex_tv_time);
+        dateTV = (TextView) findViewById(R.id.ex_tv_date);
 
 
+        //Slick calls to fill date and time textviews.
+        DateTimePopulateTextView DTPOWAH = new DateTimePopulateTextView(exercise_entry.this, R.id.ex_tv_date, R.id.ex_tv_time);
+        DTPOWAH.Populate();
 
     }//END onCreate()
 
@@ -93,6 +101,26 @@ public class exercise_entry extends AppCompatActivity implements AdapterView.OnI
         // or else my heart concealing it will break.
     }
 
+    //Setter for time TextView
+public void setTimeText (String time){
+    timeTV = (TextView)findViewById(R.id.ex_tv_time);
+    timeTV.setText(time);
+}
+    //Setter for date TextView
+    public void setDateText (String date){
+        TextView dateTV = (TextView)findViewById(R.id.ex_tv_date);
+        dateTV.setText(date);
+    }
 
+    //Getter for time TextView
+    public TextView getTimeText (){
+        TextView timeTV = (TextView)findViewById(R.id.ex_tv_time);
+        return timeTV;
+    }
+    //Getter for date TextView
+    public TextView getDateText () {
+        TextView dateTV = (TextView) findViewById(R.id.ex_tv_date);
+        return dateTV;
+    }
 
 }
