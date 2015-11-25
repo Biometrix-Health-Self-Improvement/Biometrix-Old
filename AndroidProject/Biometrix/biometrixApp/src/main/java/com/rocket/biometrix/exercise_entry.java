@@ -1,5 +1,6 @@
 package com.rocket.biometrix;
 
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -26,17 +27,8 @@ public class exercise_entry extends AppCompatActivity implements AdapterView.OnI
         setContentView(R.layout.activity_exercise_entry);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
         //@Filling contents of Minutes: Slide down menu
         minuteSpinner = (Spinner) findViewById(R.id.ex_min_spinner);
@@ -85,15 +77,6 @@ public class exercise_entry extends AppCompatActivity implements AdapterView.OnI
 //        nextField.requestFocus();
 
 
-        Button addNewEntry = (Button) findViewById(R.id.ex_b_when);
-        addNewEntry.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                //start new intent (Parent activity start with capital, child don't have capital)
-                Intent LaunchNewEntry = new Intent(exercise_entry.this, exercise_entry_when.class);
-                //start new activity
-                startActivity(LaunchNewEntry);
-            }
-        });
 
 
     }//END onCreate()
@@ -109,4 +92,7 @@ public class exercise_entry extends AppCompatActivity implements AdapterView.OnI
         //O! Foul bits! My tongue will tell the anger of my heart,
         // or else my heart concealing it will break.
     }
+
+
+
 }
