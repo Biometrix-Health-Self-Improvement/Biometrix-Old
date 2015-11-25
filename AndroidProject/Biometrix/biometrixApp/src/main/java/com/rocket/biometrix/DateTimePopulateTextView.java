@@ -38,6 +38,9 @@ public class DateTimePopulateTextView extends AppCompatActivity {
     int timeID;
     Context ParentContext;
     protected AppCompatActivity context;
+    public TextView textDate;
+    public TextView textTime;
+
 
     //Fill up this constructor with the Context (probs ur activity), and the TextView IDs (R.id.YOUR_ID_HERE)
     DateTimePopulateTextView(Context ParentContext, int dateID, int timeID){
@@ -45,6 +48,8 @@ public class DateTimePopulateTextView extends AppCompatActivity {
         this.context = (AppCompatActivity) ParentContext;
         this.dateID = dateID;
         this.timeID = timeID;
+        TextView textDate = (TextView)context.findViewById(dateID);
+        TextView textTime = (TextView)context.findViewById(timeID);
     }
 
     //Seeds all TextVies and calls setDatetimeOnPage
@@ -60,10 +65,8 @@ public class DateTimePopulateTextView extends AppCompatActivity {
     //Sets the default date and time values on the activity and sets the onClickListener for the time and date views
     //dateID is TextView id you want to have filled.
     private void setDatetimeOnPage(){
-//        TextView textDate = (TextView)findViewById(dateID);
-//        TextView textTime = (TextView)findViewById(timeID);
-
-        exercise_entry.dateTV.setOnClickListener(new View.OnClickListener() {
+        context.findViewById(dateID).setOnClickListener(new View.OnClickListener() {
+            //exercise_entry.dateTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -82,8 +85,8 @@ public class DateTimePopulateTextView extends AppCompatActivity {
                 mDatePicker.show(); //shows the date picker that was just create
             }
         });
-
-        exercise_entry.timeTV.setOnClickListener(new View.OnClickListener() {
+        //2nd click listener for time
+        context.findViewById(timeID).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Calendar current = Calendar.getInstance(TimeZone.getDefault());
@@ -105,7 +108,7 @@ public class DateTimePopulateTextView extends AppCompatActivity {
         Calendar c = new GregorianCalendar(year, month, day);
         if (!c.after(Calendar.getInstance(TimeZone.getDefault()))) {
             String str = new SimpleDateFormat(_dateFormat).format(c.getTime());
-            exercise_entry.dateTV.setText("Date: " + str);
+            updateTVdate("Date: " + str); //update on seperate thread (not stack safe)
         }
     }
     private void setTime(int hour, int minute){
@@ -116,8 +119,27 @@ public class DateTimePopulateTextView extends AppCompatActivity {
                 hour, minute);
         if (!c.after(Calendar.getInstance(TimeZone.getDefault()))) {
             String str = new SimpleDateFormat(_timeFormat).format(c.getTime());
-            exercise_entry.timeTV.setText("Time: " + str);
+            updateTVtime("Time: " + str);
         }
     }
+
+    //Updating parent activity must be done on separate thread
+    public void updateTVdate(final String str1){
+        context.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                TextView textDate = (TextView)context.findViewById(dateID);
+                textDate.setText(str1);
+            }
+        });}
+   //other method for time. The real challenge is making this more flexible to work with any number of buttons!
+    public void updateTVtime(final String str1){
+        context.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                TextView textTime = (TextView)context.findViewById(timeID);
+                textTime.setText(str1);
+            }
+        });}
 
 }
