@@ -79,9 +79,9 @@ public class exercise_entry extends AppCompatActivity implements AdapterView.OnI
 //        TextView nextField = (TextView)currentField.focusSearch(View.FOCUS_RIGHT);
 //        nextField.requestFocus();
 
+        //Linking contexts likes non-null variables.
         timeTV = (TextView) findViewById(R.id.ex_tv_time);
         dateTV = (TextView) findViewById(R.id.ex_tv_date);
-
 
         //Slick calls to fill date and time textviews.
         DateTimePopulateTextView DTPOWAH = new DateTimePopulateTextView(exercise_entry.this, R.id.ex_tv_date, R.id.ex_tv_time);
@@ -100,6 +100,8 @@ public class exercise_entry extends AppCompatActivity implements AdapterView.OnI
         //O! Foul bits! My tongue will tell the anger of my heart,
         // or else my heart concealing it will break.
     }
+
+    //Getters and Setters NEVER USED
 
     //Setter for time TextView
 public void setTimeText (String time){
