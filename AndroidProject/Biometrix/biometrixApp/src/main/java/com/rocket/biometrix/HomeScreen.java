@@ -40,7 +40,7 @@ public class HomeScreen extends AppCompatActivity {
         diet_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent Launch_Diet = new Intent(HomeScreen.this, HomeScreen.class);
+                Intent Launch_Diet = new Intent(HomeScreen.this, DietMain.class);
                 startActivity(Launch_Diet);
             }
         });
