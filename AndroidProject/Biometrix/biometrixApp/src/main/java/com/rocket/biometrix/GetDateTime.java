@@ -1,4 +1,4 @@
-package com.rocket.biometrix;
+/*package com.rocket.biometrix;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -53,4 +53,4 @@ public class GetDateTime extends AppCompatActivity {
         setResult(RESULT_OK, dataPassback);
         finish();
     }
-}
+}*/

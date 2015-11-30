@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -33,6 +34,8 @@ public class SleepEntry extends AppCompatActivity {
 
     private Spinner generalHealthSpinner;
 
+    private TextView noteTextView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +50,8 @@ public class SleepEntry extends AppCompatActivity {
 
         //Moves listener setups to another function to avoid clutter
         SetupListeners();
+
+        qualitySeekBar.setMax(SleepData.maxQuality);
 
         UpdateEndTimes();
     }
@@ -66,6 +71,7 @@ public class SleepEntry extends AppCompatActivity {
         qualitySeekBar = (SeekBar) findViewById(R.id.sleepQualitySeekBar);
         qualityNumberTextView = (TextView) findViewById(R.id.sleepQualityNumberTextView);
         generalHealthSpinner = (Spinner) findViewById(R.id.sleepGeneralHealthSpinner);
+        noteTextView = (TextView) findViewById(R.id.sleepNotesEditText);
     }
 
     /**
@@ -113,6 +119,13 @@ public class SleepEntry extends AppCompatActivity {
         qualitySeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+
+                //Ensures that a quality too low cannot be given
+                if(progress < SleepData.minQuality)
+                {
+                    qualitySeekBar.setProgress(SleepData.minQuality);
+                }
+
                 qualityNumberTextView.setText(Integer.toString(qualitySeekBar.getProgress()));
             }
 
@@ -269,9 +282,26 @@ public class SleepEntry extends AppCompatActivity {
      */
     public void onDoneClick(View view)
     {
-        Intent dataPassback = new Intent();
+        LocalStorageAccess fileAccess = new LocalStorageAccess(this, null, null, 1);
 
-        setResult(RESULT_OK, dataPassback);
+        String dateText = startDateTextView.getText().toString();
+        String timeText = startTimeTextView.getText().toString();
+        String duration = sleptTimeTextView.getText().toString();
+
+        dateText = dateText.substring(dateText.indexOf(",") + 1).trim();
+        timeText = timeText.substring(timeText.indexOf(":") + 2).trim();
+        duration = duration.substring(duration.indexOf(":") + 2).trim();
+
+        int quality = qualitySeekBar.getProgress();
+
+        String notes = noteTextView.getText().toString();
+        String status = generalHealthSpinner.getSelectedItem().toString();
+
+
+        SleepData sleepData = new SleepData(dateText + " " + timeText, duration, quality, status, notes);
+
+        fileAccess.AddSleepEntry(sleepData);
+
         finish();
     }
 }
