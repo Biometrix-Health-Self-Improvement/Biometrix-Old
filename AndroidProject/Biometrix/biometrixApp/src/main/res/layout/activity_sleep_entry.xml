@@ -8,125 +8,162 @@
     tools:context="com.rocket.biometrix.SleepEntry"
     android:paddingEnd="6dp">
 
-    <Button
-        style="@color/button_color"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="DONE"
-        android:id="@+id/submitSleepButton"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="86dp" />
-
-    <TableLayout
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentEnd="false">
 
-        <TableRow
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:id="@+id/sleepStartDateRow">
+            android:layout_height="wrap_content"
+            android:text="@string/date_prompt"
+            android:id="@+id/sleepStartDateTextView"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:layout_weight="1" />
 
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/sleepStartTextView"
-                android:layout_column="0"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                android:text="@string/sleep_start_text"
-                android:onClick="getSleepDateClick"
-                android:layout_span="2"
-                android:layout_weight="1" />
-        </TableRow>
 
-        <TableRow
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/sleepStartTimeTextView"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:text="@string/time_prompt"
+            android:layout_weight="1" />
+
+        <Space
+            android:layout_width="20px"
+            android:layout_height="20px" />
+
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <Space
-                android:layout_width="20px"
-                android:layout_height="20px"
-                android:layout_column="0" />
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Hours slept: "
+                android:text="@string/sleep_display_hours"
                 android:id="@+id/sleepHoursSleptTextView"
-                android:layout_column="0"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
             <SeekBar
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/sleepHoursSeekBar"
-                android:layout_column="1"
                 android:indeterminate="false"
-                android:layout_weight="1"
                 android:max="23"
                 android:progress="1" />
+        </LinearLayout>
 
-        </TableRow>
-
-        <TableRow
+       <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Minutes slept: "
                 android:id="@+id/sleepMinutesSleptTextView"
-                android:layout_column="0"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
 
             <SeekBar
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/sleepMinutesSeekBar"
-                android:layout_column="1"
-                android:layout_weight="1"
                 android:indeterminate="false"
                 android:max="59"
                 android:progress="1" />
-        </TableRow>
+        </LinearLayout>
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <Space
+            android:layout_width="20px"
+            android:layout_height="20px" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/sleepTimeSleptTextView"
+            android:text="@string/sleep_time_slept_base"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:layout_weight="1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/sleepEndTimeTextView"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:text="@string/sleep_end_time_base"
+            android:layout_weight="1" />
+
+
+        <Space
+            android:layout_width="20px"
+            android:layout_height="20px" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sleep_quality"
+            android:id="@+id/sleepQualityTextView"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+            <SeekBar
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/sleepQualitySeekBar"
+                android:layout_weight="1"
+                android:max="10"
+                android:progress="1"
+                android:indeterminate="false" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/sleepEndTimeTextView"
-                android:layout_column="0"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                android:layout_span="3"
-                android:text="@string/sleep_end_base" />
-        </TableRow>
+                android:id="@+id/sleepQualityNumberTextView"
+                android:text="1"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+        </LinearLayout>
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
 
-        </TableRow>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sleep_gen_health_text"
+            android:id="@+id/textView2"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/sleepGeneralHealthSpinner"
+            android:layout_column="0" />
 
-        </TableRow>
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editText"
+            android:layout_weight="1"
+            android:hint="@string/sleep_comment_hint" />
 
-    </TableLayout>
+        <Button
+            style="@color/button_color"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="DONE"
+            android:id="@+id/submitSleepButton"
+            android:layout_marginBottom="86dp"
+            android:background="@color/button_color"
+            android:onClick="onDoneClick"
+            android:layout_weight="1" />
+    </LinearLayout>
 
 </RelativeLayout>
