@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="mood_rating_none">None</string>
+    <string name="mood_rating_mild">Mild</string>
+    <string name="mood_rating_mod">Moderate</string>
+    <string name="mood_rating_sev">Severe</string>
+    <string name="mood_rating_vsev">Very Severe</string>
+    <string name="mood_details">Enter notes...</string>
+</resources>

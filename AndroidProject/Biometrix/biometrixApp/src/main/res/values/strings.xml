@@ -5,26 +5,12 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
-    <string name="title_activity_get_login">Get Login</string>
-    <string name="title_activity_select_date__emotion_rater">SelectDate_EmotionRater</string>
-    <string name="title_activity_home_screen">HomeScreen</string>
-    <string name="title_activity_exercise_parent">ExerciseParent</string>
 
-    <string name="title_activity_navigation_drawer">NavigationDrawer</string>
+    <!-- >The trailing \u0020 is for the trailing whitespace character. Without it trailing whitespace is ignored</!-->
+    <string name="date_prompt">Date: \u0020</string>
+    <string name="time_prompt">Time: \u0020</string>
 
 
-    <string name="title_activity_mood_main_page">Mood Tracker</string>
-    <string name="title_activity_mood_creat_entry">Create Entry</string>
-    <string name="mood_rating_none">None</string>
-    <string name="mood_rating_mild">Mild</string>
-    <string name="mood_rating_mod">Moderate</string>
-    <string name="mood_rating_sev">Severe</string>
-    <string name="mood_rating_vsev">Very Severe</string>
-    <string name="mood_details">Enter notes...</string>
-    <string name="title_activity_get_date_time">GetDateTime</string>
-    <string name="title_activity_exercise_entry">exercise_entry</string>
-    <string name="title_activity_diet_main">DietMain</string>
-    <string name="title_activity_diet_create_entry">DietCreateEntry</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"
 
