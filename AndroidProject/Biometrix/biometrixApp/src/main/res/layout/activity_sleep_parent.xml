@@ -12,8 +12,24 @@
         android:layout_height="wrap_content"
         android:text="@string/new_sleep_entry_text"
         android:id="@+id/NewSleepEntryButton"
-        android:layout_marginTop="50dp"
+        android:onClick="onNewSleepEntryClick"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:onClick="onNewSleepEntryClick" />
+        android:background="@color/button_color" />
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/sleepDisplayEntriesScrollView"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:fillViewport="false"
+        android:layout_below="@+id/NewSleepEntryButton" >
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/sleepDisplayEntriesLinearLayout"></LinearLayout>
+    </ScrollView>
 </RelativeLayout>

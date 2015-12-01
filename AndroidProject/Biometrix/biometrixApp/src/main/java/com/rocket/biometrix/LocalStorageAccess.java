@@ -5,6 +5,13 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.content.Context;
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.support.annotation.NonNull;
+
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.ListIterator;
 
 
 /**
@@ -104,5 +111,54 @@ public class LocalStorageAccess extends SQLiteOpenHelper {
 
         db.close();
         return data;
+    }
+
+    /**
+     * Returns the rows from the sleep data table
+     * @return Returns a list of sleepdata objects with the information from the database
+     */
+    public List<SleepData> GetSleepEntries()
+    {
+        String query = "Select " + SLEEP_COLUMN_DATE + ", " + SLEEP_COLUMN_DURATION + ", " +
+                SLEEP_COLUMN_QUALITY + ", " + SLEEP_COLUMN_HEALTH + ", " + SLEEP_COLUMN_NOTES +
+                " FROM " + TABLE_SLEEP + " Order By " + SLEEP_COLUMN_DATE;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor cursor = db.rawQuery(query, null);
+
+        String date;
+        String duration;
+        int quality;
+        String status;
+        String notes;
+
+        List<SleepData> sleepDataList = new LinkedList<SleepData>();
+        SleepData data = null;
+
+        //If there is a valid entry move to it
+        if (cursor.moveToFirst()) {
+            cursor.moveToFirst();
+
+            while (!cursor.isAfterLast())
+            {
+                date = cursor.getString(0);
+                duration = cursor.getString(1);
+                quality = cursor.getInt(2);
+                status = cursor.getString(3);
+                notes = cursor.getString(4);
+
+                data = new SleepData(date, duration, quality, status, notes);
+                sleepDataList.add(data);
+
+                cursor.moveToNext();
+            }
+        }
+
+        cursor.close();
+
+        db.close();
+
+        return sleepDataList;
     }
 }
