@@ -13,8 +13,9 @@
 
     <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:baselineAligned="false">
+        android:layout_height="wrap_content"
+        android:baselineAligned="false"
+        android:id="@+id/tableLayout">
 
         <TableRow
             android:layout_width="match_parent"
@@ -201,5 +202,14 @@
         </TableRow>
 
     </TableLayout>
+
+    <Button
+        android:layout_width="120dp"
+        android:layout_height="35dp"
+        android:text="Done"
+        android:id="@+id/button"
+        android:background="@color/button_color"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
