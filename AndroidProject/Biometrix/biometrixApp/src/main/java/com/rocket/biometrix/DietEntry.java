@@ -2,10 +2,7 @@ package com.rocket.biometrix;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.TextView;
@@ -15,7 +12,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
 
-public class DietCreateEntry extends AppCompatActivity {
+public class DietEntry extends AppCompatActivity {
     final static String _dateFormat = "EEE, MM/dd/yyyy";
 
     @Override
@@ -42,7 +39,7 @@ public class DietCreateEntry extends AppCompatActivity {
                 int mDay = current.get(Calendar.DAY_OF_MONTH);
 
                 //creates the date picker and sets the listener to call setDate whenever the date is changed
-                DatePickerDialog mDatePicker = new DatePickerDialog(DietCreateEntry.this, new DatePickerDialog.OnDateSetListener() {
+                DatePickerDialog mDatePicker = new DatePickerDialog(DietEntry.this, new DatePickerDialog.OnDateSetListener() {
                     public void onDateSet(DatePicker datepicker, int year, int month, int day) {
                         setDate(year, month, day);
                     }

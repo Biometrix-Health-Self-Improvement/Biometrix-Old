@@ -155,13 +155,13 @@
             android:hint="@string/sleep_comment_hint" />
 
         <Button
-            style="@color/button_color"
+            style="@color/colorButtonBackground"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="DONE"
             android:id="@+id/submitSleepButton"
             android:layout_marginBottom="86dp"
-            android:background="@color/button_color"
+            android:background="@color/colorButtonBackground"
             android:onClick="onDoneClick"
             android:layout_weight="1" />
     </LinearLayout>

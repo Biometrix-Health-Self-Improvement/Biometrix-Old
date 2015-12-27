@@ -8,7 +8,7 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_home_screen" tools:context="com.rocket.biometrix.HomeScreen"
-    android:background="@color/bg_color">
+    android:background="@color/colorBackground">
 
     <ImageView
         android:layout_width="wrap_content"
@@ -21,7 +21,8 @@
         android:text="Mood"
         android:id="@+id/mood_button"
         android:layout_below="@+id/imageView2"
-        android:background="@color/button_color"
+        android:background="@color/colorButtonBackground"
+        android:textColor="@color/colorButtonText"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="135dp" />
 
@@ -30,7 +31,8 @@
         android:layout_height="50dp"
         android:text="Medications"
         android:id="@+id/medications_button"
-        android:background="@color/button_color"
+        android:background="@color/colorButtonBackground"
+        android:textColor="@color/colorButtonText"
         android:layout_below="@+id/mood_button"
         android:layout_alignParentStart="true"
         android:layout_marginLeft="10dp"
@@ -41,7 +43,8 @@
         android:layout_height="50dp"
         android:text="Exercise "
         android:id="@+id/exercise_button"
-        android:background="@color/button_color"
+        android:background="@color/colorButtonBackground"
+        android:textColor="@color/colorButtonText"
         android:layout_below="@+id/diet_button"
         android:layout_alignParentEnd="true"
         android:layout_marginRight="10dp"
@@ -52,7 +55,8 @@
         android:layout_height="50dp"
         android:text="Diet"
         android:id="@+id/diet_button"
-        android:background="@color/button_color"
+        android:background="@color/colorButtonBackground"
+        android:textColor="@color/colorButtonText"
         android:layout_alignTop="@+id/mood_button"
         android:layout_alignEnd="@+id/imageView3"
         android:layout_marginRight="10dp" />
@@ -84,7 +88,8 @@
         android:layout_alignParentStart="true"
         android:layout_marginTop="40dp"
         android:layout_marginLeft="10dp"
-        android:background="@color/button_color" />
+        android:background="@color/colorButtonBackground"
+        android:textColor="@color/colorButtonText"/>
 
     <Button
         android:layout_width="120dp"
@@ -92,7 +97,8 @@
         android:text="Analytics"
         android:id="@+id/analytics_button"
         android:layout_marginRight="10dp"
-        android:background="@color/button_color"
+        android:background="@color/colorButtonBackground"
+        android:textColor="@color/colorButtonText"
         android:layout_alignTop="@+id/sleep_button"
         android:layout_alignEnd="@+id/imageView3" />
 
@@ -101,7 +107,8 @@
         android:layout_height="50dp"
         android:text="Log In"
         android:id="@+id/login_button"
-        android:background="@color/button_color"
+        android:background="@color/colorButtonBackground"
+        android:textColor="@color/colorButtonText"
         android:layout_below="@+id/sleep_button"
         android:layout_alignStart="@+id/sleep_button"
         android:layout_marginTop="55dp"
@@ -112,7 +119,8 @@
         android:layout_height="50dp"
         android:text="Create Login"
         android:id="@+id/createLogin_button"
-        android:background="@color/button_color"
+        android:background="@color/colorButtonBackground"
+        android:textColor="@color/colorButtonText"
         android:layout_marginRight="30dp"
         android:layout_below="@+id/analytics_button"
         android:layout_alignEnd="@+id/imageView3"

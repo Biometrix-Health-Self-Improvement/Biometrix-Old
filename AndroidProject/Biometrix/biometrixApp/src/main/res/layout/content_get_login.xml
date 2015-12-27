@@ -99,7 +99,7 @@
                 android:id="@+id/loginCancelButton"
                 android:layout_weight="1"
                 android:onClick="cancelButtonClick"
-                android:background="@color/button_color" />
+                android:background="@color/colorButtonBackground" />
 
             <Space
                 android:layout_width="wrap_content"
@@ -116,7 +116,7 @@
                 android:textAlignment="center"
                 android:layout_weight="1"
                 android:onClick="okayButtonClick"
-                android:background="@color/button_color" />
+                android:background="@color/colorButtonBackground" />
 
             <Space
                 android:layout_width="wrap_content"

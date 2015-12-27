@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="title_activity_get_login">Get Login</string>
-    <string name="title_activity_select_date__emotion_rater">SelectDate_EmotionRater</string>
-    <string name="title_activity_home_screen">HomeScreen</string>
-    <string name="title_activity_exercise_parent">ExerciseParent</string>
-    <string name="title_activity_navigation_drawer">NavigationDrawer</string>
-    <string name="title_activity_mood_main_page">Mood Tracker</string>
-    <string name="title_activity_mood_creat_entry">Create Entry</string>
-    <string name="title_activity_get_date_time">GetDateTime</string>
-    <string name="title_activity_exercise_entry">exercise_entry</string>
-    <string name="title_activity_diet_main">DietMain</string>
-    <string name="title_activity_diet_create_entry">DietCreateEntry</string>
+    <string name="title_activity_home_screen">BioMetrix Home</string>
 
+    <string name="title_activity_exercise_parent">BioMetrix Exercise Tracker</string>
+    <string name="title_activity_exercise_entry">BioMetrix Add Exercise Entry</string>
+
+    <string name="title_activity_mood_parent">BioMetrix Mood Tracker</string>
+    <string name="title_activity_mood_entry">BioMetrix Add Mood Entry</string>
+
+    <string name="title_activity_diet_parent">BioMetrix Diet Tracker</string>
+    <string name="title_activity_diet_entry">BioMetrix Add Diet Entry</string>
+
+    <string name="title_activity_sleep_parent">BioMetrix Sleep Tracker</string>
+    <string name="title_activity_sleep_entry">BioMetrix Add Sleep Entry</string>
+
+
+
+    <string name="title_activity_navigation_drawer">NavigationDrawer</string>
+    <string name="title_activity_get_date_time">GetDateTime</string>
 </resources>

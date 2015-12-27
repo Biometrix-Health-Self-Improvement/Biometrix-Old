@@ -30,7 +30,7 @@ public class HomeScreen extends AppCompatActivity {
         mood_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent Launch_Mood = new Intent(HomeScreen.this, MoodMainPage.class);
+                Intent Launch_Mood = new Intent(HomeScreen.this, MoodParent.class);
                 startActivity(Launch_Mood);
             }
         });
@@ -40,7 +40,7 @@ public class HomeScreen extends AppCompatActivity {
         diet_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent Launch_Diet = new Intent(HomeScreen.this, DietMain.class);
+                Intent Launch_Diet = new Intent(HomeScreen.this, DietParent.class);
                 startActivity(Launch_Diet);
             }
         });

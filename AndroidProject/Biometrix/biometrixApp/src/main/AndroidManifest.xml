@@ -24,6 +24,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
         <activity
             android:name=".ExerciseParent"
             android:label="@string/title_activity_exercise_parent"
@@ -33,38 +35,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.rocket.biometrix.HomeScreen" />
         </activity>
+
         <activity
-            android:name=".exercise_EntryFS"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_exercise__entry_fs"
-            android:parentActivityName=".ExerciseParent"
-            android:theme="@style/FullscreenTheme" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.rocket.biometrix.ExerciseParent" />
-        </activity>
-        <activity android:name=".SleepParent" />
-        <activity
-            android:name=".CreateLoginActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".GetLoginActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".SleepEntry" />
-        <activity
-            android:name=".MoodMainPage"
-            android:label="@string/title_activity_mood_main_page"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".MoodCreatEntry"
-            android:label="@string/title_activity_mood_creat_entry"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".GetDateTime"
-            android:label="@string/title_activity_get_date_time"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".exercise_entry"
+            android:name=".ExerciseEntry"
             android:label="@string/title_activity_exercise_entry"
             android:parentActivityName=".ExerciseParent"
             android:theme="@style/AppTheme.NoActionBar" >
@@ -72,17 +45,57 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.rocket.biometrix.ExerciseParent" />
         </activity>
-        <activity android:name=".exercise_entry_when" />
+
+
         <activity
-            android:name=".DietMain"
-            android:label="@string/title_activity_diet_main"
-            android:theme="@style/AppTheme.NoActionBar" >
-        </activity>
+            android:name=".CreateLoginActivity"
+            android:parentActivityName=".HomeScreen"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".DietCreateEntry"
-            android:label="@string/title_activity_diet_create_entry"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:name=".GetLoginActivity"
+            android:parentActivityName=".HomeScreen"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+
+        <activity
+            android:name=".SleepParent"
+            android:parentActivityName=".HomeScreen"
+            android:label="@string/title_activity_sleep_parent"/>
+        <activity
+            android:name=".SleepEntry"
+            android:parentActivityName=".SleepParent"
+            android:label="@string/title_activity_sleep_entry"/>
+
+
+        <activity
+            android:name=".MoodParent"
+            android:label="@string/title_activity_mood_parent"
+            android:parentActivityName=".HomeScreen"
+            android:theme="@style/AppTheme.NoActionBar"  >
         </activity>
+
+        <activity
+            android:name=".MoodEntry"
+            android:label="@string/title_activity_mood_entry"
+            android:parentActivityName=".MoodParent"
+            android:theme="@style/AppTheme.NoActionBar"  >
+        </activity>
+
+
+
+
+        <activity
+            android:name=".DietParent"
+            android:label="@string/title_activity_diet_parent"
+            android:parentActivityName=".HomeScreen"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".DietEntry"
+            android:label="@string/title_activity_diet_entry"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+
+
     </application>
 
 </manifest>

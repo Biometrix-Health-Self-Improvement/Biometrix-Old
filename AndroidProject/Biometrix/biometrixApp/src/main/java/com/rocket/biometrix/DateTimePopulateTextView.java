@@ -1,6 +1,5 @@
 package com.rocket.biometrix;
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
@@ -20,7 +19,7 @@ import java.util.TimeZone;
  *A class that populates 2 TextViews with user-selected date and time.
         * How to use:
  * 1) Have two TextViews http://developer.android.com/reference/android/widget/TextView.html
- * @see exercise_entry
+ * @see ExerciseEntry
  * 2) Make an instance of this class inside your activity, pass it a context and two int ids
         * <pre>
 *DateTimePopulateTextView DTPTV = new DateTimePopulateTextView(YOUR_CLASS.this, R.id.YOUR_DATE_TEXTVIEW, R.id.YOUR_TIME_TEXTVIEW);
@@ -66,7 +65,7 @@ public class DateTimePopulateTextView extends AppCompatActivity {
     //dateID is TextView id you want to have filled.
     private void setDatetimeOnPage(){
         context.findViewById(dateID).setOnClickListener(new View.OnClickListener() {
-            //exercise_entry.dateTV.setOnClickListener(new View.OnClickListener() {
+            //ExerciseEntry.dateTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 

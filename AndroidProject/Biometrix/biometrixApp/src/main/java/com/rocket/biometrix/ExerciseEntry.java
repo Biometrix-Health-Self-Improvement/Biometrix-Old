@@ -1,22 +1,17 @@
 package com.rocket.biometrix;
 
-import android.app.DialogFragment;
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class exercise_entry extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class ExerciseEntry extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     Spinner minuteSpinner;
     boolean toasted = false; //Used to display encouraging messages ONCE in minuteSpinner.
@@ -84,7 +79,7 @@ public class exercise_entry extends AppCompatActivity implements AdapterView.OnI
         dateTV = (TextView) findViewById(R.id.ex_tv_date);
 
         //Slick calls to fill date and time textviews.
-        DateTimePopulateTextView DTPOWAH = new DateTimePopulateTextView(exercise_entry.this, R.id.ex_tv_date, R.id.ex_tv_time);
+        DateTimePopulateTextView DTPOWAH = new DateTimePopulateTextView(ExerciseEntry.this, R.id.ex_tv_date, R.id.ex_tv_time);
         DTPOWAH.Populate();
 
     }//END onCreate()

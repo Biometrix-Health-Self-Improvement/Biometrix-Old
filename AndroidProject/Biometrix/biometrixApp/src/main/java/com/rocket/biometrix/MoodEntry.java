@@ -3,8 +3,6 @@ package com.rocket.biometrix;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -18,7 +16,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
 
-public class MoodCreatEntry extends AppCompatActivity {
+public class MoodEntry extends AppCompatActivity {
     final static String _dateFormat = "EEE, MM/dd/yyyy";
     final static String _timeFormat = "h:mm a";
 
@@ -29,6 +27,7 @@ public class MoodCreatEntry extends AppCompatActivity {
         setContentView(R.layout.activity_mood_creat_entry);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         setDatetimeOnPage();
         Calendar current = Calendar.getInstance(TimeZone.getDefault());
@@ -52,7 +51,7 @@ public class MoodCreatEntry extends AppCompatActivity {
                 int mDay = current.get(Calendar.DAY_OF_MONTH);
 
                 //creates the date picker and sets the listener to call setDate whenever the date is changed
-                DatePickerDialog mDatePicker = new DatePickerDialog(MoodCreatEntry.this, new DatePickerDialog.OnDateSetListener() {
+                DatePickerDialog mDatePicker = new DatePickerDialog(MoodEntry.this, new DatePickerDialog.OnDateSetListener() {
                     public void onDateSet(DatePicker datepicker, int year, int month, int day) {
                         setDate(year, month, day);
                     }
@@ -68,7 +67,7 @@ public class MoodCreatEntry extends AppCompatActivity {
                 Calendar current = Calendar.getInstance(TimeZone.getDefault());
                 int mHour = current.get(Calendar.HOUR_OF_DAY);
                 int mMinute = current.get(Calendar.MINUTE);
-                TimePickerDialog time = new TimePickerDialog(MoodCreatEntry.this, new TimePickerDialog.OnTimeSetListener() {
+                TimePickerDialog time = new TimePickerDialog(MoodEntry.this, new TimePickerDialog.OnTimeSetListener() {
                     public void onTimeSet(TimePicker timepicker, int hourOfDay, int minute) {
                         setTime(hourOfDay, minute);
                     }

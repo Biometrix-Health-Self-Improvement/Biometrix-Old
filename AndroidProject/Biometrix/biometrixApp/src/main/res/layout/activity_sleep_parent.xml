@@ -15,7 +15,7 @@
         android:onClick="onNewSleepEntryClick"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:background="@color/button_color" />
+        android:background="@color/colorButtonBackground" />
 
     <ScrollView
         android:layout_width="fill_parent"
