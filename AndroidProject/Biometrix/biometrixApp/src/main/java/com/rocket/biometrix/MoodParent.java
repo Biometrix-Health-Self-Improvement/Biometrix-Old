@@ -44,34 +44,24 @@ public class MoodParent extends AppCompatActivity {
     //in progress - don't mind me
     void populatePastEntriesScrollview(){
 
-        LinearLayout entryList = (LinearLayout) this.findViewById(R.id.pastEntries);
+        LinearLayout entryList = (LinearLayout) this.findViewById(R.id.pastMoodEntries);
 
 
-        View div = new View(this);
-        div.setBackgroundResource(R.color.colorBackgroundDark);
-        div.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 2));
-        entryList.addView(div);
+        View div;
 
 
+        for (int i =0; i < 40; i++) {
+            TextView pastEntry = new TextView(this);
+            pastEntry.setText("in java addin' textviews 1");
+            pastEntry.setTextSize(16);
+            entryList.addView(pastEntry);
 
-        TextView pastEntry = new TextView(this);
-        pastEntry.setText("in java addin' textviews 1");
-        entryList.addView(pastEntry);
+            div = new View(this);
+            div.setBackgroundResource(R.color.colorBackgroundDark);
+            div.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 2));
 
-        div =  new View(this);
-        div.setBackgroundResource(R.color.colorBackgroundDark);
-        div.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 2));
-        entryList.addView(div);
-
-        pastEntry = new TextView(this);
-        pastEntry.setText("in java addin' textviews 2");
-        entryList.addView(pastEntry);
-
-
-        div =  new View(this);
-        div.setBackgroundResource(R.color.colorBackgroundDark);
-        div.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 2));
-        entryList.addView(div);
+            entryList.addView(div);
+        }
     }
 
 
