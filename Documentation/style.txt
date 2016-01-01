@@ -1,0 +1,20 @@
+We need to start naming things consistently between the four of us. I created this style guide and refactored a lot of the code to match this. We'll need to add more to this and decide things as a team, but I figured this is a good place to start at least and we can change things later as we need to.
+
+
+Color variable names
+	camel case, full words, begin with "color"
+	ex: colorPrimary, colorDefaultBackground, colorButtonEnabled, colorButtonDisabled
+
+
+Java classes
+	begin with capital, camel case, full words
+	Module main page is Parent Activity
+	ex:   MoodCreateEntry, DietParentActivity
+
+
+Variables
+	camel case, full words, descriptive
+	ex: startDateTextView, sleepQualityNumberTextView
+
+
+
