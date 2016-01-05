@@ -1,5 +1,6 @@
 package com.rocket.biometrix;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -7,6 +8,10 @@ import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,8 +21,12 @@ public class ExerciseEntry extends AppCompatActivity implements AdapterView.OnIt
     Spinner minuteSpinner;
     boolean toasted = false; //Used to display encouraging messages ONCE in minuteSpinner.
 
-    public static TextView timeTV;
+    public static TextView timeTV; //Used by the DateTimePopulateTextView in the onCreate event
     public static TextView dateTV;
+
+    String min_selected; //string to save minutes exercised spinner result
+    String type_selected; //string to save type of exercise selected in the radio 'bubble' buttons
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,10 +54,10 @@ public class ExerciseEntry extends AppCompatActivity implements AdapterView.OnIt
                     initializedAdapter = parentView.getAdapter();
                     return;
                 }
+                //Set string
+                min_selected = parentView.getItemAtPosition(position).toString();
 
-                String selected = parentView.getItemAtPosition(position).toString();
-
-                if (selected.equals("5") || selected.equals("10")) {
+                if (min_selected.equals("5") || min_selected.equals("10")) {
                     if (!toasted) {
                         Toast.makeText(getApplicationContext(), "Keep it up :)", Toast.LENGTH_LONG).show();
                         toasted = true;
@@ -70,9 +79,38 @@ public class ExerciseEntry extends AppCompatActivity implements AdapterView.OnIt
             }
         });
 
-        //@Corrections for 'next' ime button //I'm too stupid to figure out how to use.
-//        TextView nextField = (TextView)currentField.focusSearch(View.FOCUS_RIGHT);
-//        nextField.requestFocus();
+        //Group of exercise types in the right corner, like "cardio"
+        RadioGroup rg = (RadioGroup) findViewById(R.id.ex_radioGroup);
+        //When a bubble is poked, update a string to match the bubble poked.
+        rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId) {
+                    case R.id.ex_rb_a:
+                        //Extract CharSequences from UI and convert them to string array
+                        final RadioButton ETa1 = (RadioButton) findViewById(R.id.ex_rb_a);
+                        type_selected = ETa1.getText().toString();
+                        break;
+
+                    case R.id.ex_rb_b:
+                        final RadioButton ETa2 = (RadioButton) findViewById(R.id.ex_rb_b);
+                        type_selected = ETa2.getText().toString();
+                        break;
+
+                    case R.id.ex_rb_c:
+                        final RadioButton ETa3 = (RadioButton) findViewById(R.id.ex_rb_c);
+                        type_selected = ETa3.getText().toString();
+                        break;
+
+                    case R.id.ex_rb_d:
+                        final RadioButton ETa4 = (RadioButton) findViewById(R.id.ex_rb_d);
+                        type_selected = ETa4.getText().toString();
+                        break;
+
+                }
+
+
+            }
+        });
 
         //Linking contexts likes non-null variables.
         timeTV = (TextView) findViewById(R.id.ex_tv_time);
@@ -80,7 +118,23 @@ public class ExerciseEntry extends AppCompatActivity implements AdapterView.OnIt
 
         //Slick calls to fill date and time textviews.
         DateTimePopulateTextView DTPOWAH = new DateTimePopulateTextView(ExerciseEntry.this, R.id.ex_tv_date, R.id.ex_tv_time);
-        DTPOWAH.Populate();
+        DTPOWAH.Populate(); //Change the text
+
+
+        //Done click event saves entered data to string array
+        //Bundles string array for transport across activities
+        //Saves entry to SQLlite DB using LocalStorageAccess
+        //And, Adds this exercise to the 'plan' if it needs to be added
+        //Lastly, it closes up the entry activity.
+        Button addNewEntry = (Button) findViewById(R.id.ex_b_done);
+        addNewEntry.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+
+                //Kill this thread, User will still have exercise main page open.
+                finish();
+            }
+        }); //end addNewEntry on click listener
 
     }//END onCreate()
 
@@ -92,32 +146,30 @@ public class ExerciseEntry extends AppCompatActivity implements AdapterView.OnIt
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
         //To please the cruel mistress Android Studio...
-        //O! Foul bits! My tongue will tell the anger of my heart,
-        // or else my heart concealing it will break.
     }
 
-    //Getters and Setters NEVER USED
+    //Getters and Setters NOT USED CURRENTLY
 
     //Setter for time TextView
-public void setTimeText (String time){
-    timeTV = (TextView)findViewById(R.id.ex_tv_time);
-    timeTV.setText(time);
-}
-    //Setter for date TextView
-    public void setDateText (String date){
-        TextView dateTV = (TextView)findViewById(R.id.ex_tv_date);
-        dateTV.setText(date);
-    }
-
-    //Getter for time TextView
-    public TextView getTimeText (){
-        TextView timeTV = (TextView)findViewById(R.id.ex_tv_time);
-        return timeTV;
-    }
-    //Getter for date TextView
-    public TextView getDateText () {
-        TextView dateTV = (TextView) findViewById(R.id.ex_tv_date);
-        return dateTV;
-    }
+//public void setTimeText (String time){
+//    timeTV = (TextView)findViewById(R.id.ex_tv_time);
+//    timeTV.setText(time);
+//}
+//    //Setter for date TextView
+//    public void setDateText (String date){
+//        TextView dateTV = (TextView)findViewById(R.id.ex_tv_date);
+//        dateTV.setText(date);
+//    }
+//
+//    //Getter for time TextView
+//    public TextView getTimeText (){
+//        TextView timeTV = (TextView)findViewById(R.id.ex_tv_time);
+//        return timeTV;
+//    }
+//    //Getter for date TextView
+//    public TextView getDateText () {
+//        TextView dateTV = (TextView) findViewById(R.id.ex_tv_date);
+//        return dateTV;
+//    }
 
 }
