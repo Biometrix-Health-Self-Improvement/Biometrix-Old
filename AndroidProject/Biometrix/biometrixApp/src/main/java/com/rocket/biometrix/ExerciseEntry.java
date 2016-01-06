@@ -1,6 +1,5 @@
 package com.rocket.biometrix;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -24,8 +23,8 @@ public class ExerciseEntry extends AppCompatActivity implements AdapterView.OnIt
     public static TextView timeTV; //Used by the DateTimePopulateTextView in the onCreate event
     public static TextView dateTV;
 
-    String min_selected; //string to save minutes exercised spinner result
-    String type_selected; //string to save type of exercise selected in the radio 'bubble' buttons
+    String minSelected; //string to save minutes exercised spinner result
+    String typeSelected; //string to save type of exercise selected in the radio 'bubble' buttons
 
 
     @Override
@@ -55,9 +54,9 @@ public class ExerciseEntry extends AppCompatActivity implements AdapterView.OnIt
                     return;
                 }
                 //Set string
-                min_selected = parentView.getItemAtPosition(position).toString();
+                minSelected = parentView.getItemAtPosition(position).toString();
 
-                if (min_selected.equals("5") || min_selected.equals("10")) {
+                if (minSelected.equals("5") || minSelected.equals("10")) {
                     if (!toasted) {
                         Toast.makeText(getApplicationContext(), "Keep it up :)", Toast.LENGTH_LONG).show();
                         toasted = true;
@@ -88,22 +87,22 @@ public class ExerciseEntry extends AppCompatActivity implements AdapterView.OnIt
                     case R.id.ex_rb_a:
                         //Extract CharSequences from UI and convert them to string array
                         final RadioButton ETa1 = (RadioButton) findViewById(R.id.ex_rb_a);
-                        type_selected = ETa1.getText().toString();
+                        typeSelected = ETa1.getText().toString();
                         break;
 
                     case R.id.ex_rb_b:
                         final RadioButton ETa2 = (RadioButton) findViewById(R.id.ex_rb_b);
-                        type_selected = ETa2.getText().toString();
+                        typeSelected = ETa2.getText().toString();
                         break;
 
                     case R.id.ex_rb_c:
                         final RadioButton ETa3 = (RadioButton) findViewById(R.id.ex_rb_c);
-                        type_selected = ETa3.getText().toString();
+                        typeSelected = ETa3.getText().toString();
                         break;
 
                     case R.id.ex_rb_d:
                         final RadioButton ETa4 = (RadioButton) findViewById(R.id.ex_rb_d);
-                        type_selected = ETa4.getText().toString();
+                        typeSelected = ETa4.getText().toString();
                         break;
 
                 }
@@ -126,10 +125,24 @@ public class ExerciseEntry extends AppCompatActivity implements AdapterView.OnIt
         //Saves entry to SQLlite DB using LocalStorageAccess
         //And, Adds this exercise to the 'plan' if it needs to be added
         //Lastly, it closes up the entry activity.
-        Button addNewEntry = (Button) findViewById(R.id.ex_b_done);
-        addNewEntry.setOnClickListener(new View.OnClickListener() {
+        Button ExerciseEntryDone = (Button) findViewById(R.id.ex_b_done);
+        ExerciseEntryDone.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                //Filling a string that holds title
+                String titleString = GetStringFromEditText(R.id.ex_title);
 
+                //Filling date and time strings for bundle's string array
+                String dateString = dateTV.getText().toString();
+                String timeString = timeTV.getText().toString();
+
+                //Filling reps string
+                String repsString = GetStringFromEditText(R.id.ex_et_reps);
+
+                //Filling weight string from its editText found @content_exercise_entry.xml
+                String weightString = GetStringFromEditText(R.id.ex_et_weight);
+
+                //Filling notes string
+                String notesString = GetStringFromEditText(R.id.ex_notes);
 
                 //Kill this thread, User will still have exercise main page open.
                 finish();
@@ -146,6 +159,27 @@ public class ExerciseEntry extends AppCompatActivity implements AdapterView.OnIt
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
         //To please the cruel mistress Android Studio...
+    }
+
+    //Function given an <<EditText>> resource ID (R.id.ex_et_weight) will return its text contents as a string.
+    //Soft error handling will just mess up the returned string if you gave a bad id, not crash the app.
+    public String GetStringFromEditText(int id)
+    {
+        String endResult = "ERROR in GetStringFromEditText: Resource ID does not exist";
+        //0 is always an invalid resource. And if a view can't be found by its ID, findViewById returns null
+        //http://developer.android.com/reference/android/content/res/Resources.html#getIdentifier%28java.lang.String,%20java.lang.String,%20java.lang.String%29
+        //http://developer.android.com/reference/android/app/Activity.html#findViewById%28int%29
+        if (id != 0) {
+            if (findViewById(id) != null)
+            try {
+                final EditText et = (EditText) findViewById(id);
+                endResult = et.getText().toString();
+            }//end try
+            catch (IllegalArgumentException |  ClassCastException exceptionName) {
+                endResult = "ERROR in GetStringFromEditText: try block";
+            }
+        }
+        return endResult;
     }
 
     //Getters and Setters NOT USED CURRENTLY
