@@ -16,5 +16,6 @@ Variables
 	camel case, full words, descriptive
 	ex: startDateTextView, sleepQualityNumberTextView
 
-
-
+Resources
+	Keep a unique phrase up front for the resources in your module or activity. Try and keep resources in their own logical 		xml files as well if possible.
+	ex: ex_rb_a (in the exercise module, all resources start with ex; ex_rb_a is a radio button inside the exercise module.)
