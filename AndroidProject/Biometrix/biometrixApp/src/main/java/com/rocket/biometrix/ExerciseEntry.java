@@ -1,5 +1,6 @@
 package com.rocket.biometrix;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -17,14 +18,19 @@ import android.widget.Toast;
 
 public class ExerciseEntry extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    Spinner minuteSpinner;
-    boolean toasted = false; //Used to display encouraging messages ONCE in minuteSpinner.
-
     public static TextView timeTV; //Used by the DateTimePopulateTextView in the onCreate event
     public static TextView dateTV;
 
     String minSelected; //string to save minutes exercised spinner result
     String typeSelected; //string to save type of exercise selected in the radio 'bubble' buttons
+
+    Spinner minuteSpinner;
+    boolean toasted = false; //Used to display encouraging messages ONCE in minuteSpinner.
+    //To avoid 'hard coded' strings...These are implemented in the minuteSpinners listener in the onCreate event
+    String lowestSpinnerValueThreshold = "5"; //5 minutes
+    String lowSpinnerValueThreshold = "10"; //10 minutes (idea is to encourage user to exercise more but still celebrate their 'baby' gains)
+    String lowSpinnerMessage = "Keep it up :)"; //The encouraging message
+    String highSpinnerMessage = "Nice!"; //The BEST message users strive for
 
 
     @Override
@@ -56,14 +62,14 @@ public class ExerciseEntry extends AppCompatActivity implements AdapterView.OnIt
                 //Set string
                 minSelected = parentView.getItemAtPosition(position).toString();
 
-                if (minSelected.equals("5") || minSelected.equals("10")) {
+                if (minSelected.equals(lowestSpinnerValueThreshold) || minSelected.equals(lowSpinnerValueThreshold)) {
                     if (!toasted) {
-                        Toast.makeText(getApplicationContext(), "Keep it up :)", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), lowSpinnerMessage, Toast.LENGTH_LONG).show();
                         toasted = true;
                     }
                 } else {
                     if (!toasted) {
-                        Toast.makeText(getApplicationContext(), "Nice!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), highSpinnerMessage, Toast.LENGTH_LONG).show();
                         toasted = true;
                     }
                 }
@@ -143,6 +149,27 @@ public class ExerciseEntry extends AppCompatActivity implements AdapterView.OnIt
 
                 //Filling notes string
                 String notesString = GetStringFromEditText(R.id.ex_notes);
+
+                //Make string array to hold all the strings extracted from the user's input on this entry activity
+                String[] exerciseEntryData = {titleString,dateString,timeString,repsString,weightString,notesString};
+
+                //Put string array that has all the entries data points in it into a Bundle.
+                Bundle exerciseEntryBundle = new Bundle();
+                exerciseEntryBundle.putStringArray("exEntBundKey",exerciseEntryData);
+
+
+//                //TODO:Recieve intent extras from parent. Change the old String array to the newly filled string array; then put extra BACK IN and set result to OK w/ error checking.
+//                String parentExerciseEntryData;
+//
+//                    Bundle extras = getIntent().getExtras();
+//                    if(extras == null) {
+//                        parentExerciseEntryData= null;
+//                    } else {
+//                        parentExerciseEntryData= extras.getString("key");
+//                    }
+
+
+                //TODO: SQLite calls to LocalStorageAccess which will have to be made more abstract first since it's hardcoded now.
 
                 //Kill this thread, User will still have exercise main page open.
                 finish();
