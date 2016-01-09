@@ -141,6 +141,10 @@ public class ExerciseEntry extends AppCompatActivity implements AdapterView.OnIt
                 String dateString = dateTV.getText().toString();
                 String timeString = timeTV.getText().toString();
 
+                //Cleaning date and time strings (I know what you're thinking, why not test the buffer to determine where the 1st number occurs to avoid using magic numbers? Not worth it is my opinion.)
+                dateString = removeChars(dateString, 12); //Date:_Fri,__ = 12 characters.
+                timeString = removeChars(timeString, 7); //Time:__ = 7 characters
+
                 //Filling reps string
                 String repsString = GetStringFromEditText(R.id.ex_et_reps);
 
@@ -151,7 +155,7 @@ public class ExerciseEntry extends AppCompatActivity implements AdapterView.OnIt
                 String notesString = GetStringFromEditText(R.id.ex_notes);
 
                 //Make string array to hold all the strings extracted from the user's input on this entry activity
-                String[] exerciseEntryData = {titleString,dateString,timeString,repsString,weightString,notesString};
+                String[] exerciseEntryData = {titleString,dateString,timeString,minSelected,typeSelected,notesString};
 
                 //Put string array that has all the entries data points in it into a Bundle. This bundle is for future extensibility it is NOT for the parent class.
                 Bundle exerciseEntryBundle = new Bundle();
@@ -213,6 +217,20 @@ public class ExerciseEntry extends AppCompatActivity implements AdapterView.OnIt
             }
         }
         return endResult;
+    }
+
+
+    //String cleaner, just removes a number of characters from the front of the string.
+    //http://docs.oracle.com/javase/7/docs/api/java/lang/StringBuffer.html#delete%28int,%20int%29
+    private static String removeChars(String s, int num) {
+        StringBuffer buf = new StringBuffer(s);
+        int front = 0;
+        //Simple error checking. To avoid exception below (this is just a wrapper function around String Buffer's delete() function)
+        //StringIndexOutOfBoundsException - if start is negative, greater than length(), or greater than end.
+       if (num < s.length()) {
+           buf.delete(front,num-1);
+       }
+        return buf.toString();
     }
 
     //Getters and Setters NOT USED CURRENTLY
