@@ -46,7 +46,7 @@ public class ExerciseEntry extends AppCompatActivity implements AdapterView.OnIt
         minuteSpinner = (Spinner) findViewById(R.id.ex_min_spinner);
         //Array adapter from exer_strings resource
         ArrayAdapter minSpin = ArrayAdapter.createFromResource(
-                this, R.array.ex_min_array,android.R.layout.simple_spinner_item);
+                this, R.array.ex_min_array, android.R.layout.simple_spinner_item);
 
         minuteSpinner.setAdapter(minSpin);
 
@@ -130,7 +130,7 @@ public class ExerciseEntry extends AppCompatActivity implements AdapterView.OnIt
         //Bundles string array for transport across activities
         //Saves entry to SQLlite DB using LocalStorageAccess
         //And, Adds this exercise to the 'plan' if it needs to be added
-        //Lastly, it closes up the entry activity.
+        //Lastly, it closes up the entry activity with finish() which will activate the onActivityResult() in ExerciseParent.
         Button ExerciseEntryDone = (Button) findViewById(R.id.ex_b_done);
         ExerciseEntryDone.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -142,6 +142,7 @@ public class ExerciseEntry extends AppCompatActivity implements AdapterView.OnIt
                 String timeString = timeTV.getText().toString();
 
                 //Cleaning date and time strings (I know what you're thinking, why not test the buffer to determine where the 1st number occurs to avoid using magic numbers? Not worth it is my opinion.)
+                //Could also use regexp for this String newString = aString.replaceAll("[^a-zA-Z]","");
                 dateString = removeChars(dateString, 12); //Date:_Fri,__ = 12 characters.
                 timeString = removeChars(timeString, 7); //Time:__ = 7 characters
 
@@ -155,29 +156,31 @@ public class ExerciseEntry extends AppCompatActivity implements AdapterView.OnIt
                 String notesString = GetStringFromEditText(R.id.ex_notes);
 
                 //Make string array to hold all the strings extracted from the user's input on this entry activity
-                String[] exerciseEntryData = {titleString,dateString,timeString,minSelected,typeSelected,notesString};
+                String[] exerciseEntryData = {titleString, dateString, timeString, minSelected, typeSelected, notesString};
 
                 //Put string array that has all the entries data points in it into a Bundle. This bundle is for future extensibility it is NOT for the parent class.
                 Bundle exerciseEntryBundle = new Bundle();
-                exerciseEntryBundle.putStringArray("exEntBundKey",exerciseEntryData);
+                exerciseEntryBundle.putStringArray("exEntBundKey", exerciseEntryData);
 
 
-                //TODO:Recieve intent extras from parent. Change the old String array to the newly filled string array; then put extra BACK IN and set result to OK w/ error checking.
+                //Getting PARENT bundle.
                 Bundle parentExtras = getIntent().getExtras();
-                String[] usersEntryData = parentExtras.getStringArray("parentArray");
-
-
+                String[] usersEntryData = parentExtras.getStringArray("parentArray"); //Don't worry this is supposed to be redundant for extendability.
                 //Here is where the parent bundle could be used (to auto-populate an entry for editing for example) For now I will only set the parent's string array equal to exerciseEntryData.
                 usersEntryData = exerciseEntryData;
 
-//                Intent backtoParent = getIntent();
-//
-//                String msg = backtoParent.getStringExtra("key");
-//                if (msg.contentEquals("key")) {
-//                    backtoParent.putExtra("widthInfo", s);
-//                    setResult(RESULT_OK, backtoParent);
-//                    finish();
-//                }
+                //Get PARENT intent for setResult()
+                Intent backtoParent = getIntent();
+
+                //Another bundle specifically for giving data and results back to the PARENT
+                Bundle backtoParentBund = new Bundle();
+                backtoParentBund.putStringArray("childKey", usersEntryData);
+
+
+                backtoParent.putExtra("childKey", backtoParentBund);
+                //HERE is where extensive error checking could be done on the user's entry (IE if it is all blank don't save) but for now... if the key matched say it went OK
+                setResult(RESULT_OK, backtoParent);
+
 
                 //TODO: SQLite calls to LocalStorageAccess which will have to be made more abstract first since it's hardcoded now.
 
@@ -200,21 +203,20 @@ public class ExerciseEntry extends AppCompatActivity implements AdapterView.OnIt
 
     //Function given an <<EditText>> resource ID (R.id.ex_et_weight) will return its text contents as a string.
     //Soft error handling will just mess up the returned string if you gave a bad id, not crash the app.
-    public String GetStringFromEditText(int id)
-    {
+    public String GetStringFromEditText(int id) {
         String endResult = "ERROR in GetStringFromEditText: Resource ID does not exist";
         //0 is always an invalid resource. And if a view can't be found by its ID, findViewById returns null
         //http://developer.android.com/reference/android/content/res/Resources.html#getIdentifier%28java.lang.String,%20java.lang.String,%20java.lang.String%29
         //http://developer.android.com/reference/android/app/Activity.html#findViewById%28int%29
         if (id != 0) {
             if (findViewById(id) != null)
-            try {
-                final EditText et = (EditText) findViewById(id);
-                endResult = et.getText().toString();
-            }//end try
-            catch (IllegalArgumentException |  ClassCastException exceptionName) {
-                endResult = "ERROR in GetStringFromEditText: try block";
-            }
+                try {
+                    final EditText et = (EditText) findViewById(id);
+                    endResult = et.getText().toString();
+                }//end try
+                catch (IllegalArgumentException | ClassCastException exceptionName) {
+                    endResult = "ERROR in GetStringFromEditText: try block";
+                }
         }
         return endResult;
     }
@@ -227,9 +229,9 @@ public class ExerciseEntry extends AppCompatActivity implements AdapterView.OnIt
         int front = 0;
         //Simple error checking. To avoid exception below (this is just a wrapper function around String Buffer's delete() function)
         //StringIndexOutOfBoundsException - if start is negative, greater than length(), or greater than end.
-       if (num < s.length()) {
-           buf.delete(front,num-1);
-       }
+        if (num < s.length()) {
+            buf.delete(front, num - 1);
+        }
         return buf.toString();
     }
 
