@@ -41,8 +41,12 @@ public class ExerciseParent extends AppCompatActivity {
                 //http://www.mybringback.com/android-sdk/12204/onactivityresult-android-tutorial/
                 String[] usersEntryData = null; //will be filled up by ExerciseEntry on its finish();
 
-                //key is a reference to the data im putting in the intent.
-                LaunchNewEntry.putExtra("key", usersEntryData);
+                //Bundling the empty usersEntryData to be filled. This seems redundant NOW but later, it will make life easier.
+                Bundle usrEntD = new Bundle();
+                usrEntD.putStringArray("parentArray",usersEntryData);
+
+                //key is a reference to the data im putting in the intent. Which is the bundle created above.
+                LaunchNewEntry.putExtra("key", usrEntD);
 
                 //Way to check if user actually put in an entry or accidentally tapped it.
                 startActivityForResult(LaunchNewEntry, 1);

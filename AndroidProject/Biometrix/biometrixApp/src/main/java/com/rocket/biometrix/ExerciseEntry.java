@@ -153,21 +153,27 @@ public class ExerciseEntry extends AppCompatActivity implements AdapterView.OnIt
                 //Make string array to hold all the strings extracted from the user's input on this entry activity
                 String[] exerciseEntryData = {titleString,dateString,timeString,repsString,weightString,notesString};
 
-                //Put string array that has all the entries data points in it into a Bundle.
+                //Put string array that has all the entries data points in it into a Bundle. This bundle is for future extensibility it is NOT for the parent class.
                 Bundle exerciseEntryBundle = new Bundle();
                 exerciseEntryBundle.putStringArray("exEntBundKey",exerciseEntryData);
 
 
-//                //TODO:Recieve intent extras from parent. Change the old String array to the newly filled string array; then put extra BACK IN and set result to OK w/ error checking.
-//                String parentExerciseEntryData;
-//
-//                    Bundle extras = getIntent().getExtras();
-//                    if(extras == null) {
-//                        parentExerciseEntryData= null;
-//                    } else {
-//                        parentExerciseEntryData= extras.getString("key");
-//                    }
+                //TODO:Recieve intent extras from parent. Change the old String array to the newly filled string array; then put extra BACK IN and set result to OK w/ error checking.
+                Bundle parentExtras = getIntent().getExtras();
+                String[] usersEntryData = parentExtras.getStringArray("parentArray");
 
+
+                //Here is where the parent bundle could be used (to auto-populate an entry for editing for example) For now I will only set the parent's string array equal to exerciseEntryData.
+                usersEntryData = exerciseEntryData;
+
+//                Intent backtoParent = getIntent();
+//
+//                String msg = backtoParent.getStringExtra("key");
+//                if (msg.contentEquals("key")) {
+//                    backtoParent.putExtra("widthInfo", s);
+//                    setResult(RESULT_OK, backtoParent);
+//                    finish();
+//                }
 
                 //TODO: SQLite calls to LocalStorageAccess which will have to be made more abstract first since it's hardcoded now.
 
