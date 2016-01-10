@@ -18,10 +18,14 @@ import java.util.ListIterator;
  * Created by Alder on 11/30/2015.
  */
 public class LocalStorageAccess extends SQLiteOpenHelper {
+//http://developer.android.com/reference/android/database/sqlite/SQLiteOpenHelper.html
+    //TODO: How can this class be restructured to make adding entries easier? Editing entries easier? Pulling entries out for display easier? How can backing this up to webserver be made easier?
 
+    //TODO: Can local dbs be detected and checked against some kind of key?
     private static final String LOCAL_DB_NAME = "BiometrixLocal";
     private static final int LOCAL_DB_VERSION = 1;
 
+    //TODO: Is there a better way to do this?
     //Sleep table and columns
     private static final String TABLE_SLEEP = "Sleep";
     public static final String SLEEP_COLUMN_DATE = "StartDate";
@@ -30,12 +34,16 @@ public class LocalStorageAccess extends SQLiteOpenHelper {
     public static final String SLEEP_COLUMN_NOTES = "Notes";
     public static final String SLEEP_COLUMN_HEALTH = "Health";
 
+    //Exercise Add Entry Table strings
+
+
     public LocalStorageAccess(Context context, String name,
                        SQLiteDatabase.CursorFactory factory, int version)
     {
         super(context, LOCAL_DB_NAME, factory, LOCAL_DB_VERSION);
     }
 
+    //TODO: Add if not exists error checking. Research if you HAVE TO hand bake the SQL
     @Override
     public void onCreate(SQLiteDatabase db) {
         //Creates the SQL string to make the SLEEP table
@@ -74,6 +82,11 @@ public class LocalStorageAccess extends SQLiteOpenHelper {
         db.close();
     }
 
+
+    //TODO: Create abstract way to fill the database. Some ideas: method that is a switch on a parameter that calls methods like the one below.
+    //TODO: Another idea is to mimic a bundle and test string keys instead of data...
+    //TODO: Another idea is some kind of observer pattern to call the right methods whenever an entry signal has been emitted by an activity.
+    //TODO: Right now, I don't see any way out of hardcoding all of this down to the individual data points in SPECIFIC module entries :(
     /**
      * Returns the top row from the database sleep table
      * @return Returns a sleepdata object with the information from the database
