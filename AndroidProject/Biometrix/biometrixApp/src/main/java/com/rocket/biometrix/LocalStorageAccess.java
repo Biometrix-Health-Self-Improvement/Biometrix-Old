@@ -15,7 +15,7 @@ import java.util.ListIterator;
 
 
 /**
- * Created by TJ on 11/30/2015.
+ * Created by Alder on 11/30/2015.
  */
 public class LocalStorageAccess extends SQLiteOpenHelper {
 
