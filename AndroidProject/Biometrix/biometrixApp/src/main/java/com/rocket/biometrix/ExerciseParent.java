@@ -72,7 +72,7 @@ public class ExerciseParent extends AppCompatActivity {
                 if (data.getExtras().containsKey("childKey")) {
                     usersEntryData = data.getBundleExtra("childKey").getStringArray("childKey");
                     //Lil bling bling to let user know they successfully saved an entry.
-                    Toast.makeText(getApplicationContext(), "Added entry: " + usersEntryData[0], Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Added Entry: " + usersEntryData[0], Toast.LENGTH_SHORT).show();
                 }
             }
         }// end request code check

@@ -158,6 +158,8 @@ public class ExerciseEntry extends AppCompatActivity implements AdapterView.OnIt
                 //Make string array to hold all the strings extracted from the user's input on this entry activity
                 String[] exerciseEntryData = {titleString, dateString, timeString, minSelected, typeSelected, notesString};
 
+                //TODO: Make this bundle <T extends Parcelable> T 	getParcelable(String key) as a StringDictionary like in C#
+                //https://developer.android.com/reference/android/os/Bundle.html
                 //Put string array that has all the entries data points in it into a Bundle. This bundle is for future extensibility it is NOT for the parent class.
                 Bundle exerciseEntryBundle = new Bundle();
                 exerciseEntryBundle.putStringArray("exEntBundKey", exerciseEntryData);
