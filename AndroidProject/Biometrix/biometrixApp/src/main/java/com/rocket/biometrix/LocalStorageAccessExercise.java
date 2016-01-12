@@ -28,6 +28,7 @@ public class LocalStorageAccessExercise extends LocalStorageAccessREMIX {
     private static final String INT = "Intensity";
     private static final String NOTES = "Notes";
 
+
     //Later, we'll hopefully get to a shared preferences class that stores BMI and weight information.
 
     public LocalStorageAccessExercise(Context context) {
@@ -38,21 +39,33 @@ public class LocalStorageAccessExercise extends LocalStorageAccessREMIX {
     //TODO: How avoid RAW SQL on table create? IS there a predefined merge in SQLiteDatabaseHelper?
     //TODO: Convince group to use: https://github.com/greenrobot/greenDAO
     @Override
-    public void onCreate(SQLiteDatabase db) {
+    protected String createTable() {
+        //Some SQL
+        String createTableSQL = "CREATE TABLE " + TABLE_NAME +
+                "(" + UID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                TITLE + " VARCHAR(255));"; //TODO: FINISH THIS
 
-        try{
-        db.execSQL("CREATE TABLE " + TABLE_NAME +
-                   "(" + UID +" INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    TITLE + " VARCHAR(255));" );
-        }
-        catch(SQLException e){
-            e.printStackTrace();
-        }
-
+        return createTableSQL;
     }
 
+    //Update table on user upgrade
+    protected boolean onUpgradeAlter(SQLiteDatabase db, int oldVersion, int newVersion) {
+        boolean versionDetected = true;
 
+        //In future, will need to test version to upgrade properly.
+        if (oldVersion < 1) {
+            db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+            onCreate(db); //Drop and recreate
+        }
+//        else if (oldVersion < 2) {
+//            db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+//            onCreate(db); //Drop and recreate
+//        }
+        else {
+            versionDetected = false;
+        }
 
-
+        return versionDetected;
+    }
 
 }

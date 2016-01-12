@@ -76,7 +76,8 @@ public class LocalStorageAccess extends SQLiteOpenHelper {
      * Creates an SQL entry for the passed in sleep data
      * @param sleepData The data to be stored.
      */
-    //TODO: ALTER TABLE no raw sql
+    //TODO: Somehow avoid all these horrible getters (StringDictionary w/ column keys? & data type keys w/ cast switch?)
+    //TODO: TRY HASHMAP
     public void AddSleepEntry(SleepData sleepData)
     {
         ContentValues values = new ContentValues();
