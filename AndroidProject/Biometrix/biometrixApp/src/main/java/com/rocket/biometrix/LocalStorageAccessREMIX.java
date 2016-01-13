@@ -19,6 +19,7 @@ import java.util.List;
  * SQL lite subclass
  * //http://developer.android.com/reference/android/database/sqlite/SQLiteOpenHelper.html
  * Abstract base 'middle layer' class for interfacing with, reading, writing a local DB.
+ * RENAME TO SQLiteAdapterBase when finished.
  */
 public abstract class LocalStorageAccessREMIX extends SQLiteOpenHelper {
 
@@ -53,11 +54,32 @@ public abstract class LocalStorageAccessREMIX extends SQLiteOpenHelper {
         }
 
     }
-    //When database version has changed
+    //When database version has changed, call the child module implementation of updating the database.
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
-    //For now call
+    //For now call onUpgradeAlter. I know this breaks OO principles, but seems like a good solution since the modules tables can be so different, and the whole db has to be updated at once.
        boolean oldVersionDetected = onUpgradeAlter(db, oldVersion, newVersion);
+    }
+
+    //Way to insert values into a table
+    //Child class (a module's implementation will fill a ContentValues and call this function after double checking the keys=column names)
+    protected long safeInsert(String tablename, String nullColumn, ContentValues columnsAndValues){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+         long rowNumberInserted = -1; //-1 if fail
+        db.beginTransaction();
+        try {
+            rowNumberInserted = db.insertOrThrow(tablename,nullColumn, columnsAndValues);
+            db.setTransactionSuccessful();
+        } catch(SQLException e) {
+            e.printStackTrace();
+            //TODO: Error handling, validation... Rollback is automatic :) <3
+        } finally {
+            db.endTransaction();
+        }
+         rowNumberInserted = db.insertOrThrow(tablename,nullColumn, columnsAndValues);
+
+        return rowNumberInserted;
     }
 
     //A module's table create sql statement.

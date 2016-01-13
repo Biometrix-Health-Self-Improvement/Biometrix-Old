@@ -11,6 +11,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 /**
  * Created by JP on 1/10/2016.
+ * Will rename when finished
  */
 public class LocalStorageAccessExercise extends LocalStorageAccessREMIX {
 
@@ -67,5 +68,12 @@ public class LocalStorageAccessExercise extends LocalStorageAccessREMIX {
 
         return versionDetected;
     }
+
+    //TODO: enforce that children have an insert method???
+    //TODO: Should I check keys BEFORE insert? or test the content AFTER exception throw?
+    //Make a method that calls this with ur custom dadta points bro.
+   // protected long safeInsert(String tablename, String nullColumn, ContentValues columnsAndValues){
+    //TODO: use iterator to fill CV from string array and/or check the keys against the private strings above.
+    //check if key exists, if she do, insert it into the CV all in one itty.
 
 }
