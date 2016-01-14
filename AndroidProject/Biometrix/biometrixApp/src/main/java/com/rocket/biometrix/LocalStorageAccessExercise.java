@@ -7,6 +7,11 @@ import android.database.DatabaseErrorHandler;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 
 
 /**
@@ -15,6 +20,7 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 public class LocalStorageAccessExercise extends LocalStorageAccessREMIX {
 
+    //TODO: Could columns be a private inner class?
     //Strings that represent table and column names in the database for Exercise X
     private static final String TABLE_NAME = "Exercise";
     private static final String UID = "Exercise_id"; //ID used for primary key
@@ -29,6 +35,8 @@ public class LocalStorageAccessExercise extends LocalStorageAccessREMIX {
     private static final String INT = "Intensity";
     private static final String NOTES = "Notes";
 
+    // All the columns above, see getColumns() below
+    private static final String[] columns = {TITLE, TYPE, MINUTES, REPS, LAPS, WEIGHT, INT, NOTES};
 
     //Later, we'll hopefully get to a shared preferences class that stores BMI and weight information.
 
@@ -69,11 +77,58 @@ public class LocalStorageAccessExercise extends LocalStorageAccessREMIX {
         return versionDetected;
     }
 
+    //Prints all column names and returns a string array with them in it.
+    public String[] getColumns() {
+        for (String s : columns) {
+            System.out.println(s);
+            Log.d("column: ", s);
+        }
+        return columns;
+    }
+
     //TODO: enforce that children have an insert method???
     //TODO: Should I check keys BEFORE insert? or test the content AFTER exception throw?
     //Make a method that calls this with ur custom dadta points bro.
-   // protected long safeInsert(String tablename, String nullColumn, ContentValues columnsAndValues){
+    // protected long safeInsert(String tablename, String nullColumn, ContentValues columnsAndValues){
     //TODO: use iterator to fill CV from string array and/or check the keys against the private strings above.
-    //check if key exists, if she do, insert it into the CV all in one itty.
+    //check if key exists, if she do, insert it into the CV all in one itty
+    public void insertFromContentValues(ContentValues cv) {
+
+        //Real ContentValues that will be passed to the base class' insert method.
+        ContentValues dataToBeInserted = new ContentValues();
+
+        //This is inefficient for more than 100 columns, but we've got a glorified file system so we'll be fine.
+        for (String columnName : columns) {
+            if (cv.containsKey(columnName)) {
+                //if the key pulled out of the parameter cv is equal to any string inside columns:
+                dataToBeInserted.put(columnName,cv.getAsString(columnName));
+            }//TODO: else block with Log() information
+        }
+
+        //WHERE THE MAGIC HAPPENS TODO: Understand implicit casts in sqlite, everything works as 100% as strings, but unsure about DATETIME
+        safeInsert(TABLE_NAME, columns[1], dataToBeInserted );
+
+
+//        //ANOTHER WAY
+//            //Get Set of ContentValues keys and values.
+//            Set<Map.Entry<String, Object>> cvSet = cv.valueSet();
+//            Iterator itr = cvSet.iterator(); //Make an iterator on that Set.
+//
+//            Log.d("insertFromContentValues", "ContentValue Length :: " + cv.size());
+//
+//            while(itr.hasNext())
+//            {
+//                //move iterator :::: test for off by one
+//                Map.Entry me = (Map.Entry)itr.next();
+//                String key = me.getKey().toString(); //cv's key (column name)
+//                Object value =  me.getValue(); //cv's value (data)
+//
+//                Log.d("insertFromContentValues", "Key:"+key+", values:"+(String)(value == null?null:value.toString()));
+//
+//                //Fill up other cv here.
+//
+//            }//end itr
+        }//end insert
+
 
 }

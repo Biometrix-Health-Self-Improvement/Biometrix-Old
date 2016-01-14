@@ -67,17 +67,19 @@ public abstract class LocalStorageAccessREMIX extends SQLiteOpenHelper {
 
         SQLiteDatabase db = this.getWritableDatabase();
          long rowNumberInserted = -1; //-1 if fail
+
         db.beginTransaction();
+
         try {
-            rowNumberInserted = db.insertOrThrow(tablename,nullColumn, columnsAndValues);
+            rowNumberInserted = db.insertOrThrow(tablename, nullColumn, columnsAndValues);
             db.setTransactionSuccessful();
         } catch(SQLException e) {
+
             e.printStackTrace();
-            //TODO: Error handling, validation... Rollback is automatic :) <3
+
         } finally {
-            db.endTransaction();
+            db.endTransaction(); //rollback is automatic
         }
-         rowNumberInserted = db.insertOrThrow(tablename,nullColumn, columnsAndValues);
 
         return rowNumberInserted;
     }
