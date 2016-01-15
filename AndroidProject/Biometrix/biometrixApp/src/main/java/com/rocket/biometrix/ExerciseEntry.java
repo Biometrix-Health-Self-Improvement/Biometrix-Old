@@ -183,7 +183,7 @@ public class ExerciseEntry extends AppCompatActivity implements AdapterView.OnIt
                 //HERE is where extensive error checking could be done on the user's entry (IE if it is all blank don't save) but for now... if the key matched say it went OK
                 setResult(RESULT_OK, backtoParent);
 
-
+                //TODO: HElper function to convert datetime strings to TEXT as ISO8601 strings ("YYYY-MM-DD HH:MM:SS.SSS").
                 //TODO: SQLite calls to LocalStorageAccess which will have to be made more abstract first since it's hardcoded now.
 
                 //Kill this thread, User will still have exercise main page open.

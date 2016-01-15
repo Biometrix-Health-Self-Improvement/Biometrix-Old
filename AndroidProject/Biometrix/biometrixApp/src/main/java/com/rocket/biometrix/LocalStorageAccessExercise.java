@@ -24,6 +24,7 @@ public class LocalStorageAccessExercise extends LocalStorageAccessREMIX {
     //Strings that represent table and column names in the database for Exercise X
     private static final String TABLE_NAME = "Exercise";
     private static final String UID = "Exercise_id"; //ID used for primary key
+    //private static final String USER_ID = "not implemented yet, will be in shared preferences";
     private static final String MODE = "Mode"; //String to for mode which is not implemented yet. Think: Belly fat reduction mode - probably needs laps, won't need weight. Yada yada YODA
     //Columns
     private static final String TITLE = "Title"; //Title will help co-determine the module mode e.g. Simple mode (yay I walked to the fridge), Gainz mode (weight and reps etc.)
@@ -32,11 +33,13 @@ public class LocalStorageAccessExercise extends LocalStorageAccessREMIX {
     private static final String REPS = "Reps"; //Reps or laps, data significance determined by module mode WHICH IS NOT IMPLEMENTED YET
     private static final String LAPS = "Laps";
     private static final String WEIGHT = "Weight";
-    private static final String INT = "Intensity";
+    private static final String INTY = "Intensity";
     private static final String NOTES = "Notes";
+    private static final String DATE = "DateEx";
+    private static final String TIME = "TimeEx";
 
     // All the columns above, see getColumns() below
-    private static final String[] columns = {TITLE, TYPE, MINUTES, REPS, LAPS, WEIGHT, INT, NOTES};
+    private static final String[] columns = {TITLE, TYPE, MINUTES, REPS, LAPS, WEIGHT, INTY, NOTES, DATE, TIME};
 
     //Later, we'll hopefully get to a shared preferences class that stores BMI and weight information.
 
@@ -45,14 +48,23 @@ public class LocalStorageAccessExercise extends LocalStorageAccessREMIX {
     }
 
 
-    //TODO: How avoid RAW SQL on table create? IS there a predefined merge in SQLiteDatabaseHelper?
-    //TODO: Convince group to use: https://github.com/greenrobot/greenDAO
+    //onCreate in parent will call this.
     @Override
     protected String createTable() {
         //Some SQL
         String createTableSQL = "CREATE TABLE " + TABLE_NAME +
                 "(" + UID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                TITLE + " VARCHAR(255));"; //TODO: FINISH THIS
+                TITLE + " VARCHAR(255), " +
+                TYPE + " VARCHAR(140), " +
+                MINUTES + " TINYINT, " +
+                REPS + " TINYINT, " +
+                LAPS + " TINYINT, " +
+                WEIGHT + " SMALLINT, " +
+                INTY + " TINYINT, " +
+                NOTES + " VARCHAR(255), " +
+                DATE + " DATE, " +
+                TIME + "VARCHAR(50)" +
+                ");";
 
         return createTableSQL;
     }
@@ -86,12 +98,7 @@ public class LocalStorageAccessExercise extends LocalStorageAccessREMIX {
         return columns;
     }
 
-    //TODO: enforce that children have an insert method???
-    //TODO: Should I check keys BEFORE insert? or test the content AFTER exception throw?
-    //Make a method that calls this with ur custom dadta points bro.
-    // protected long safeInsert(String tablename, String nullColumn, ContentValues columnsAndValues){
-    //TODO: use iterator to fill CV from string array and/or check the keys against the private strings above.
-    //check if key exists, if she do, insert it into the CV all in one itty
+    //TODO: document function
     public void insertFromContentValues(ContentValues cv) {
 
         //Real ContentValues that will be passed to the base class' insert method.
@@ -105,7 +112,7 @@ public class LocalStorageAccessExercise extends LocalStorageAccessREMIX {
             }//TODO: else block with Log() information
         }
 
-        //WHERE THE MAGIC HAPPENS TODO: Understand implicit casts in sqlite, everything works as 100% as strings, but unsure about DATETIME
+        //WHERE THE MAGIC HAPPENS
         safeInsert(TABLE_NAME, columns[1], dataToBeInserted );
 
 
