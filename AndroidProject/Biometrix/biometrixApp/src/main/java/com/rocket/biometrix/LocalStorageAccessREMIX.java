@@ -26,6 +26,7 @@ public abstract class LocalStorageAccessREMIX extends SQLiteOpenHelper {
     //Name of database that won't change throughout all the implementations of this class.
     protected static final String DATABASE_NAME = "BiometrixLAS";
     /*
+    * Please increment by 1 each time major changes are made in the database, document your change here
      * Version 1 on 1/08/16
     */
     protected static final int DATABASE_VERSION = 1;
@@ -42,7 +43,6 @@ public abstract class LocalStorageAccessREMIX extends SQLiteOpenHelper {
     }
 
     //Called when app is installed
-    //TODO: How to override sealed this? or is this smart?
     @Override
         public void onCreate(SQLiteDatabase db) {
             try{
@@ -73,6 +73,7 @@ public abstract class LocalStorageAccessREMIX extends SQLiteOpenHelper {
         try {
             rowNumberInserted = db.insertOrThrow(tablename, nullColumn, columnsAndValues);
             db.setTransactionSuccessful();
+            db.close(); //TODO: close necessary?
         } catch(SQLException e) {
 
             e.printStackTrace();
@@ -84,8 +85,19 @@ public abstract class LocalStorageAccessREMIX extends SQLiteOpenHelper {
         return rowNumberInserted;
     }
 
+   //Get int database version for testing in the onUpgrade methods
+    protected int getDBVersion(){
+        return DATABASE_VERSION;
+    }
+
+
+    //TODO: Define functions for accessing database here. Probably just going to return Strings, however CalendarView() likes em
+
     //A module's table create sql statement.
     protected abstract String createTable();
+
+    //Returns string array of private string variables representing Columns in child module class
+    protected abstract String[] getColumns();
 
     //Version safe Alter table SQL called in onUpgrade, eventually might return some kind of error checking information...
     //Returns true if oldVersion was detected

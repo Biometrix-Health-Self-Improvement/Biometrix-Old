@@ -20,16 +20,13 @@ import java.util.ListIterator;
  */
 public class LocalStorageAccess extends SQLiteOpenHelper {
 //http://developer.android.com/reference/android/database/sqlite/SQLiteOpenHelper.html
-    //TODO: How can this class be restructured to make adding entries easier? Editing entries easier? Pulling entries out for display easier? How can backing this up to webserver be made easier?
 
-    //TODO: Can local dbs be detected and checked against some kind of key?
     //Schema
     private static final String LOCAL_DB_NAME = "BiometrixLocal";
     private static final int LOCAL_DB_VERSION = 1;
     private static final String UID = "_id";
 
-    //TODO: Is there a better way to do this?
-    //TODO: Think I'll make each module implement its own table through localstorageaccess with a nice constructor. I mean EXTEND this class.
+
     //Sleep table and columns
     private static final String TABLE_SLEEP = "Sleep";
     public static final String SLEEP_COLUMN_DATE = "StartDate";
@@ -48,10 +45,7 @@ public class LocalStorageAccess extends SQLiteOpenHelper {
         super(context, LOCAL_DB_NAME, factory, LOCAL_DB_VERSION);
     }
 
-    //TODO: Add if not exists error checking.
-    //TODO: make abstract; NO RAW SQL
-    // DICTIONARY with keys that link to SQL commands maybe? //Saved Preferences?
-    //
+
     @Override
     public void onCreate(SQLiteDatabase db) {
         //Creates the SQL string to make the SLEEP table
@@ -67,7 +61,6 @@ public class LocalStorageAccess extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion,
                           int newVersion)
     {
-        //TODO: FIX RAW SQL
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_SLEEP);
         onCreate(db);
     }
@@ -76,8 +69,7 @@ public class LocalStorageAccess extends SQLiteOpenHelper {
      * Creates an SQL entry for the passed in sleep data
      * @param sleepData The data to be stored.
      */
-    //TODO: Somehow avoid all these horrible getters (StringDictionary w/ column keys? & data type keys w/ cast switch?)
-    //TODO: TRY HASHMAP
+
     public void AddSleepEntry(SleepData sleepData)
     {
         ContentValues values = new ContentValues();
@@ -94,10 +86,6 @@ public class LocalStorageAccess extends SQLiteOpenHelper {
     }
 
 
-    //TODO: Create abstract way to fill the database. Some ideas: method that is a switch on a parameter that calls methods like the one below.
-    //TODO: Another idea is to mimic a bundle and test string keys instead of data...
-    //TODO: Another idea is some kind of observer pattern to call the right methods whenever an entry signal has been emitted by an activity.
-    //TODO: Right now, I don't see any way out of hardcoding all of this down to the individual data points in SPECIFIC module entries :(
     /**
      * Returns the top row from the database sleep table
      * @return Returns a sleepdata object with the information from the database
@@ -109,7 +97,7 @@ public class LocalStorageAccess extends SQLiteOpenHelper {
 
         SQLiteDatabase db = this.getWritableDatabase();
 
-        //TODO: Call up the clean up crew
+
         Cursor cursor = db.rawQuery(query, null);
 
         String date;

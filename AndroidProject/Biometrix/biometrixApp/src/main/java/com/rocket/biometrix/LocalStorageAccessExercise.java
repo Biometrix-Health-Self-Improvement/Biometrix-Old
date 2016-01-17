@@ -20,7 +20,6 @@ import java.util.Set;
  */
 public class LocalStorageAccessExercise extends LocalStorageAccessREMIX {
 
-    //TODO: Could columns be a private inner class?
     //Strings that represent table and column names in the database for Exercise X
     private static final String TABLE_NAME = "Exercise";
     private static final String UID = "Exercise_id"; //ID used for primary key
@@ -71,16 +70,17 @@ public class LocalStorageAccessExercise extends LocalStorageAccessREMIX {
 
     //Update table on user upgrade
     protected boolean onUpgradeAlter(SQLiteDatabase db, int oldVersion, int newVersion) {
-        boolean versionDetected = true;
+        boolean versionDetected = true; //version of db is found in parent class
 
         //In future, will need to test version to upgrade properly.
-        if (oldVersion < 1) {
+        if (oldVersion < getDBVersion() - 1) {
             db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
             onCreate(db); //Drop and recreate
         }
 //        else if (oldVersion < 2) {
 //            db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
-//            onCreate(db); //Drop and recreate
+//            onCreate(db); //Drop and recreated
+//            //update to appropriate version (e.g. if user has skipped updates)
 //        }
         else {
             versionDetected = false;
@@ -89,7 +89,9 @@ public class LocalStorageAccessExercise extends LocalStorageAccessREMIX {
         return versionDetected;
     }
 
+
     //Prints all column names and returns a string array with them in it.
+    @Override
     public String[] getColumns() {
         for (String s : columns) {
             System.out.println(s);
@@ -98,22 +100,37 @@ public class LocalStorageAccessExercise extends LocalStorageAccessREMIX {
         return columns;
     }
 
-    //TODO: document function
+    /**
+     * Tests the passed in ContentValues against the private Strings
+     * that represent columns in this class. Then calls parent's insert method
+     * <p>
+     * If the key values of the passed in cv EXACTLY match your column titles,
+     * they will be placed into a new cv that is used as a parameter for the
+     * safeInsert method.
+     *
+     * @param  cv  a ContentValues map with key values that match the private String column names
+     * {@see safeInsert} in parent is called from
+     */
     public void insertFromContentValues(ContentValues cv) {
 
         //Real ContentValues that will be passed to the base class' insert method.
         ContentValues dataToBeInserted = new ContentValues();
 
         //This is inefficient for more than 100 columns, but we've got a glorified file system so we'll be fine.
-        for (String columnName : columns) {
+        //for each String returned by getColumns method, check if the parameter cv contains a Column String  as a key
+        for (String columnName : getColumns()) {
             if (cv.containsKey(columnName)) {
                 //if the key pulled out of the parameter cv is equal to any string inside columns:
-                dataToBeInserted.put(columnName,cv.getAsString(columnName));
-            }//TODO: else block with Log() information
+                dataToBeInserted.put(columnName,cv.getAsString(columnName)); //put the key and its value into the new CV
+            }
+            else{
+                Log.d("insertFromContentValues"," Key " + columnName+" not found");
+            }
         }
 
-        //WHERE THE MAGIC HAPPENS
+        //WHERE THE MAGIC HAPPENS //Table name is a string above "Exercise", columns[1] is just any column that can be null, then we pass in the clean cv
         safeInsert(TABLE_NAME, columns[1], dataToBeInserted );
+    }//end insert
 
 
 //        //ANOTHER WAY
@@ -135,7 +152,6 @@ public class LocalStorageAccessExercise extends LocalStorageAccessREMIX {
 //                //Fill up other cv here.
 //
 //            }//end itr
-        }//end insert
 
 
 }

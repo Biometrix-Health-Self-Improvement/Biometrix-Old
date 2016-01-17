@@ -16,6 +16,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class ExerciseEntry extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     public static TextView timeTV; //Used by the DateTimePopulateTextView in the onCreate event
@@ -135,30 +140,28 @@ public class ExerciseEntry extends AppCompatActivity implements AdapterView.OnIt
         ExerciseEntryDone.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 //Filling a string that holds title
-                String titleString = GetStringFromEditText(R.id.ex_title);
+                String titleString = ModuleStringHelper.GetStringFromEditText(R.id.ex_title, ExerciseEntry.this);
 
                 //Filling date and time strings for bundle's string array
                 String dateString = dateTV.getText().toString();
                 String timeString = timeTV.getText().toString();
 
-                //Cleaning date and time strings (I know what you're thinking, why not test the buffer to determine where the 1st number occurs to avoid using magic numbers? Not worth it is my opinion.)
-                //Could also use regexp for this String newString = aString.replaceAll("[^a-zA-Z]","");
-                dateString = removeChars(dateString, 12); //Date:_Fri,__ = 12 characters.
-                timeString = removeChars(timeString, 7); //Time:__ = 7 characters
+                //Cleaning date and time strings with helper class
+                dateString = ModuleStringHelper.fixDate(dateString);
+                timeString = ModuleStringHelper.fixTime(timeString);
 
                 //Filling reps string
-                String repsString = GetStringFromEditText(R.id.ex_et_reps);
+                String repsString = ModuleStringHelper.GetStringFromEditText(R.id.ex_et_reps, ExerciseEntry.this);
 
                 //Filling weight string from its editText found @content_exercise_entry.xml
-                String weightString = GetStringFromEditText(R.id.ex_et_weight);
+                String weightString = ModuleStringHelper.GetStringFromEditText(R.id.ex_et_weight, ExerciseEntry.this);
 
                 //Filling notes string
-                String notesString = GetStringFromEditText(R.id.ex_notes);
+                String notesString = ModuleStringHelper.GetStringFromEditText(R.id.ex_notes, ExerciseEntry.this);
 
                 //Make string array to hold all the strings extracted from the user's input on this entry activity
                 String[] exerciseEntryData = {titleString, dateString, timeString, minSelected, typeSelected, notesString};
 
-                //TODO: Make this bundle <T extends Parcelable> T 	getParcelable(String key) as a StringDictionary like in C#
                 //https://developer.android.com/reference/android/os/Bundle.html
                 //Put string array that has all the entries data points in it into a Bundle. This bundle is for future extensibility it is NOT for the parent class.
                 Bundle exerciseEntryBundle = new Bundle();
@@ -183,8 +186,8 @@ public class ExerciseEntry extends AppCompatActivity implements AdapterView.OnIt
                 //HERE is where extensive error checking could be done on the user's entry (IE if it is all blank don't save) but for now... if the key matched say it went OK
                 setResult(RESULT_OK, backtoParent);
 
-                //TODO: HElper function to convert datetime strings to TEXT as ISO8601 strings ("YYYY-MM-DD HH:MM:SS.SSS").
-                //TODO: SQLite calls to LocalStorageAccess which will have to be made more abstract first since it's hardcoded now.
+
+                //TODO: SQLite calls to LocalStorageAccess AND filling up CV correctly with getColumns method
 
                 //Kill this thread, User will still have exercise main page open.
                 finish();
@@ -202,63 +205,5 @@ public class ExerciseEntry extends AppCompatActivity implements AdapterView.OnIt
     public void onNothingSelected(AdapterView<?> parent) {
         //To please the cruel mistress Android Studio...
     }
-
-    //Function given an <<EditText>> resource ID (R.id.ex_et_weight) will return its text contents as a string.
-    //Soft error handling will just mess up the returned string if you gave a bad id, not crash the app.
-    public String GetStringFromEditText(int id) {
-        String endResult = "ERROR in GetStringFromEditText: Resource ID does not exist";
-        //0 is always an invalid resource. And if a view can't be found by its ID, findViewById returns null
-        //http://developer.android.com/reference/android/content/res/Resources.html#getIdentifier%28java.lang.String,%20java.lang.String,%20java.lang.String%29
-        //http://developer.android.com/reference/android/app/Activity.html#findViewById%28int%29
-        if (id != 0) {
-            if (findViewById(id) != null)
-                try {
-                    final EditText et = (EditText) findViewById(id);
-                    endResult = et.getText().toString();
-                }//end try
-                catch (IllegalArgumentException | ClassCastException exceptionName) {
-                    endResult = "ERROR in GetStringFromEditText: try block";
-                }
-        }
-        return endResult;
-    }
-
-
-    //String cleaner, just removes a number of characters from the front of the string.
-    //http://docs.oracle.com/javase/7/docs/api/java/lang/StringBuffer.html#delete%28int,%20int%29
-    private static String removeChars(String s, int num) {
-        StringBuffer buf = new StringBuffer(s);
-        int front = 0;
-        //Simple error checking. To avoid exception below (this is just a wrapper function around String Buffer's delete() function)
-        //StringIndexOutOfBoundsException - if start is negative, greater than length(), or greater than end.
-        if (num < s.length()) {
-            buf.delete(front, num - 1);
-        }
-        return buf.toString();
-    }
-
-    //Getters and Setters NOT USED CURRENTLY
-
-    //Setter for time TextView
-//public void setTimeText (String time){
-//    timeTV = (TextView)findViewById(R.id.ex_tv_time);
-//    timeTV.setText(time);
-//}
-//    //Setter for date TextView
-//    public void setDateText (String date){
-//        TextView dateTV = (TextView)findViewById(R.id.ex_tv_date);
-//        dateTV.setText(date);
-//    }
-//
-//    //Getter for time TextView
-//    public TextView getTimeText (){
-//        TextView timeTV = (TextView)findViewById(R.id.ex_tv_time);
-//        return timeTV;
-//    }
-//    //Getter for date TextView
-//    public TextView getDateText () {
-//        TextView dateTV = (TextView) findViewById(R.id.ex_tv_date);
-//        return dateTV;
-//    }
 
 }
