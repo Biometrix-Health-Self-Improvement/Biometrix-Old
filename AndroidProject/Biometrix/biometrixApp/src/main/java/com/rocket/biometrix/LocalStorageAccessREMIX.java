@@ -74,13 +74,14 @@ public abstract class LocalStorageAccessREMIX extends SQLiteOpenHelper {
         try {
             rowNumberInserted = db.insertOrThrow(tablename, nullColumn, columnsAndValues);
             db.setTransactionSuccessful();
-            //db.close(); //TODO: close necessary?
+
         } catch(SQLException e) {
 
             e.printStackTrace();
 
         } finally {
             db.endTransaction(); //rollback is automatic
+            db.close(); //breaks sometimes?
         }
 
         return rowNumberInserted;
@@ -100,13 +101,13 @@ public abstract class LocalStorageAccessREMIX extends SQLiteOpenHelper {
         StringBuffer buf = new StringBuffer();
 
         while (cursor.moveToNext()){
-            int[] indexArray = new int[columns.length];
+            int[] indexArray = new int[columns.length+1];
             indexArray[0] = cursor.getColumnIndex(getUIDColumn());
-            int indexesIndex = 1;
+            int indexesIndex = 0;
 
             for (String column : columns) {
                 indexArray[indexesIndex] = cursor.getColumnIndex(column);
-                buf.append( column+": "+cursor.getString(indexArray[indexesIndex]) );
+                buf.append( column+": "+cursor.getString(indexArray[indexesIndex])+" " );
                 indexesIndex++;
             }
 
@@ -114,6 +115,15 @@ public abstract class LocalStorageAccessREMIX extends SQLiteOpenHelper {
         }
 
         return buf.toString();
+    }
+
+    //Select * From tbl, returned as cursor.
+    protected Cursor selectALL(String tbl)
+    {
+        SQLiteDatabase db=this.getReadableDatabase();
+        Cursor cur=db.rawQuery("SELECT * FROM "+tbl, null);
+
+        return cur;
     }
 
     //A module's table create sql statement.

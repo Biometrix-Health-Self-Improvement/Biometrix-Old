@@ -52,7 +52,7 @@ public class LocalStorageAccessExercise extends LocalStorageAccessREMIX {
     protected String createTable() {
         //Some SQL
         String createTableSQL = "CREATE TABLE " + TABLE_NAME +
-                "(" + UID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                " (" + UID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 TITLE + " VARCHAR(255), " +
                 TYPE + " VARCHAR(140), " +
                 MINUTES + " TINYINT, " +
@@ -62,7 +62,7 @@ public class LocalStorageAccessExercise extends LocalStorageAccessREMIX {
                 INTY + " TINYINT, " +
                 NOTES + " VARCHAR(255), " +
                 DATE + " DATE, " +
-                TIME + "VARCHAR(50)" +
+                TIME + " VARCHAR(50)" +
                 ");";
 
         return createTableSQL;
@@ -142,14 +142,8 @@ public class LocalStorageAccessExercise extends LocalStorageAccessREMIX {
     }//end insert
 
     //TODO: Pull from database the exercise table.
-    public Cursor getAllDepts()
-    {
-        SQLiteDatabase db=this.getReadableDatabase();
-        Cursor cur=db.rawQuery("SELECT * FROM Exercise", null);
-
-        return cur;
-    }
 
 
+//context.deleteDatabase(DATABASE_NAME);
 
 }

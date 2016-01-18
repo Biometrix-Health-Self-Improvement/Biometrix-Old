@@ -40,7 +40,7 @@ public class ExerciseEntry extends AppCompatActivity implements AdapterView.OnIt
     String lowSpinnerMessage = "Keep it up :)"; //The encouraging message
     String highSpinnerMessage = "Nice!"; //The BEST message users strive for
 
-    String [] exerciseEntryData = {}; //String array that will store all user entered data, used in bundles and SQLite insert
+    String[] exerciseEntryData = {}; //String array that will store all user entered data, used in bundles and SQLite insert
 
 
     @Override
@@ -84,13 +84,11 @@ public class ExerciseEntry extends AppCompatActivity implements AdapterView.OnIt
                     }
                 }
 
-//                textQualification=selected;
-//                SearchUpdated("Qualification");
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
-                // default to 5 min
+                // defaulted to 5 min already.
             }
         });
 
@@ -137,11 +135,11 @@ public class ExerciseEntry extends AppCompatActivity implements AdapterView.OnIt
 
 
         /**Done click event saves entered data to string array
-        *Bundles string array for transport across activities
+         *Bundles string array for transport across activities
          * Receives bundle from parent, changes the data inside and sends it back to parent with error checking
-        *Saves entry to SQLlite DB using LocalStorageAccess
-        *And, Adds this exercise to the 'plan' if it needs to be added
-        *Lastly, it closes up the entry activity with finish() which will activate the onActivityResult() in ExerciseParent.
+         *Saves entry to SQLlite DB using LocalStorageAccess
+         *And, Adds this exercise to the 'plan' if it needs to be added
+         *Lastly, it closes up the entry activity with finish() which will activate the onActivityResult() in ExerciseParent.
          * */
         Button ExerciseEntryDone = (Button) findViewById(R.id.ex_b_done);
         ExerciseEntryDone.setOnClickListener(new View.OnClickListener() {
@@ -168,7 +166,7 @@ public class ExerciseEntry extends AppCompatActivity implements AdapterView.OnIt
 
                 //Make string array to hold all the strings extracted from the user's input on this entry activity
                 //{TITLE, TYPE, MINUTES, REPS, LAPS, WEIGHT, INTY, NOTES, DATE, TIME}; //No distinction between reps and laps, weight and intensity.
-                exerciseEntryData = new String[] {titleString, typeSelected, minSelected, repsString, repsString, weightString, weightString, notesString, dateString, timeString};
+                exerciseEntryData = new String[]{titleString, typeSelected, minSelected, repsString, repsString, weightString, weightString, notesString, dateString, timeString};
 
                 //https://developer.android.com/reference/android/os/Bundle.html
                 //Put string array that has all the entries data points in it into a Bundle. This bundle is for future extensibility it is NOT for the parent class.
@@ -215,15 +213,10 @@ public class ExerciseEntry extends AppCompatActivity implements AdapterView.OnIt
                     //Call insert method
                     dbEx.insertFromContentValues(rowToBeInserted);
                 }
-                //TODO: CODE BROKEN HERE
-               // dbEx.selectALLasStrings(dbEx.getTableName());
-                //TODO: No such table "Exercise"
-                Cursor result = dbEx.getAllDepts();
-                result.moveToFirst();
-                do {
-                    result.getString(0);
-                } while (result.moveToNext());
-                result.close();
+                //Test select all.
+                dbEx.selectALLasStrings(dbEx.getTableName());
+
+
                 //Kill this thread, User will still have exercise main page open.
                 finish();
             }
