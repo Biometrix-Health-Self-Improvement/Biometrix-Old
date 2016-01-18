@@ -213,9 +213,6 @@ public class ExerciseEntry extends AppCompatActivity implements AdapterView.OnIt
                     //Call insert method
                     dbEx.insertFromContentValues(rowToBeInserted);
                 }
-                //Test select all.
-                dbEx.selectALLasStrings(dbEx.getTableName());
-
 
                 //Kill this thread, User will still have exercise main page open.
                 finish();
