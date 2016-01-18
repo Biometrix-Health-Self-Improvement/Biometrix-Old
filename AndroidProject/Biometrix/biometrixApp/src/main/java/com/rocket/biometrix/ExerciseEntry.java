@@ -1,6 +1,9 @@
 package com.rocket.biometrix;
 
+import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -36,6 +39,8 @@ public class ExerciseEntry extends AppCompatActivity implements AdapterView.OnIt
     String lowSpinnerValueThreshold = "10"; //10 minutes (idea is to encourage user to exercise more but still celebrate their 'baby' gains)
     String lowSpinnerMessage = "Keep it up :)"; //The encouraging message
     String highSpinnerMessage = "Nice!"; //The BEST message users strive for
+
+    String [] exerciseEntryData = {}; //String array that will store all user entered data, used in bundles and SQLite insert
 
 
     @Override
@@ -131,11 +136,13 @@ public class ExerciseEntry extends AppCompatActivity implements AdapterView.OnIt
         DTPOWAH.Populate(); //Change the text
 
 
-        //Done click event saves entered data to string array
-        //Bundles string array for transport across activities
-        //Saves entry to SQLlite DB using LocalStorageAccess
-        //And, Adds this exercise to the 'plan' if it needs to be added
-        //Lastly, it closes up the entry activity with finish() which will activate the onActivityResult() in ExerciseParent.
+        /**Done click event saves entered data to string array
+        *Bundles string array for transport across activities
+         * Receives bundle from parent, changes the data inside and sends it back to parent with error checking
+        *Saves entry to SQLlite DB using LocalStorageAccess
+        *And, Adds this exercise to the 'plan' if it needs to be added
+        *Lastly, it closes up the entry activity with finish() which will activate the onActivityResult() in ExerciseParent.
+         * */
         Button ExerciseEntryDone = (Button) findViewById(R.id.ex_b_done);
         ExerciseEntryDone.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -150,17 +157,18 @@ public class ExerciseEntry extends AppCompatActivity implements AdapterView.OnIt
                 dateString = ModuleStringHelper.fixDate(dateString);
                 timeString = ModuleStringHelper.fixTime(timeString);
 
-                //Filling reps string
+                //Filling reps/laps string
                 String repsString = ModuleStringHelper.GetStringFromEditText(R.id.ex_et_reps, ExerciseEntry.this);
 
-                //Filling weight string from its editText found @content_exercise_entry.xml
+                //Filling weight/intensity string from its editText found @content_exercise_entry.xml
                 String weightString = ModuleStringHelper.GetStringFromEditText(R.id.ex_et_weight, ExerciseEntry.this);
 
                 //Filling notes string
                 String notesString = ModuleStringHelper.GetStringFromEditText(R.id.ex_notes, ExerciseEntry.this);
 
                 //Make string array to hold all the strings extracted from the user's input on this entry activity
-                String[] exerciseEntryData = {titleString, dateString, timeString, minSelected, typeSelected, notesString};
+                //{TITLE, TYPE, MINUTES, REPS, LAPS, WEIGHT, INTY, NOTES, DATE, TIME}; //No distinction between reps and laps, weight and intensity.
+                exerciseEntryData = new String[] {titleString, typeSelected, minSelected, repsString, repsString, weightString, weightString, notesString, dateString, timeString};
 
                 //https://developer.android.com/reference/android/os/Bundle.html
                 //Put string array that has all the entries data points in it into a Bundle. This bundle is for future extensibility it is NOT for the parent class.
@@ -187,8 +195,35 @@ public class ExerciseEntry extends AppCompatActivity implements AdapterView.OnIt
                 setResult(RESULT_OK, backtoParent);
 
 
-                //TODO: SQLite calls to LocalStorageAccess AND filling up CV correctly with getColumns method
+                Context context = ExerciseEntry.this;
+                //Pull keys from LSA Exercise
+                LocalStorageAccessExercise dbEx = new LocalStorageAccessExercise(context);
 
+                //You don't have to keep strings in the same order across classes, I just did to make the code easier.
+                //{TITLE, TYPE, MINUTES, REPS, LAPS, WEIGHT, INTY, NOTES, DATE, TIME};
+                String[] columnNames = dbEx.getColumns();
+
+                //Making sure I have data for each column (even if null or empty, note that this is NOT required, you can insert columns individually if you wish.) @see putNull
+                if (columnNames.length == exerciseEntryData.length) {
+                    ContentValues rowToBeInserted = new ContentValues();
+                    int dataIndex = 0;
+                    for (String column : columnNames) {
+                        //Insert column name ripped from LSA child class, and the user's entry data we gathered above
+                        rowToBeInserted.put(column, exerciseEntryData[dataIndex]);
+                        dataIndex++;
+                    }
+                    //Call insert method
+                    dbEx.insertFromContentValues(rowToBeInserted);
+                }
+                //TODO: CODE BROKEN HERE
+               // dbEx.selectALLasStrings(dbEx.getTableName());
+                //TODO: No such table "Exercise"
+                Cursor result = dbEx.getAllDepts();
+                result.moveToFirst();
+                do {
+                    result.getString(0);
+                } while (result.moveToNext());
+                result.close();
                 //Kill this thread, User will still have exercise main page open.
                 finish();
             }

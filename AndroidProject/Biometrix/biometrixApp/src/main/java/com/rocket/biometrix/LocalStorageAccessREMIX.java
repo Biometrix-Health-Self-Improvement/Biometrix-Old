@@ -28,8 +28,9 @@ public abstract class LocalStorageAccessREMIX extends SQLiteOpenHelper {
     /*
     * Please increment by 1 each time major changes are made in the database, document your change here
      * Version 1 on 1/08/16
+     * Version 2 1/17 testing oncreate xercise
     */
-    protected static final int DATABASE_VERSION = 1;
+    protected static final int DATABASE_VERSION = 2;
 
     //TODO: Pull user login information from SharedPreference Class and hash it somehow or use the webservice to get a UserID for all the tables.
 
@@ -73,7 +74,7 @@ public abstract class LocalStorageAccessREMIX extends SQLiteOpenHelper {
         try {
             rowNumberInserted = db.insertOrThrow(tablename, nullColumn, columnsAndValues);
             db.setTransactionSuccessful();
-            db.close(); //TODO: close necessary?
+            //db.close(); //TODO: close necessary?
         } catch(SQLException e) {
 
             e.printStackTrace();
@@ -90,14 +91,39 @@ public abstract class LocalStorageAccessREMIX extends SQLiteOpenHelper {
         return DATABASE_VERSION;
     }
 
-
     //TODO: Define functions for accessing database here. Probably just going to return Strings, however CalendarView() likes em
+    //About the only Query I can think of that all modules will have in common.
+    protected String selectALLasStrings(String tableName){
+        SQLiteDatabase db = this.getWritableDatabase(); //Readable?
+        String[] columns = getColumns();
+        Cursor cursor = db.query(tableName, columns, null, null, null, null, null);
+        StringBuffer buf = new StringBuffer();
+
+        while (cursor.moveToNext()){
+            int[] indexArray = new int[columns.length];
+            indexArray[0] = cursor.getColumnIndex(getUIDColumn());
+            int indexesIndex = 1;
+
+            for (String column : columns) {
+                indexArray[indexesIndex] = cursor.getColumnIndex(column);
+                buf.append( column+": "+cursor.getString(indexArray[indexesIndex]) );
+                indexesIndex++;
+            }
+
+            int cid = cursor.getInt(indexArray[0]); //cursor id, references rows by their primary key
+        }
+
+        return buf.toString();
+    }
 
     //A module's table create sql statement.
     protected abstract String createTable();
 
     //Returns string array of private string variables representing Columns in child module class
     protected abstract String[] getColumns();
+
+    //Returns UID (primary key) column name
+    protected abstract String getUIDColumn();
 
     //Version safe Alter table SQL called in onUpgrade, eventually might return some kind of error checking information...
     //Returns true if oldVersion was detected

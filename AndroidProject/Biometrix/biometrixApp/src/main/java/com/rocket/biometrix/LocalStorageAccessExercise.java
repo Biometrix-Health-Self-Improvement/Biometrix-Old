@@ -100,6 +100,15 @@ public class LocalStorageAccessExercise extends LocalStorageAccessREMIX {
         return columns;
     }
 
+    @Override
+    public String getUIDColumn(){
+        return UID;
+    }
+
+    public String getTableName(){
+        return TABLE_NAME;
+    }
+
     /**
      * Tests the passed in ContentValues against the private Strings
      * that represent columns in this class. Then calls parent's insert method
@@ -132,26 +141,15 @@ public class LocalStorageAccessExercise extends LocalStorageAccessREMIX {
         safeInsert(TABLE_NAME, columns[1], dataToBeInserted );
     }//end insert
 
+    //TODO: Pull from database the exercise table.
+    public Cursor getAllDepts()
+    {
+        SQLiteDatabase db=this.getReadableDatabase();
+        Cursor cur=db.rawQuery("SELECT * FROM Exercise", null);
 
-//        //ANOTHER WAY
-//            //Get Set of ContentValues keys and values.
-//            Set<Map.Entry<String, Object>> cvSet = cv.valueSet();
-//            Iterator itr = cvSet.iterator(); //Make an iterator on that Set.
-//
-//            Log.d("insertFromContentValues", "ContentValue Length :: " + cv.size());
-//
-//            while(itr.hasNext())
-//            {
-//                //move iterator :::: test for off by one
-//                Map.Entry me = (Map.Entry)itr.next();
-//                String key = me.getKey().toString(); //cv's key (column name)
-//                Object value =  me.getValue(); //cv's value (data)
-//
-//                Log.d("insertFromContentValues", "Key:"+key+", values:"+(String)(value == null?null:value.toString()));
-//
-//                //Fill up other cv here.
-//
-//            }//end itr
+        return cur;
+    }
+
 
 
 }
