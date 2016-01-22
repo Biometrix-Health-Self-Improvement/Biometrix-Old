@@ -52,6 +52,10 @@ public class ExerciseParent extends AppCompatActivity {
                 //Way to check if user actually put in an entry or accidentally tapped it.
                 startActivityForResult(LaunchNewEntry, 1);
 
+                //Why is JP doing this? For future extensibility, this will have to be done to edit past entries. (to autopopulate entry with original data)
+                //TODO: Receive with error checking the finish() intent of ExerciseEntry, display toast message w/ title
+
+
             }
         }); //end addNewEntry on click listener
 
@@ -63,7 +67,6 @@ public class ExerciseParent extends AppCompatActivity {
 
     //Automatically called
     //http://developer.android.com/reference/android/app/Activity.html
-    //Why is JP doing this? For future extensibility, this will have to be done to edit past entries. (to autopopulate entry with original data)
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -72,7 +75,7 @@ public class ExerciseParent extends AppCompatActivity {
                 if (data.getExtras().containsKey("childKey")) {
                     usersEntryData = data.getBundleExtra("childKey").getStringArray("childKey");
                     //Lil bling bling to let user know they successfully saved an entry.
-                    Toast.makeText(getApplicationContext(), "Added Entry: " + usersEntryData[0], Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Added entry: " + usersEntryData[0], Toast.LENGTH_SHORT).show();
                 }
             }
         }// end request code check

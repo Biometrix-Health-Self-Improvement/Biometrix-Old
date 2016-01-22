@@ -5,5 +5,5 @@ package com.rocket.biometrix;
  */
 public interface AsyncResponse
 {
-    void processFinish(String result);
+    void processFinish(Object result);
 }
