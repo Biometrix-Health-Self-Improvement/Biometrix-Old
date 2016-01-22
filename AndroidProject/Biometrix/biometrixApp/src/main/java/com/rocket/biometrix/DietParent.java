@@ -13,16 +13,16 @@ public class DietParent extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diet_main);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         createEntryButtonOnClickListener();
 
-
     }
 
     void createEntryButtonOnClickListener(){
-        Button createEntry = (Button) findViewById(R.id.createMoodEntryButton);
+        Button createEntry = (Button) findViewById(R.id.CreateDietEntryButton);
         createEntry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

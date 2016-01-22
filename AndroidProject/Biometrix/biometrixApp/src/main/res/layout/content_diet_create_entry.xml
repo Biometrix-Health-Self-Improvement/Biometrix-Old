@@ -11,81 +11,55 @@
     tools:context="com.rocket.biometrix.DietEntry"
     android:background="@color/colorBackground">
 
-    <TabHost
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/DietTabHost"
-        android:layout_alignParentTop="true"
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+        android:text="Food Type: "
+        android:id="@+id/DietCreateEntryFoodType"
+        android:layout_below="@+id/DietFoodTypeTextView"
+        android:layout_alignParentStart="true" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+        android:text="Date: "
+        android:id="@+id/DietStartDateTextView"
+        android:layout_below="@+id/DietCreateEntryFoodType"
         android:layout_alignParentStart="true"
-        android:layout_above="@+id/DietCreateEntryDateSelect">
+        android:layout_marginTop="16dp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+        android:text="Time: "
+        android:id="@+id/DietStartTimeTextView"
+        android:layout_below="@+id/DietStartDateTextView"
+        android:layout_alignParentStart="true" />
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/DietCommentsTextView"
+        android:layout_marginBottom="142dp"
+        android:background="@color/colorBackgroundSecondary"
+        android:foregroundTint="@color/colorAccent"
+        android:hint="Enter Comments..."
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:autoText="false"
+        android:elegantTextHeight="false"
+        android:maxHeight="30dp"
+        android:maxLines="4" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <TabWidget
-                android:id="@android:id/tabs"
-                android:layout_width="match_parent"
-                android:layout_height="27dp">
-
-
-            </TabWidget>
-
-            <FrameLayout
-                android:id="@android:id/tabcontent"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <LinearLayout
-                    android:id="@+id/MEALS"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:weightSum="1">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                        android:text="Date: "
-                        android:id="@+id/DietCreateEntryDateSelect"
-                        android:layout_above="@+id/DietCommentsEditText"
-                        android:layout_alignParentStart="true"
-                        android:layout_marginBottom="37dp" />
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/DietCommentsEditText"
-                        android:layout_marginBottom="72dp"
-                        android:background="@color/colorBackgroundSecondary"
-                        android:hint="Enter Comments..."
-                        android:layout_alignParentBottom="true"
-                        android:layout_alignParentStart="true" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/RECIPES"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/FOODS"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-
-                </LinearLayout>
-            </FrameLayout>
-        </LinearLayout>
-    </TabHost>
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="DONE"
+        android:id="@+id/DietCreateEntryDoneButton"
+        android:layout_marginBottom="55dp"
+        android:background="@color/colorButtonBackground"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>

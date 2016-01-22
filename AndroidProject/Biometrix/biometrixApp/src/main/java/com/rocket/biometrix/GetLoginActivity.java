@@ -11,14 +11,20 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class GetLoginActivity extends AppCompatActivity implements AsyncResponse {
 
-    private Boolean loginSuccessful;
+    private String returnResult;
 
     private String username;
     private String password;
 
     @Override
+    /**
+     * Initializes various things for the activity
+     */
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
@@ -31,10 +37,14 @@ public class GetLoginActivity extends AppCompatActivity implements AsyncResponse
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        loginSuccessful = false;
+        returnResult = "";
     }
 
 
+    /**
+     * Calls the database to check the login for the user
+     * @param view
+     */
     public void okayButtonClick(View view)
     {
         EditText usernameEdit =  (EditText) findViewById(R.id.usernameEditText);
@@ -43,9 +53,7 @@ public class GetLoginActivity extends AppCompatActivity implements AsyncResponse
         EditText passwordEdit = (EditText) findViewById(R.id.passwordEditText);
         password = passwordEdit.getText().toString();
 
-        //loginSuccessful = tryLogin(username, password);
-
-        new DatabaseLoginConnect(this).execute(DatabaseConnectionTypes.LOGIN_CHECK,username, password);
+        new DatabaseConnect(this).execute(DatabaseConnectionTypes.LOGIN_CHECK,username, password);
 
     }
 
@@ -55,33 +63,56 @@ public class GetLoginActivity extends AppCompatActivity implements AsyncResponse
     }
 
     @Override
-    public void processFinish(Object result)
+    /**
+     * Retrieves the results of the call to the webserver
+     */
+    public void processFinish(String result)
     {
+        returnResult = result;
+
+        JSONObject jsonObject;
+
+        //Tries to parse the returned result as a json object.
         try
         {
-            loginSuccessful = (Boolean) result;
+            jsonObject = new JSONObject(returnResult);
         }
-        catch (Exception e)
+        catch (JSONException jsonExcept)
         {
-            loginSuccessful = false;
+            jsonObject = null;
         }
 
-        if (loginSuccessful)
+        //If the return could not be parsed, then it was not a successful login
+        if (jsonObject == null)
         {
-            Toast.makeText(getApplicationContext(), "Login Succeeded", Toast.LENGTH_LONG).show();
-
-            //Create's an "intent" to passback user information with keys username and password.
-            Intent dataPassback = new Intent();
-            dataPassback.putExtra("username", username);
-            dataPassback.putExtra("password", password);
-
-            setResult(RESULT_OK, dataPassback);
-            finish();
-
+            Toast.makeText(getApplicationContext(), returnResult, Toast.LENGTH_LONG).show();
         }
         else
         {
-            Toast.makeText(getApplicationContext(), "Login Failed =(", Toast.LENGTH_LONG).show();
+            try
+            {
+                if ((Boolean)jsonObject.get("Verified") == true)
+                {
+                    Toast.makeText(getApplicationContext(), "Login Succeeded!", Toast.LENGTH_LONG).show();
+
+                    //Create's an "intent" to passback user information with keys username and password.
+                    Intent dataPassback = new Intent();
+                    dataPassback.putExtra("username", username);
+                    dataPassback.putExtra("password", password);
+
+                    setResult(RESULT_OK, dataPassback);
+                    finish();
+
+                }
+                else
+                {
+                    Toast.makeText(getApplicationContext(), "Login failed", Toast.LENGTH_LONG).show();
+                }
+            }
+            catch (JSONException jsonExcept)
+            {
+                Toast.makeText(getApplicationContext(), "Something went wrong with the server's return", Toast.LENGTH_LONG).show();
+            }
         }
 
     }
