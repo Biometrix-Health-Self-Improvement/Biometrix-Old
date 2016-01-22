@@ -15,12 +15,17 @@ import java.util.ListIterator;
 
 
 /**
- * Created by TJ on 11/30/2015.
+ * Created by Alder on 11/30/2015.
+ * SQL lite subclass
  */
 public class LocalStorageAccess extends SQLiteOpenHelper {
+//http://developer.android.com/reference/android/database/sqlite/SQLiteOpenHelper.html
 
+    //Schema
     private static final String LOCAL_DB_NAME = "BiometrixLocal";
     private static final int LOCAL_DB_VERSION = 1;
+    private static final String UID = "_id";
+
 
     //Sleep table and columns
     private static final String TABLE_SLEEP = "Sleep";
@@ -30,11 +35,16 @@ public class LocalStorageAccess extends SQLiteOpenHelper {
     public static final String SLEEP_COLUMN_NOTES = "Notes";
     public static final String SLEEP_COLUMN_HEALTH = "Health";
 
+    //Exercise Add Entry Table strings
+
+    //Extended from SQLiteOpenHelper
     public LocalStorageAccess(Context context, String name,
                        SQLiteDatabase.CursorFactory factory, int version)
     {
+        //Calls constructor of SQLiteOpenHelper
         super(context, LOCAL_DB_NAME, factory, LOCAL_DB_VERSION);
     }
+
 
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -43,10 +53,10 @@ public class LocalStorageAccess extends SQLiteOpenHelper {
             TABLE_SLEEP + " ( " + SLEEP_COLUMN_DATE + " datetime Not Null," + SLEEP_COLUMN_DURATION
             + " time Not null, " + SLEEP_COLUMN_QUALITY + " int Not Null," +
                 SLEEP_COLUMN_NOTES + " varchar(300), " + SLEEP_COLUMN_HEALTH + " varchar(20) " + ");";
-
         db.execSQL(CREATE_SLEEP_TABLE);
     }
 
+    //Extended from SQLiteOpenHelper
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion,
                           int newVersion)
@@ -59,6 +69,7 @@ public class LocalStorageAccess extends SQLiteOpenHelper {
      * Creates an SQL entry for the passed in sleep data
      * @param sleepData The data to be stored.
      */
+
     public void AddSleepEntry(SleepData sleepData)
     {
         ContentValues values = new ContentValues();
@@ -74,6 +85,7 @@ public class LocalStorageAccess extends SQLiteOpenHelper {
         db.close();
     }
 
+
     /**
      * Returns the top row from the database sleep table
      * @return Returns a sleepdata object with the information from the database
@@ -84,6 +96,7 @@ public class LocalStorageAccess extends SQLiteOpenHelper {
         String query = "Select * FROM " + TABLE_SLEEP + " Order By " + SLEEP_COLUMN_DATE;
 
         SQLiteDatabase db = this.getWritableDatabase();
+
 
         Cursor cursor = db.rawQuery(query, null);
 
