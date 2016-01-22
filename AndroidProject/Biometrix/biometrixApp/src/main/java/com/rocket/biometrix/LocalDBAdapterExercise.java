@@ -2,23 +2,15 @@ package com.rocket.biometrix;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
-import android.database.DatabaseErrorHandler;
-import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
 
 
 /**
  * Created by JP on 1/10/2016.
- * Will rename when finished
+ * The exercise module's basic implementation of LocalDBAdapter
  */
-public class LocalStorageAccessExercise extends LocalStorageAccessREMIX {
+public class LocalDBAdapterExercise extends LocalDBAdapter {
 
     //Strings that represent table and column names in the database for Exercise X
     private static final String TABLE_NAME = "Exercise";
@@ -42,7 +34,7 @@ public class LocalStorageAccessExercise extends LocalStorageAccessREMIX {
 
     //Later, we'll hopefully get to a shared preferences class that stores BMI and weight information.
 
-    public LocalStorageAccessExercise(Context context) {
+    public LocalDBAdapterExercise(Context context) {
         super(context);
     }
 
