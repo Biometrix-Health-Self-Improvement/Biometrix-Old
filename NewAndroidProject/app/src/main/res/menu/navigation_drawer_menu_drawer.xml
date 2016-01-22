@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_mood_module"
+            android:title="Mood Tracker" />
+        <item
+            android:id="@+id/nav_sleep_module"
+            android:title="Sleep Tracker" />
+        <item
+            android:id="@+id/nav_exercise_module"
+            android:title="Exercise Tracker" />
+        <item
+            android:id="@+id/nav_diet_module"
+            android:title="Diet Tracker" />
+    </group>
+
+    <item android:title="Account Settings">
+        <menu>
+            <item
+                android:id="@+id/nav_settings"
+                android:title="Settings" />
+            <item
+                android:id="@+id/nav_login"
+                android:title="Login" />
+            <item
+                android:id="@+id/nav_create_account"
+                android:title="Create Account" />
+        </menu>
+    </item>
+
+</menu>
