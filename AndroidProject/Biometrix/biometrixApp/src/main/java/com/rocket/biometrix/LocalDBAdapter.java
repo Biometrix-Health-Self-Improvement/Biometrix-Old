@@ -16,30 +16,29 @@ import java.util.List;
 //TODO: Implement an export method that will call on some kind of FileAccess class that will save an encrypted binary to the users phone as like an offline save backup. SD CARD
 /**
  * Created by "F4LL0N" on 1/10/2016.
- * SQL lite subclass
+ * SQLiteOpenHelper subclass
  * //http://developer.android.com/reference/android/database/sqlite/SQLiteOpenHelper.html
  * Abstract base 'middle layer' class for interfacing with, reading, writing a local DB.
- * RENAME TO SQLiteAdapterBase when finished.
  */
-public abstract class LocalStorageAccessREMIX extends SQLiteOpenHelper {
+public abstract class LocalDBAdapter extends SQLiteOpenHelper {
 
     //Name of database that won't change throughout all the implementations of this class.
     protected static final String DATABASE_NAME = "BiometrixLAS";
     /*
     * Please increment by 1 each time major changes are made in the database, document your change here
      * Version 1 on 1/08/16
-     * Version 2 1/17 testing oncreate xercise
+     * Version 2 1/17 testing oncreate exercise
     */
     protected static final int DATABASE_VERSION = 2;
 
     //TODO: Pull user login information from SharedPreference Class and hash it somehow or use the webservice to get a UserID for all the tables.
 
-    public LocalStorageAccessREMIX(Context context) {
+    public LocalDBAdapter(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     //SQLiteOpenHelper default Ctor
-    public LocalStorageAccessREMIX(Context context, String name, SQLiteDatabase.CursorFactory factory, int version, DatabaseErrorHandler errorHandler) {
+    public LocalDBAdapter(Context context, String name, SQLiteDatabase.CursorFactory factory, int version, DatabaseErrorHandler errorHandler) {
         super(context, name, factory, version, errorHandler);
     }
 
@@ -92,7 +91,6 @@ public abstract class LocalStorageAccessREMIX extends SQLiteOpenHelper {
         return DATABASE_VERSION;
     }
 
-    //TODO: Define functions for accessing database here. Probably just going to return Strings, however CalendarView() likes em
     //About the only Query I can think of that all modules will have in common.
     protected String selectALLasStrings(String tableName){
         SQLiteDatabase db = this.getWritableDatabase(); //Readable?
