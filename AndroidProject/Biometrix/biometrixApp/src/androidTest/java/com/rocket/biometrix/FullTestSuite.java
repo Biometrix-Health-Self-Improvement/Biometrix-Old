@@ -22,6 +22,7 @@ public class FullTestSuite extends TestSuite {
 }
 
 
+
 /* within android hash
 *testOptions.unitTests.all {
     testLogging {
