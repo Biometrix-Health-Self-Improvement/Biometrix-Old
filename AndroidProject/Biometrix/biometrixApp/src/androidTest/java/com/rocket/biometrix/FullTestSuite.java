@@ -20,3 +20,14 @@ public class FullTestSuite extends TestSuite {
     }
 
 }
+
+
+/* within android hash
+*testOptions.unitTests.all {
+    testLogging {
+        events 'passed', 'skipped', 'failed', 'standardOut', 'standardError'
+        outputs.upToDateWhen { false }
+        showStandardStreams = true
+    }
+}
+ */
