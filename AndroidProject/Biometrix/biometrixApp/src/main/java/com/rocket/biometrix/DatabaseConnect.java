@@ -57,6 +57,10 @@ public class DatabaseConnect extends AsyncTask<String, Void, Void>
         //This string contains the information for which database operation to perform
         //It must have a match in the Db_operation.php file on the server
         String db_operation = "";
+
+        //This paramater is not filled out for all operations, so only fill it in if it is required
+        String email_address = "";
+
         if (params[0].equals(DatabaseConnectionTypes.LOGIN_CHECK) )
         {
             db_operation = "Login";
@@ -64,6 +68,7 @@ public class DatabaseConnect extends AsyncTask<String, Void, Void>
         else if (params[0].equals(DatabaseConnectionTypes.LOGIN_CREATE) )
         {
             db_operation = "Add";
+            email_address = params[3];
         }
         else if(params[0].equals(DatabaseConnectionTypes.LOGIN_DELETE) )
         {
@@ -103,6 +108,12 @@ public class DatabaseConnect extends AsyncTask<String, Void, Void>
             jsonParam.put("Password", params[2]);
             jsonParam.put("Operation", db_operation);
 
+            //If the email address was set, send that as well
+            if (email_address != null)
+            {
+                jsonParam.put("Email", email_address);
+            }
+
             //Send POST output
             webOutput = new DataOutputStream(urlConnection.getOutputStream() );
             webOutput.write((URLEncoder.encode(jsonParam.toString(), "UTF-8")).getBytes());
@@ -120,6 +131,7 @@ public class DatabaseConnect extends AsyncTask<String, Void, Void>
                 //Reads in all of the input from the stream to the string builder
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(
                         urlConnection.getInputStream(),"utf-8"));
+
                 String line = null;
 
                 while ((line = bufferedReader.readLine()) != null)
@@ -160,95 +172,7 @@ public class DatabaseConnect extends AsyncTask<String, Void, Void>
     }
 
 
-  /*  protected String GetConnectionURL(String dbConnectString)
-    {
-        String dbName = "Biometrix";
-        String server = "rocketjpserver.cktljt0phf7d.us-west-2.rds.amazonaws.com:1433";
 
-        String userName = null;
-        String password = null;
-
-        if (dbConnectString.equals(DatabaseConnectionTypes.LOGIN_CHECK) )
-        {
-            userName = "ReadOnlyTest";
-            password = "ReadTest";
-        }
-        else if (dbConnectString.equals(DatabaseConnectionTypes.LOGIN_CREATE) )
-        {
-            userName = "LoginCreator";
-            password = "RocketMaker1!";
-        }
-
-        String full_connection = null;
-
-        if (userName != null && password != null)
-        {
-            full_connection = "jdbc:jtds:sqlserver://"+server+";" +"databaseName="+dbName+";user="+userName+";password="+password;
-        }
-
-
-        return full_connection;
-    }
-
-    protected void CheckLoginExists(String username, String password, Connection dbConnection)
-    {
-        try {
-            //Creates an SQL statement object.
-            Statement sqlStatement = dbConnection.createStatement();
-
-            String queryString = "select * from Biometrix.dbo.LoginTable";
-
-            queryString = queryString + " where username = '" + username + "' and password = '" + password + "'";
-
-            ResultSet resultSet = sqlStatement.executeQuery(queryString);
-
-            if (resultSet.next()) {
-                //If there is a record, then login succeeded
-                String valueReturned = resultSet.getString(1);
-
-                returnResult = (valueReturned != null);
-            } else {
-                returnResult = false;
-            }
-
-            sqlStatement.close();
-            resultSet.close();
-        }
-        catch (Exception except)
-        {
-            returnResult = false;
-        }
-    }
-
-    protected void CreateNewLogin(String username, String password, Connection dbConnection)
-    {
-        try {
-            //Creates an SQL statement object.
-            Statement sqlStatement = dbConnection.createStatement();
-
-            //e.g. Insert Biometrix.dbo.LoginTable (Username, Password) Values ('Bob', 'Password1');
-            String queryString1 = "Insert Biometrix.dbo.LoginTable (Username, Password) Values ('";
-
-            String queryString = queryString1 + username +"', '" + password + "')";
-
-            int rowsEffected = sqlStatement.executeUpdate(queryString);
-
-            if (rowsEffected == 1)
-            {
-                returnResult = true;
-            }
-            else
-            {
-                returnResult = false;
-            }
-
-            sqlStatement.close();
-        }
-        catch (Exception except)
-        {
-            returnResult = false;
-        }
-    }*/
 
     @Override
     protected void onPostExecute(Void aVoid)

@@ -14,13 +14,15 @@ import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class CreateLoginActivity extends AppCompatActivity implements AsyncResponse {
+public class CreateLoginActivity extends AppCompatActivity implements AsyncResponse
+{
 
     private String returnResult;
 
     private String username;
     private String password;
     private String confirmedPassword;
+    private String email;
 
     @Override
     /**
@@ -47,10 +49,9 @@ public class CreateLoginActivity extends AppCompatActivity implements AsyncRespo
      * Makes a request for the webserver to create a new user if the username and passwords match
      * @param view
      */
-    public void okayButtonClick(View view)
-    {
-        //Gets username and passwords from the edit Text boxes
-        EditText usernameEdit =  (EditText) findViewById(R.id.usernameEditText);
+    public void okayButtonClick(View view) {
+        //Gets username, and email passwords from the edit Text boxes
+        EditText usernameEdit = (EditText) findViewById(R.id.usernameEditText);
         username = usernameEdit.getText().toString();
 
         EditText passwordEdit = (EditText) findViewById(R.id.passwordEditText);
@@ -59,10 +60,33 @@ public class CreateLoginActivity extends AppCompatActivity implements AsyncRespo
         EditText passwordConfirmEdit = (EditText) findViewById(R.id.confirmPasswordEditText);
         confirmedPassword = passwordConfirmEdit.getText().toString();
 
-        //Calls the database connection if the passwords match
-        if (password.equals(confirmedPassword))
+        EditText emailEdit = (EditText) findViewById(R.id.emailEditText);
+        email = emailEdit.getText().toString();
+
+        //Ensures username is not blank
+        if (username.equals(""))
         {
-            new DatabaseConnect(this).execute(DatabaseConnectionTypes.LOGIN_CREATE,username, password);
+            Toast.makeText(getApplicationContext(), "Username cannot be blank", Toast.LENGTH_LONG).show();
+        }
+        //Ensures password is not blank
+        else if (password.equals(""))
+        {
+            Toast.makeText(getApplicationContext(), "Password cannot be blank", Toast.LENGTH_LONG).show();
+        }
+        //Ensures email is not blank
+        else if (email.equals(""))
+        {
+            Toast.makeText(getApplicationContext(), "Email cannot be blank", Toast.LENGTH_LONG).show();
+        }
+        //Ensures that the email address at least appears valid
+        else if (!email.contains("@") || !email.contains(".") )
+        {
+            Toast.makeText(getApplicationContext(), "Email does not appear valid, please check it", Toast.LENGTH_LONG).show();
+        }
+        //Calls the database connection if the passwords match
+        else if (password.equals(confirmedPassword))
+        {
+            new DatabaseConnect(this).execute(DatabaseConnectionTypes.LOGIN_CREATE, username, password, email);
         }
         else
         {
