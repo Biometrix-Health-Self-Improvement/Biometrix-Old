@@ -27,7 +27,7 @@
             android:id="@+id/usernameText"
             android:layout_gravity="center_horizontal"
             android:editable="false"
-            android:text="Username"
+            android:text="@string/login_username_string"
             android:enabled="true"
             android:textAlignment="center"
             style="@style/AppTheme"
@@ -46,18 +46,44 @@
             android:inputType="textPersonName"
             style="@style/AppTheme" />
 
+        <EditText
+            style="@style/AppTheme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/emailText"
+            android:layout_gravity="center_horizontal"
+            android:editable="false"
+            android:text="@string/login_email_string"
+            android:enabled="true"
+            android:textAlignment="center"
+            android:inputType="none" />
+
+        <EditText
+            style="@style/AppTheme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:id="@+id/emailEditText"
+            android:layout_gravity="center_horizontal"
+            android:editable="false"
+            android:focusable="true"
+            android:enabled="true"
+            android:clickable="true"
+            android:inputType="textPersonName" />
+
         <Space
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            style="@style/AppTheme" />
+            style="@style/AppTheme"
+            android:layout_weight="0.11" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/passwordText"
             android:layout_gravity="center_horizontal"
-            android:text="Password"
+            android:text="@string/login_password_string"
             android:textAlignment="center"
             style="@style/AppTheme"
             android:inputType="none"
@@ -83,7 +109,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/confirmPasswordText"
-            android:text="Confirm Password"
+            android:text="@string/login_confirm_password_string"
             android:textAlignment="center"
             android:inputType="none"
             android:editable="false"
