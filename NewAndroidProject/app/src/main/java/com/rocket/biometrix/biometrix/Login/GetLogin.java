@@ -1,4 +1,4 @@
-package com.rocket.biometrix.biometrix.SleepModule;
+package com.rocket.biometrix.biometrix.Login;
 
 import android.content.Context;
 import android.net.Uri;
@@ -14,12 +14,12 @@ import com.rocket.biometrix.biometrix.R;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link SleepEntry.OnFragmentInteractionListener} interface
+ * {@link GetLogin.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link SleepEntry#newInstance} factory method to
+ * Use the {@link GetLogin#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SleepEntry extends Fragment {
+public class GetLogin extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -31,7 +31,7 @@ public class SleepEntry extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public SleepEntry() {
+    public GetLogin() {
         // Required empty public constructor
     }
 
@@ -41,11 +41,11 @@ public class SleepEntry extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment SleepEntry.
+     * @return A new instance of fragment GetLogin.
      */
     // TODO: Rename and change types and number of parameters
-    public static SleepEntry newInstance(String param1, String param2) {
-        SleepEntry fragment = new SleepEntry();
+    public static GetLogin newInstance(String param1, String param2) {
+        GetLogin fragment = new GetLogin();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -61,11 +61,10 @@ public class SleepEntry extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
-
         try{
             NavigationDrawerActivity nav = (NavigationDrawerActivity) getActivity();
             //Change the title of the action bar to reflect the current fragment
-            nav.setActionBarTitleFromFragment(R.string.action_bar_title_mood_parent);
+            nav.setActionBarTitleFromFragment(R.string.action_bar_title_login);
             //set activities active fragment to this one
             nav.activeFragment = this;
         } catch (Exception e){}
@@ -76,7 +75,7 @@ public class SleepEntry extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_sleep_entry, container, false);
+        return inflater.inflate(R.layout.fragment_get_login, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event

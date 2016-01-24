@@ -3,11 +3,12 @@ package com.rocket.biometrix.biometrix.SleepModule;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.rocket.biometrix.biometrix.NavigationDrawerActivity;
 import com.rocket.biometrix.biometrix.R;
 
 /**
@@ -59,19 +60,34 @@ public class SleepParent extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+
+        try{
+            NavigationDrawerActivity nav = (NavigationDrawerActivity) getActivity();
+
+            //Change the title of the action bar to reflect the current fragment
+            nav.setActionBarTitleFromFragment(R.string.action_bar_title_sleep_parent);
+
+            //set activities active fragment to this one
+            nav.activeFragment = this;
+        } catch (Exception e){}
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+//        if (mListener != null) {
+//            mListener.onFragmentInteraction(getResources().getString(R.string.action_bar_title_sleep_parent));
+//        }
         return inflater.inflate(R.layout.fragment_sleep_parent, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+          mListener.onFragmentInteraction(uri);
         }
     }
 
@@ -104,6 +120,7 @@ public class SleepParent extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
+      //  void onFragmentInteraction(String title);
         void onFragmentInteraction(Uri uri);
     }
 }

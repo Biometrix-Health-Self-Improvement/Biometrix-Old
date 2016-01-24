@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.rocket.biometrix.biometrix.NavigationDrawerActivity;
 import com.rocket.biometrix.biometrix.R;
 
 /**
@@ -59,6 +60,15 @@ public class DietParent extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        try{
+            NavigationDrawerActivity nav = (NavigationDrawerActivity) getActivity();
+            //Change the title of the action bar to reflect the current fragment
+            nav.setActionBarTitleFromFragment(R.string.action_bar_title_diet_parent);
+            //set activities active fragment to this one
+            nav.activeFragment = this;
+        } catch (Exception e){}
+
     }
 
     @Override

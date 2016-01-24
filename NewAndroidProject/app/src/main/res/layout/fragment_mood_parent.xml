@@ -1,13 +1,43 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.rocket.biometrix.biometrix.MoodModule.MoodParent">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <Button
+        android:layout_width="120dp"
+        android:layout_height="35dp"
+        android:text="@string/create_entry_button"
+        android:id="@+id/createMoodEntryButton"
+        android:background="@color/colorButtonBackground"
+        android:textColor="@color/colorButtonText"
+        android:gravity="center"
+        android:layout_gravity="end"
+        android:textAlignment="center"
+        android:layout_alignParentRight="true"
+        android:onClick="CreateEntryOnClick" />
 
-</FrameLayout>
+    <View
+        style="@style/Divider"
+        android:layout_below="@+id/createMoodEntryButton"
+        android:id="@+id/dividerUpperMood"
+        />
+
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/pastMoodEntriesScrollview"
+        android:layout_below="@+id/dividerUpperMood"
+        >
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:id="@+id/pastMoodEntries"
+            android:layout_height="wrap_content">
+
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

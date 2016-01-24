@@ -3,6 +3,9 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/nav_home"
+            android:title="Home" />
+        <item
             android:id="@+id/nav_mood_module"
             android:title="Mood Tracker" />
         <item
@@ -14,6 +17,12 @@
         <item
             android:id="@+id/nav_diet_module"
             android:title="Diet Tracker" />
+        <item
+            android:id="@+id/nav_medication_module"
+            android:title="Medication Tracker" />
+        <item
+            android:id="@+id/nav_analytics"
+            android:title="Analysis" />
     </group>
 
     <item android:title="Account Settings">

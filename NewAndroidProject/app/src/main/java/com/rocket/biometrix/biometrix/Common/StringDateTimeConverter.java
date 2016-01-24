@@ -36,14 +36,14 @@ public class StringDateTimeConverter //TODO: Add more functionality, convert fro
     }
 **/
 
-    //Call various helper methods to make the DateTimePopulateTextView edit texts
+    //Call various helper methods to make the  edit texts
     // go from human readable to more Database friendly formats
     public static String fixDate (String date){
         date = removeChars(date, 12); //Date:_Fri,__ = 12 characters.
         date = convertDateString(date);
         return date;
     }
-    //Call various helper methods to make the DateTimePopulateTextView edit texts
+    //Call various helper methods to make the  edit texts
     // go from human readable to more Database friendly formats
     public static String fixTime (String time){
         time = removeChars(time, 7); //Time:__ = 7 characters
