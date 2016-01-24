@@ -46,11 +46,10 @@ public class DatabaseConnect extends AsyncTask<String, Void, Void>
     //Required method, this is the main method for doing the asynchronous task
     @Override
     /**
-     * Passed three string variables that correspond to the operation, username,
-     * and password respectively
+     * Passed string variables that correspond to different variables depending on the operation
+     * which is always the first paramaters
      */
-    protected Void doInBackground(String... params)
-    {
+    protected Void doInBackground(String... params) {
         //Creates the object for the string that will be returned
         StringBuilder returnStringBuilder = new StringBuilder();
 
@@ -58,22 +57,52 @@ public class DatabaseConnect extends AsyncTask<String, Void, Void>
         //It must have a match in the Db_operation.php file on the server
         String db_operation = "";
 
-        //This paramater is not filled out for all operations, so only fill it in if it is required
-        String email_address = "";
+        //Creates the JSONObject to pass to the webserver. Since Username and password requirements
+        //Differ per operation
+        JSONObject jsonParam = new JSONObject();
+        try
+        {
 
-        if (params[0].equals(DatabaseConnectionTypes.LOGIN_CHECK) )
-        {
-            db_operation = "Login";
+            switch (params[0])
+            {
+                //Login check requires username and password
+                case DatabaseConnectionTypes.LOGIN_CHECK:
+                    jsonParam.put("Username", params[1]);
+                    jsonParam.put("Password", params[2]);
+                    db_operation = "Login";
+                    break;
+                //Creating login requires username, password, and email
+                case DatabaseConnectionTypes.LOGIN_CREATE:
+                    db_operation = "Add";
+                    jsonParam.put("Username", params[1]);
+                    jsonParam.put("Password", params[2]);
+                    jsonParam.put("Email", params[3]);
+                    break;
+                //Deleting login requires username, password, and email
+                case DatabaseConnectionTypes.LOGIN_DELETE:
+                    db_operation = "Delete";
+                    jsonParam.put("Username", params[1]);
+                    jsonParam.put("Password", params[2]);
+                    jsonParam.put("Email", params[3]);
+                    break;
+                //Resetting password requires username and email field
+                case  DatabaseConnectionTypes.LOGIN_RESET:
+                    db_operation = "Reset";
+                    jsonParam.put("Username", params[1]);
+                    jsonParam.put("Email", params[2]);
+                    break;
+                default:
+                    db_operation = "";
+                    break;
+            }
+
+            jsonParam.put("Operation", db_operation);
         }
-        else if (params[0].equals(DatabaseConnectionTypes.LOGIN_CREATE) )
+        catch (org.json.JSONException jsonExcept)
         {
-            db_operation = "Add";
-            email_address = params[3];
+            returnResult = "Problems parsing output to server";
         }
-        else if(params[0].equals(DatabaseConnectionTypes.LOGIN_DELETE) )
-        {
-            db_operation = "Delete";
-        }
+
 
         //The http url connection that will be used to talk to the webserver
         HttpURLConnection urlConnection = null;
@@ -84,7 +113,7 @@ public class DatabaseConnect extends AsyncTask<String, Void, Void>
 
             //The stream to read responses from the server
             DataInputStream webInput;
-            URL url = new URL("http://54.201.41.185/Db_operation.php");
+            URL url = new URL("http://www.biometrixapp.com/do_operation.php");
 
             //Opens the connection to the webserver
             urlConnection = (HttpURLConnection) url.openConnection();
@@ -95,24 +124,10 @@ public class DatabaseConnect extends AsyncTask<String, Void, Void>
             urlConnection.setConnectTimeout(10000);
             urlConnection.setChunkedStreamingMode(0);
             urlConnection.setUseCaches(false);
-            urlConnection.setRequestProperty("Host", "54.201.41.185");
+            urlConnection.setRequestProperty("Host", "biometrixapp.com");
 
-            //Sets the type of content passed to be json.. I think
+            //Sets the type of content passed to be json
             urlConnection.setRequestProperty("Content-Type", "application/json");
-
-
-            //Creates the JSONObject to pass to the webserver. Username and Password
-            //Must be filled out as well as operation
-            JSONObject jsonParam = new JSONObject();
-            jsonParam.put("Username", params[1]);
-            jsonParam.put("Password", params[2]);
-            jsonParam.put("Operation", db_operation);
-
-            //If the email address was set, send that as well
-            if (email_address != null)
-            {
-                jsonParam.put("Email", email_address);
-            }
 
             //Send POST output
             webOutput = new DataOutputStream(urlConnection.getOutputStream() );
@@ -120,12 +135,11 @@ public class DatabaseConnect extends AsyncTask<String, Void, Void>
             webOutput.flush();
             webOutput.close();
 
-            //
+            //Starts the actual HTTP connection
             urlConnection.connect();
 
             //Ensures that the webserver was actually able to be accessed
             int HttpResult = urlConnection.getResponseCode();
-
             if(HttpResult ==HttpURLConnection.HTTP_OK)
             {
                 //Reads in all of the input from the stream to the string builder
@@ -141,17 +155,15 @@ public class DatabaseConnect extends AsyncTask<String, Void, Void>
 
                 bufferedReader.close();
 
-            }else{
-                System.out.println(urlConnection.getResponseMessage());
+            }
+            else
+            {
+                returnResult = DatabaseConnectionTypes.CONNECTION_FAIL;
             }
         }
         catch (java.io.IOException except)
         {
             returnResult = DatabaseConnectionTypes.CONNECTION_FAIL;
-        }
-        catch (org.json.JSONException jsonExcept)
-        {
-            returnResult = "Problems parsing output to server";
         }
         finally
         {
