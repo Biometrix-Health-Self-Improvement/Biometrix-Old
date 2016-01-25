@@ -16,7 +16,8 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
 
-public class MoodEntry extends AppCompatActivity {
+public class MoodEntry extends AppCompatActivity
+{
     final static String _dateFormat = "EEE, MM/dd/yyyy";
     final static String _timeFormat = "h:mm a";
 

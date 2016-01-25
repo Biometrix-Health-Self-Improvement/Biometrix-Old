@@ -1,10 +1,8 @@
 package com.rocket.biometrix;
 
-import android.app.ActionBar;
+
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -125,16 +123,18 @@ public class GetLoginActivity extends AppCompatActivity implements AsyncResponse
                 if ((Boolean)jsonObject.get("Verified") )
                 {
                     //If the json object passes back an email address, that means that it was a reset, not a login
-                    if ( jsonObject.get("EmailAddress").equals(""))
+                    if ( !jsonObject.has("EmailAddress"))
                     {
-                        Toast.makeText(getApplicationContext(), "User created!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Login Successful!", Toast.LENGTH_LONG).show();
 
-                        //Create's an "intent" to passback user information with keys username and password.
+                        LocalAccount.Login(username);
+
+                        /*//Create's an "intent" to passback user information with keys username and password.
                         Intent dataPassback = new Intent();
                         dataPassback.putExtra("username", username);
-                        dataPassback.putExtra("password", password);
+                        dataPassback.putExtra("password", password);*/
 
-                        setResult(RESULT_OK, dataPassback);
+                        setResult(RESULT_OK);
                         finish();
                     }
                     else

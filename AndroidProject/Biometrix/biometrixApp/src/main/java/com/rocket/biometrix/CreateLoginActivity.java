@@ -133,12 +133,13 @@ public class CreateLoginActivity extends AppCompatActivity implements AsyncRespo
                 {
                     Toast.makeText(getApplicationContext(), "User created!", Toast.LENGTH_LONG).show();
 
-                    //Create's an "intent" to passback user information with keys username and password.
+                    /*//Create's an "intent" to passback user information with keys username and password.
                     Intent dataPassback = new Intent();
                     dataPassback.putExtra("username", username);
-                    dataPassback.putExtra("password", password);
+                    dataPassback.putExtra("password", password);*/
 
-                    setResult(RESULT_OK, dataPassback);
+                    LocalAccount.Login(username);
+                    setResult(RESULT_OK);
                     finish();
                 }
                 else
