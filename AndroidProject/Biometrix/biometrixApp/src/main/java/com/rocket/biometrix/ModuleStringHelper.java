@@ -1,7 +1,6 @@
 package com.rocket.biometrix;
 
 import android.app.Activity;
-import android.content.Context;
 import android.widget.EditText;
 
 import java.text.ParseException;
@@ -71,6 +70,36 @@ public class ModuleStringHelper
         try {
             //make date time and parse string passed in dayt
             date = new SimpleDateFormat("MM/dd/yyyy").parse(dayt);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        //Make string with right SQL date format.
+        String formattedDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSSZ").format(date);
+
+        //cut out time information
+        StringBuffer buf = new StringBuffer(formattedDate);
+        buf.delete(10,buf.length());
+
+        return buf.toString();
+    }
+
+    //HElper function to convert CalendarView date strings to TEXT as ISO8601 strings ("YYYY-MM-DD HH:MM:SS.SSS").
+    public static String convertCalDateString (String[] dayt){
+
+        StringBuilder builder = new StringBuilder();
+        for(String s : dayt) {
+            builder.append(s);
+            builder.append('/');
+        }
+        //Making the passed in date a string (Year month day)
+        String yearMonthDay  = builder.toString();
+
+        //use SimpleDateFormat to first parse() String to Date and then format() Date to String
+        Date date = null;
+        try {
+            //make date time and parse string passed in dayt
+            date = new SimpleDateFormat("yyyy/MM/dd").parse(yearMonthDay);
         } catch (ParseException e) {
             e.printStackTrace();
         }
