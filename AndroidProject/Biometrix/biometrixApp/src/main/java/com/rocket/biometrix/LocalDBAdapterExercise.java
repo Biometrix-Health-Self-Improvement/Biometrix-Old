@@ -2,6 +2,7 @@ package com.rocket.biometrix;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
@@ -136,6 +137,9 @@ public class LocalDBAdapterExercise extends LocalDBAdapter {
     //TODO: Pull from database the exercise table.
 
 
-//context.deleteDatabase(DATABASE_NAME);
-
+    //Notice all I had to do was put the TABLE_NAME constant (or gettablename method) defined at the top of this class.
+    @Override
+    protected Cursor selectAllDatabyDateRange(String tablename) {
+        return super.selectAllDatabyDateRange(TABLE_NAME);
+    }
 }

@@ -8,9 +8,6 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import java.util.LinkedList;
-import java.util.List;
-
 //TODO: Use this for final test adb uninstall <yourpackagename>
 
 //TODO: Implement an export method that will call on some kind of FileAccess class that will save an encrypted binary to the users phone as like an offline save backup. SD CARD
@@ -59,6 +56,17 @@ public abstract class LocalDBAdapter extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
     //For now call onUpgradeAlter. I know this breaks OO principles, but seems like a good solution since the modules tables can be so different, and the whole db has to be updated at once.
        boolean oldVersionDetected = onUpgradeAlter(db, oldVersion, newVersion);
+    }
+
+    //TODO: TEST THIS
+    //Query out all data related to a range of dates
+    protected Cursor selectAllDatabyDateRange(String tablename){
+
+            SQLiteDatabase db=this.getReadableDatabase();
+            Cursor cur=db.rawQuery("SELECT * FROM "+ tablename, null);
+
+            return cur;
+
     }
 
     //Way to insert values into a table
