@@ -1,5 +1,6 @@
 package com.rocket.biometrix.biometrix;
 
+import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
@@ -14,6 +15,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.app.FragmentManager.*;
+import android.widget.TableRow;
+import android.widget.TextView;
 
 
 import com.rocket.biometrix.biometrix.DietModule.DietEntry;
@@ -215,6 +218,5 @@ public class NavigationDrawerActivity extends AppCompatActivity
             replaceFragment(newFragment);
         }
     }
-
 
 }

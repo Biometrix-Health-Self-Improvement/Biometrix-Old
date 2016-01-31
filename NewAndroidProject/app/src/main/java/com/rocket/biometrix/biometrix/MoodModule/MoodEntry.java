@@ -86,7 +86,7 @@ public class MoodEntry extends Fragment {
 
         DateTimeSelectorPopulateTextView popDateTime = new DateTimeSelectorPopulateTextView
                 (getActivity(), view, R.id.moodCreateEntryDateSelect, R.id.moodCreateEntryTimeSelect);
-        popDateTime.Populate(); //this will do the date time stuff once I figure out how to make it fragment compatible
+        popDateTime.Populate();
 
         return view;
     }
@@ -109,7 +109,10 @@ public class MoodEntry extends Fragment {
         mListener = null;
     }
 
-
+    /**************************************************************************
+     * Sets on rating bar listener to change the description text for the rating bar
+     * @param view the view the rating bar is in
+     **************************************************************************/
     private void setRatingBarListener(final View view) {
         //Depression
         SeekBar rating = (SeekBar)view.findViewById(R.id.moodDepressedRating);//the rating bar
@@ -215,4 +218,7 @@ public class MoodEntry extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+
+
 }

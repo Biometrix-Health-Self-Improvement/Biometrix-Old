@@ -66,7 +66,6 @@ public class MoodParent extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
-
         try{
             NavigationDrawerActivity nav = (NavigationDrawerActivity) getActivity();
             //Change the title of the action bar to reflect the current fragment
