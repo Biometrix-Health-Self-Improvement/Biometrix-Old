@@ -7,7 +7,8 @@ import android.view.View;
 import android.widget.Button;
 
 
-public class HomeScreen extends AppCompatActivity {
+public class HomeScreen extends AppCompatActivity
+{
     private static Button mood_button;
     private static Button diet_button;
     private static Button medications_button;

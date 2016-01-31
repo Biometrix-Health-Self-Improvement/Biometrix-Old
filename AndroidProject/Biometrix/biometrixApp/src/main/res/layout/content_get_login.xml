@@ -125,5 +125,76 @@
                 style="@style/AppTheme" />
         </LinearLayout>
 
+        <Space
+            style="@style/AppTheme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="0.24" />
+
+        <EditText
+            style="@style/AppTheme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/forgotPasswordText"
+            android:layout_gravity="center_horizontal"
+            android:editable="false"
+            android:text="Forgot Password?"
+            android:enabled="true"
+            android:textAlignment="center"
+            android:inputType="none" />
+
+        <Space
+            style="@style/AppTheme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="0.07" />
+
+        <EditText
+            style="@style/AppTheme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/enterEmailText"
+            android:layout_gravity="center_horizontal"
+            android:editable="false"
+            android:text="Associated Email Address"
+            android:enabled="true"
+            android:textAlignment="center"
+            android:inputType="none" />
+
+        <EditText
+            style="@style/AppTheme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:id="@+id/loginEnterEmailEditText"
+            android:layout_gravity="center_horizontal"
+            android:editable="false"
+            android:focusable="true"
+            android:enabled="true"
+            android:clickable="true"
+            android:inputType="textPersonName" />
+
+        <LinearLayout
+            style="@style/AppTheme"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal" >
+
+            <Button
+                style="@style/AppTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Send me a reset link"
+                android:id="@+id/sendResetLinkButton"
+                android:textAlignment="center"
+                android:layout_weight="1"
+                android:onClick="resetButtonClick"
+                android:background="@color/colorButtonBackground" />
+
+        </LinearLayout>
+
     </LinearLayout>
 </RelativeLayout>

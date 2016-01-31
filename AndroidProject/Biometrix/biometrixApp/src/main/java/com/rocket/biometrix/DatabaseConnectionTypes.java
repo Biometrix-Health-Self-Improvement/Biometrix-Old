@@ -12,30 +12,11 @@ public final class DatabaseConnectionTypes
     public static final String LOGIN_CHECK = "Test User Login";
     public static final String LOGIN_CREATE = "Create User Login";
     public static final String LOGIN_DELETE = "Delete User Login";
+    public static final String LOGIN_RESET = "Reset User Password";
 
     public static final String CONNECTION_FAIL = "Unable to connect to database";
     public static final String JSON_PARSE_FAIL = "Unable to parse the input JSON";
     public static final String INCORRECT_CREDENTIALS = "Username or password was incorrect";
-
-    /**
-     * Checks a passed in string to see if it is one of the error messages from this class
-     * @param checkedMessage The string to check against
-     * @return Returns true if the string matches a known error message from the class
-     */
-    /*public static boolean IsErrorMessage(String checkedMessage)
-    {
-        boolean isError = false;
-
-        //Verifies against the known error messages
-        if (checkedMessage.equals(CONNECTION_FAIL)
-                || checkedMessage.equals(JSON_PARSE_FAIL)
-                || checkedMessage.equals(INCORRECT_CREDENTIALS))
-        {
-            isError = true;
-        }
-
-        return isError;
-    }*/
 
     private DatabaseConnectionTypes() {}
 }

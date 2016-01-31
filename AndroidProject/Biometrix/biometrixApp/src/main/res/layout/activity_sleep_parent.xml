@@ -32,4 +32,14 @@
             android:layout_height="wrap_content"
             android:id="@+id/sleepDisplayEntriesLinearLayout"></LinearLayout>
     </ScrollView>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/disable_sleep_string"
+        android:id="@+id/disableSleepButton"
+        android:onClick="onSleepDisableClick"
+        android:background="@color/colorButtonBackground"
+        android:layout_above="@+id/sleepDisplayEntriesScrollView"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>

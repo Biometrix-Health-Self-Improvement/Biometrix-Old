@@ -1,10 +1,8 @@
 package com.rocket.biometrix;
 
-import android.app.ActionBar;
+
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -20,6 +18,7 @@ public class GetLoginActivity extends AppCompatActivity implements AsyncResponse
 
     private String username;
     private String password;
+    private String email;
 
     @Override
     /**
@@ -53,7 +52,36 @@ public class GetLoginActivity extends AppCompatActivity implements AsyncResponse
         EditText passwordEdit = (EditText) findViewById(R.id.passwordEditText);
         password = passwordEdit.getText().toString();
 
-        new DatabaseConnect(this).execute(DatabaseConnectionTypes.LOGIN_CHECK,username, password);
+        if (username.equals("") || password.equals("") )
+        {
+            Toast.makeText(getApplicationContext(), "Username or password is blank", Toast.LENGTH_LONG);
+        }
+        else
+        {
+            new DatabaseConnect(this).execute(DatabaseConnectionTypes.LOGIN_CHECK,username, password);
+        }
+    }
+
+    /**
+     * Calls the database to check the login for the user
+     * @param view
+     */
+    public void resetButtonClick(View view)
+    {
+        EditText usernameEdit =  (EditText) findViewById(R.id.usernameEditText);
+        username = usernameEdit.getText().toString();
+
+        EditText emailEdit = (EditText) findViewById(R.id.loginEnterEmailEditText);
+        email = emailEdit.getText().toString();
+
+        if (username.equals("") || email.equals("") )
+        {
+            Toast.makeText(getApplicationContext(), "Username or email is blank, both are required to identify you", Toast.LENGTH_LONG).show();
+        }
+        else
+        {
+            new DatabaseConnect(this).execute(DatabaseConnectionTypes.LOGIN_RESET, username, email);
+        }
 
     }
 
@@ -91,17 +119,28 @@ public class GetLoginActivity extends AppCompatActivity implements AsyncResponse
         {
             try
             {
-                if ((Boolean)jsonObject.get("Verified") == true)
+                //If the operation succeeded
+                if ((Boolean)jsonObject.get("Verified") )
                 {
-                    Toast.makeText(getApplicationContext(), "Login Succeeded!", Toast.LENGTH_LONG).show();
+                    //If the json object passes back an email address, that means that it was a reset, not a login
+                    if ( !jsonObject.has("EmailAddress"))
+                    {
+                        Toast.makeText(getApplicationContext(), "Login Successful!", Toast.LENGTH_LONG).show();
 
-                    //Create's an "intent" to passback user information with keys username and password.
-                    Intent dataPassback = new Intent();
-                    dataPassback.putExtra("username", username);
-                    dataPassback.putExtra("password", password);
+                        LocalAccount.Login(username);
 
-                    setResult(RESULT_OK, dataPassback);
-                    finish();
+                        /*//Create's an "intent" to passback user information with keys username and password.
+                        Intent dataPassback = new Intent();
+                        dataPassback.putExtra("username", username);
+                        dataPassback.putExtra("password", password);*/
+
+                        setResult(RESULT_OK);
+                        finish();
+                    }
+                    else
+                    {
+                        Toast.makeText(getApplicationContext(), "Check your email (and your spam folder) for your reset link", Toast.LENGTH_LONG).show();
+                    }
 
                 }
                 else
