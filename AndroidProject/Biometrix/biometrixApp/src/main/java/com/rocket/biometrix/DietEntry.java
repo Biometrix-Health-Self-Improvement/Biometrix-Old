@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.DatePicker;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -17,7 +18,7 @@ import java.util.TimeZone;
 
 public class DietEntry extends AppCompatActivity {
     final static String _dateFormat = "EEE, MM/dd/yyyy";
-    final static String _timeFormat = "h:mm a";
+    //final static String _timeFormat = "h:mm a";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,13 +32,13 @@ public class DietEntry extends AppCompatActivity {
         setDatetimeOnPage();
         Calendar current = Calendar.getInstance(TimeZone.getDefault());
         setDate(current.get(Calendar.YEAR), current.get(Calendar.MONTH), current.get(Calendar.DAY_OF_MONTH));
-        setTime(current.get(Calendar.HOUR_OF_DAY), current.get(Calendar.MINUTE));
+        //setTime(current.get(Calendar.HOUR_OF_DAY), current.get(Calendar.MINUTE));
     }
 
     //Sets the default date and time values on the activity and sets the onClickListener for the time and date views
     private void setDatetimeOnPage(){
         TextView textDate = (TextView)findViewById(R.id.DietStartDateTextView);
-        TextView textTime = (TextView)findViewById(R.id.DietStartTimeTextView);
+        //TextView textTime = (TextView)findViewById(R.id.DietStartTimeTextView);
 
         textDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,7 +60,7 @@ public class DietEntry extends AppCompatActivity {
             }
         });
 
-        textTime.setOnClickListener(new View.OnClickListener() {
+/*        textTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Calendar current = Calendar.getInstance(TimeZone.getDefault());
@@ -73,7 +74,7 @@ public class DietEntry extends AppCompatActivity {
                 time.setTitle("Select Time");
                 time.show();
             }
-        });
+        });*/
     }
     private void setDate(int year, int month, int day) {
         TextView textDate = (TextView) findViewById(R.id.DietStartDateTextView);
@@ -85,7 +86,7 @@ public class DietEntry extends AppCompatActivity {
             textDate.setText("Date: " + str);
         }
     }
-    private void setTime(int hour, int minute){
+/*    private void setTime(int hour, int minute){
         TextView textTime = (TextView)findViewById(R.id.DietStartTimeTextView);
 
         Calendar current = Calendar.getInstance(TimeZone.getDefault());
@@ -95,5 +96,16 @@ public class DietEntry extends AppCompatActivity {
             String str = new SimpleDateFormat(_timeFormat).format(c.getTime());
             textTime.setText("Time: " + str);
         }
-    }
+    }*/
+
+/*    public void toggleSwitchExample(View view){
+        //Switch sw = (Switch) findViewById(R.id.diet_entry_toggle_switch);
+        TextView s = (TextView) findViewById(R.id.DietStartDateTextView);
+
+        if(s.getVisibility() == View.VISIBLE)
+        s.setVisibility(View.INVISIBLE);
+        else
+            s.setVisibility(View.VISIBLE);
+
+    }*/
 }

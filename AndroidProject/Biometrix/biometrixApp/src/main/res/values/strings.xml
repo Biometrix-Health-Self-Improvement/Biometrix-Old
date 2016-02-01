@@ -102,5 +102,16 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
     <string name="section_format">Hello World from section: %1$d</string>
-
+    <string-array name="Meal_Type">
+        <item>Breakfast</item>
+        <item>Lunch</item>
+        <item>Snack</item>
+        <item>Dinner</item>
+    </string-array>
+    <string-array name="Serving_Size">
+        <item>Grams</item>
+        <item>Ounces</item>
+        <item>Tablespoons</item>
+        <item>Cups</item>
+    </string-array>
 </resources>
