@@ -29,4 +29,11 @@
         android:layout_alignEnd="@+id/exNewEntry"
         >
     </FrameLayout>
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listView"
+        android:layout_alignTop="@+id/ex_parent_frame"
+        android:layout_toStartOf="@+id/ex_parent_frame"/>
 </RelativeLayout>

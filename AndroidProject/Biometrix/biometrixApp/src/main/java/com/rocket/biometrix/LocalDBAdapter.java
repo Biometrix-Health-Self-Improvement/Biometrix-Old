@@ -63,7 +63,7 @@ public abstract class LocalDBAdapter extends SQLiteOpenHelper {
     protected Cursor selectAllDatabyDateRange(String tablename){
 
             SQLiteDatabase db=this.getReadableDatabase();
-            Cursor cur=db.rawQuery("SELECT * FROM "+ tablename, null);
+            Cursor cur=db.rawQuery("SELECT * FROM " + tablename, null);
 
             return cur;
 
@@ -128,6 +128,14 @@ public abstract class LocalDBAdapter extends SQLiteOpenHelper {
     {
         SQLiteDatabase db=this.getReadableDatabase();
         Cursor cur=db.rawQuery("SELECT * FROM "+tbl, null);
+
+        return cur;
+    }
+
+    //Get all rows that match date YYYY-MM-DD (pass in date to search, then table you are looking at...)
+    protected Cursor selectByDate(String dayte, String tbl, String date_col){
+        SQLiteDatabase db=this.getReadableDatabase();
+        Cursor cur=db.rawQuery("SELECT * FROM "+tbl+" WHERE "+date_col+ " == "+dayte, null);
 
         return cur;
     }

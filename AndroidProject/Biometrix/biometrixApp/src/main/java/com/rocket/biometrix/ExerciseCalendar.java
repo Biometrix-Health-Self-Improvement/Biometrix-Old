@@ -87,8 +87,11 @@ public class ExerciseCalendar extends Fragment {
                 String[] dateSelected = { Integer.toString(year),Integer.toString(month),Integer.toString(dayOfMonth)};
                 String dateSelectedFormatted = ModuleStringHelper.convertCalDateString(dateSelected);
 
+                //Pass to parent activity/fragment then call selectByDate() to fill list view with cursor set
+
+
                 //getActivity() for the context.
-                Toast.makeText(getActivity(), "FUCK THIS SHIT", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), dateSelectedFormatted, Toast.LENGTH_LONG).show();
 
 
 
