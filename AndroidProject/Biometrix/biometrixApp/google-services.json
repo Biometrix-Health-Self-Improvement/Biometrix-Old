@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_id": "biometrixapp-1995d",
+    "project_number": "212262655567",
+    "name": "BiometrixApp"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:212262655567:android:caba6b848631a7e0",
+        "client_id": "android:com.rocket.biometrix",
+        "client_type": 1,
+        "android_client_info": {
+          "package_name": "com.rocket.biometrix"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "cloud_messaging_service": {
+          "status": 1,
+          "apns_config": []
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "google_signin_service": {
+          "status": 1
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "client_info": [],
+  "ARTIFACT_VERSION": "1"
+}

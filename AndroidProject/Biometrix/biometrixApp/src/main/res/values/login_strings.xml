@@ -6,4 +6,5 @@
     <string name="login_email_string">Email</string>
     <string name="login_password_string">Password</string>
     <string name="login_confirm_password_string">Confirm Password</string>
+    <string name="login_loading_string">Trying to login to Google...</string>
 </resources>

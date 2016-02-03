@@ -130,26 +130,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_weight="0.24" />
-
-        <EditText
-            style="@style/AppTheme"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/forgotPasswordText"
-            android:layout_gravity="center_horizontal"
-            android:editable="false"
-            android:text="Forgot Password?"
-            android:enabled="true"
-            android:textAlignment="center"
-            android:inputType="none" />
-
-        <Space
-            style="@style/AppTheme"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="0.07" />
+            android:layout_weight="0.14" />
 
         <EditText
             style="@style/AppTheme"
@@ -158,7 +139,7 @@
             android:id="@+id/enterEmailText"
             android:layout_gravity="center_horizontal"
             android:editable="false"
-            android:text="Associated Email Address"
+            android:text="Forgot password? Associated Email Address"
             android:enabled="true"
             android:textAlignment="center"
             android:inputType="none" />
@@ -170,11 +151,10 @@
             android:ems="10"
             android:id="@+id/loginEnterEmailEditText"
             android:layout_gravity="center_horizontal"
-            android:editable="false"
             android:focusable="true"
             android:enabled="true"
             android:clickable="true"
-            android:inputType="textPersonName" />
+            android:inputType="textWebEmailAddress" />
 
         <LinearLayout
             style="@style/AppTheme"
@@ -195,6 +175,11 @@
                 android:background="@color/colorButtonBackground" />
 
         </LinearLayout>
+
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/sign_in_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 </RelativeLayout>
