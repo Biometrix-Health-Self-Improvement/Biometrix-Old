@@ -103,27 +103,36 @@
         android:layout_alignEnd="@+id/imageView3" />
 
     <Button
-        android:layout_width="120dp"
+        android:layout_width="80dp"
         android:layout_height="50dp"
         android:text="Log In"
         android:id="@+id/login_button"
         android:background="@color/colorButtonBackground"
         android:textColor="@color/colorButtonText"
-        android:layout_below="@+id/sleep_button"
-        android:layout_alignStart="@+id/sleep_button"
-        android:layout_marginTop="55dp"
-        android:layout_marginLeft="30dp" />
+        android:layout_marginLeft="10dp"
+        android:layout_alignTop="@+id/createLogin_button"
+        android:layout_alignParentStart="true" />
 
     <Button
-        android:layout_width="120dp"
+        android:layout_width="80dp"
         android:layout_height="50dp"
         android:text="Create Login"
         android:id="@+id/createLogin_button"
         android:background="@color/colorButtonBackground"
         android:textColor="@color/colorButtonText"
-        android:layout_marginRight="30dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="54dp"
         android:layout_below="@+id/analytics_button"
-        android:layout_alignEnd="@+id/imageView3"
-        android:layout_marginTop="55dp" />
+        android:layout_alignEnd="@+id/analytics_button" />
 
+    <Button
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:text="Google Login"
+        android:id="@+id/google_button"
+        android:background="@color/colorButtonBackground"
+        android:textColor="@color/colorButtonText"
+        android:layout_marginRight="10dp"
+        android:layout_alignTop="@+id/createLogin_button"
+        android:layout_toStartOf="@+id/analytics_button" />
 </RelativeLayout>

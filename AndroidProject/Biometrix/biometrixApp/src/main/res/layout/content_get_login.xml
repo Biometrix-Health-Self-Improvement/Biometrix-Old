@@ -26,8 +26,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/usernameText"
             android:layout_gravity="center_horizontal"
-            android:editable="false"
-            android:text="Username"
+            android:text="@string/login_username"
             android:enabled="true"
             android:textAlignment="center"
             style="@style/AppTheme"
@@ -39,7 +38,6 @@
             android:ems="10"
             android:id="@+id/usernameEditText"
             android:layout_gravity="center_horizontal"
-            android:editable="false"
             android:focusable="true"
             android:enabled="true"
             android:clickable="true"
@@ -57,11 +55,10 @@
             android:layout_height="wrap_content"
             android:id="@+id/passwordText"
             android:layout_gravity="center_horizontal"
-            android:text="Password"
+            android:text="@string/login_password"
             android:textAlignment="center"
             style="@style/AppTheme"
             android:inputType="none"
-            android:editable="false"
             android:textIsSelectable="false"
             android:enabled="true"
             android:focusable="false" />
@@ -72,7 +69,6 @@
             android:inputType="textPassword"
             android:ems="10"
             android:id="@+id/passwordEditText"
-            android:editable="true"
             android:enabled="true"
             android:focusable="true"
             android:clickable="true"
@@ -138,8 +134,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/enterEmailText"
             android:layout_gravity="center_horizontal"
-            android:editable="false"
-            android:text="Forgot password? Associated Email Address"
+            android:text="@string/login_enter_email_reset"
             android:enabled="true"
             android:textAlignment="center"
             android:inputType="none" />
@@ -167,7 +162,7 @@
                 style="@style/AppTheme"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Send me a reset link"
+                android:text="@string/login_send_email_button"
                 android:id="@+id/sendResetLinkButton"
                 android:textAlignment="center"
                 android:layout_weight="1"
@@ -176,10 +171,6 @@
 
         </LinearLayout>
 
-        <com.google.android.gms.common.SignInButton
-            android:id="@+id/sign_in_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
 
     </LinearLayout>
 </RelativeLayout>

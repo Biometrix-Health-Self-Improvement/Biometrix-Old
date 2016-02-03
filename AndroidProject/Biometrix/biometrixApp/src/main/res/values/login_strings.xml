@@ -2,9 +2,15 @@
 <resources>
 
 
-    <string name="login_username_string">Username</string>
-    <string name="login_email_string">Email</string>
-    <string name="login_password_string">Password</string>
-    <string name="login_confirm_password_string">Confirm Password</string>
-    <string name="login_loading_string">Trying to login to Google...</string>
+    <string name="login_username">Username</string>
+    <string name="login_password">Password</string>
+    <string name="login_email">Email</string>
+    <string name="login_confirm_password">Confirm Password</string>
+    <string name="login_loading">Trying to login to Google</string>
+    <string name="login_enter_email_reset">Forgot password? Enter Associated Email Address</string>
+    <string name="login_send_email_button">Send me a reset link</string>
+    <string name="login_cancel">Cancel</string>
+    <string name="login_ok">OK</string>
+    <string name="login_logout">Logout</string>
+    <string name="login_revoke">Revoke</string>
 </resources>

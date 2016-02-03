@@ -17,6 +17,7 @@ public class HomeScreen extends AppCompatActivity
     private static Button analytics_button;
     private static Button login_button;
     private static Button createLogin_button;
+    private static Button google_button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,6 +104,16 @@ public class HomeScreen extends AppCompatActivity
             public void onClick(View v) {
                 Intent Launch_CreateLogin = new Intent(HomeScreen.this, CreateLoginActivity.class);
                 startActivity(Launch_CreateLogin);
+            }
+        });
+
+        //@GOOGLE BUTTON
+        google_button = (Button)findViewById(R.id.google_button);
+        google_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent Launch_Mood = new Intent(HomeScreen.this, GoogleLoginActivity.class);
+                startActivity(Launch_Mood);
             }
         });
     }

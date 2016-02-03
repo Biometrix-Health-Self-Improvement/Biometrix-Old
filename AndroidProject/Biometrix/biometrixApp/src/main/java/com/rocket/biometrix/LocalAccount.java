@@ -12,6 +12,7 @@ import android.content.SharedPreferences;
  */
 public class LocalAccount
 {
+    //Reference variables for information needed by shared preferences
     private static final int PREFERENCE_PRIVATE_MODE = 0;
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor preferenceEditor;
@@ -53,8 +54,8 @@ public class LocalAccount
 
     /**
      * Retrieves a reference to the currently logged in local account
-     *
-     * @return A reference to the local account, throws null if login was not called first
+     * @return A reference to the local account, throws NullPointerException if login was not called
+     * first
      */
     public static LocalAccount GetInstance() throws NullPointerException
     {
@@ -62,6 +63,17 @@ public class LocalAccount
             throw new NullPointerException("Login not called for LocalAccount");
 
         return _instance;
+    }
+
+    /**
+     * Logs the current user out of the system. This means that login will have to be called before
+     * get instance is valid again
+     */
+    public static void Logout()
+    {
+        _instance = null;
+
+        username = null;
     }
 
     /**
