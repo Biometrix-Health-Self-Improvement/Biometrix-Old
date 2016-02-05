@@ -1,13 +1,43 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.rocket.biometrix.biometrix.SleepModule.SleepParent">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="sleep parent" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/new_sleep_entry_text"
+        android:id="@+id/NewSleepEntryButton"
+        android:onClick="CreateEntryOnClick"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:background="@color/colorButtonBackground" />
 
-</FrameLayout>
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/sleepDisplayEntriesScrollView"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:fillViewport="false"
+        android:layout_below="@+id/NewSleepEntryButton" >
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/sleepDisplayEntriesLinearLayout"/>
+    </ScrollView>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/disable_sleep_string"
+        android:id="@+id/disableSleepButton"
+        android:onClick="onSleepDisableClick"
+        android:background="@color/colorButtonBackground"
+        android:layout_above="@+id/sleepDisplayEntriesScrollView"
+        android:layout_alignParentStart="true" />
+
+</RelativeLayout>

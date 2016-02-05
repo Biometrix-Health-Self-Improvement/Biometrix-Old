@@ -8,4 +8,8 @@
 
     <string name="create_entry_button">Create Entry</string>
     <string name="done_button">Done</string>
+
+    <string name="date_prompt">Date: \u0020</string>
+    <string name="time_prompt">Time: \u0020</string>
+
 </resources>

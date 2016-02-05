@@ -19,8 +19,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                android:text="Date: "
-                android:id="@+id/moodCreateEntryDateSelect"
+                android:text="@string/date_prompt"
+                android:id="@+id/exCreateEntryDateSelect"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentStart="true" />
         </TableRow>
@@ -34,7 +34,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                android:text="Time: "
+                android:text="@string/time_prompt"
                 android:id="@+id/moodCreateEntryTimeSelect"
                 android:layout_below="@+id/moodCreateEntryDateSelect"
                 android:layout_alignParentStart="true" />

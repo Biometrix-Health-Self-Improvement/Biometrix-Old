@@ -1,13 +1,122 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.rocket.biometrix.biometrix.ExerciseModule.ExerciseEntry">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="exercise entry" />
 
-</FrameLayout>
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:baselineAligned="false"
+        android:id="@+id/tableLayout">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/exDateTableRow">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                android:text="@string/date_prompt"
+                android:id="@+id/ex_tv_date"
+                />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/exTimeTableRow">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                android:text="@string/time_prompt"
+                android:id="@+id/ex_tv_time"
+                 />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/exTableRowSpace1">
+
+            <Space
+                android:layout_height="20dp"/>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/exTableRowMin">
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:text="@string/ex_et_title"
+                android:id="@+id/ex_title"
+                android:gravity="start"
+                android:hint="@string/ex_ex_name"
+                android:textAlignment="center" />
+
+            <Space android:layout_width="15dp"/>
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/ex_time"
+                android:id="@+id/ex_time"
+                />
+
+            <Space android:layout_width="5dp"/>
+
+            <Spinner
+                android:layout_height="wrap_content"
+                android:minWidth="60dp"
+                android:id="@+id/ex_min_spinner"
+                android:layout_column="1"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:gravity="start"
+                android:prompt="@string/ex_prompt"
+                 />
+
+            <Space android:layout_width="10dp"/>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/exTableRowSpace2">
+
+            <Space
+                android:layout_height="10dp"/>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/exTableRow">
+
+            <Space
+                android:layout_height="10dp"/>
+
+        </TableRow>
+
+
+    </TableLayout>
+
+    <Button
+        style="@style/done_button"
+        android:id="@+id/mood_entry_done_button"
+        />
+
+
+</RelativeLayout>

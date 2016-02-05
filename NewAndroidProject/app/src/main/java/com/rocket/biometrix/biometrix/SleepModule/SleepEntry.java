@@ -7,6 +7,8 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import com.rocket.biometrix.biometrix.NavigationDrawerActivity;
 import com.rocket.biometrix.biometrix.R;
@@ -65,10 +67,14 @@ public class SleepEntry extends Fragment {
         try{
             NavigationDrawerActivity nav = (NavigationDrawerActivity) getActivity();
             //Change the title of the action bar to reflect the current fragment
-            nav.setActionBarTitleFromFragment(R.string.action_bar_title_mood_parent);
+            nav.setActionBarTitleFromFragment(R.string.action_bar_title_sleep_parent);
             //set activities active fragment to this one
             nav.activeFragment = this;
         } catch (Exception e){}
+
+
+
+
 
     }
 
@@ -76,7 +82,10 @@ public class SleepEntry extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_sleep_entry, container, false);
+        View v = inflater.inflate(R.layout.fragment_sleep_entry, container, false);
+
+
+        return v;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
