@@ -143,7 +143,8 @@ public class GetLoginActivity extends AppCompatActivity implements AsyncResponse
                     {
                         Toast.makeText(getApplicationContext(), "Login Successful!", Toast.LENGTH_LONG).show();
 
-                        LocalAccount.Login(username);
+                        //TODO retrieve JSON web token and pass to local account call
+                        LocalAccount.Login(username, null);
 
                         /*//Create's an "intent" to passback user information with keys username and password.
                         Intent dataPassback = new Intent();

@@ -30,7 +30,9 @@
             android:enabled="true"
             android:textAlignment="center"
             style="@style/AppTheme"
-            android:inputType="none" />
+            android:inputType="none"
+            android:textIsSelectable="false"
+            android:focusable="false"/>
 
         <EditText
             android:layout_width="match_parent"
@@ -61,7 +63,7 @@
             android:inputType="none"
             android:textIsSelectable="false"
             android:enabled="true"
-            android:focusable="false" />
+            android:focusable="false"/>
 
         <EditText
             android:layout_width="match_parent"
@@ -137,7 +139,9 @@
             android:text="@string/login_enter_email_reset"
             android:enabled="true"
             android:textAlignment="center"
-            android:inputType="none" />
+            android:inputType="none"
+            android:textIsSelectable="false"
+            android:focusable="false"/>
 
         <EditText
             style="@style/AppTheme"

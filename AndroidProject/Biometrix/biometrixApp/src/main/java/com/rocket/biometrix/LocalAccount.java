@@ -2,6 +2,11 @@ package com.rocket.biometrix;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.JsonToken;
+
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+
+import org.json.JSONArray;
 
 /**
  * Created by TJ on 1/24/2016.
@@ -27,27 +32,62 @@ public class LocalAccount
     //The username that was most recently used for a preference file
     private String preferenceUsername;
 
+    //A google account for the current sign in. This way it can be accessed from wherever it is needed
+    private static GoogleSignInAccount googleAccount;
+
+    //A token signed by the webserver to ensure the user is currently valid
+    private JsonToken webServerToken;
+
     /**
      * Creates the LocalAccount. Private since this is a singleton
+     * @param jsonToken The token that was passed back by the webserver
      */
-    private LocalAccount()
-    {     }
+    private LocalAccount(JsonToken jsonToken)
+    {
+        webServerToken = jsonToken;
+    }
 
     /**
      * Changes the login information to be the newly logged in user. If another user was logged in,
-     * this changes to the new user
+     * this changes to the new user. This should only be used for regular sign-in, not google sign in
      *
      * @param new_username The username of the newly logged in user.
+     * @param jsonToken The token returned by the server when the login was called.
      */
-    public static LocalAccount Login(String new_username)
+    public static LocalAccount Login(String new_username, JsonToken jsonToken)
     {
-        //Updates the shared preferences and username if the new username is not the same one
+        //Overrides the current username
         username = new_username;
 
+        //Since a username was specified, this is not a google account.
+        googleAccount = null;
 
-        if (_instance == null) {
-            _instance = new LocalAccount();
+        if (_instance == null)
+        {
+            _instance = new LocalAccount(jsonToken);
         }
+
+        return _instance;
+    }
+
+    /**
+     * Logs the user in with their google account instead of with their Biometrix account
+     * @param googleSignInAccount A reference to the google account that will be held
+     * @return A reference to the account that was logged in
+     */
+    public static LocalAccount Login(GoogleSignInAccount googleSignInAccount, JsonToken jsonToken)
+    {
+        //If there is no google account signed in, sign the user in. If the currently logged in account
+        //is the same as the one being logged in, do nothing
+        if (googleAccount == null || !(googleAccount.getIdToken().equals(googleSignInAccount.getIdToken() ) ) )
+        {
+            //Sets the static fields before creating the login
+            googleAccount = googleSignInAccount;
+            username = googleSignInAccount.getEmail();
+
+            _instance = new LocalAccount(jsonToken);
+        }
+
 
         return _instance;
     }

@@ -115,6 +115,13 @@ public class GoogleLoginActivity extends AppCompatActivity implements GoogleApiC
         }
     }
 
+    @Override
+    public void onStop()
+    {
+        super.onStop();
+
+        googleApiClient.disconnect();
+    }
 
     /**
      * Retrieves the result of the sign-in intent
@@ -152,7 +159,8 @@ public class GoogleLoginActivity extends AppCompatActivity implements GoogleApiC
             updateUI(true);
 
             //Logins the google account user with their email address as their "username"
-            LocalAccount.Login(acct.getEmail());
+            //TODO get webserver token and place in call to local account
+            LocalAccount.Login(acct, null);
 
             Toast.makeText(getApplicationContext(), "Google sign in succeeded!", Toast.LENGTH_LONG).show();
         }
