@@ -36,13 +36,13 @@ public class LocalAccount
     private static GoogleSignInAccount googleAccount;
 
     //A token signed by the webserver to ensure the user is currently valid
-    private JsonToken webServerToken;
+    private String webServerToken;
 
     /**
      * Creates the LocalAccount. Private since this is a singleton
      * @param jsonToken The token that was passed back by the webserver
      */
-    private LocalAccount(JsonToken jsonToken)
+    private LocalAccount(String jsonToken)
     {
         webServerToken = jsonToken;
     }
@@ -54,7 +54,7 @@ public class LocalAccount
      * @param new_username The username of the newly logged in user.
      * @param jsonToken The token returned by the server when the login was called.
      */
-    public static LocalAccount Login(String new_username, JsonToken jsonToken)
+    public static LocalAccount Login(String new_username, String jsonToken)
     {
         //Overrides the current username
         username = new_username;
@@ -75,7 +75,7 @@ public class LocalAccount
      * @param googleSignInAccount A reference to the google account that will be held
      * @return A reference to the account that was logged in
      */
-    public static LocalAccount Login(GoogleSignInAccount googleSignInAccount, JsonToken jsonToken)
+    public static LocalAccount Login(GoogleSignInAccount googleSignInAccount, String jsonToken)
     {
         //If there is no google account signed in, sign the user in. If the currently logged in account
         //is the same as the one being logged in, do nothing
@@ -125,6 +125,12 @@ public class LocalAccount
     {
         return username;
     }
+
+    /**
+     * Returns the currently logged in user's token.
+     * @return A string containing the user's token
+     */
+    public String GetToken() { return webServerToken; }
 
     /**
      * Sets up the shared preferences for the current user and context to allow reading or writing

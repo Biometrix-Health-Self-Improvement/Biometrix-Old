@@ -155,12 +155,19 @@ public class DatabaseConnect extends AsyncTask<String, Void, Void>
 
                 String line = null;
 
-                while ((line = bufferedReader.readLine()) != null)
-                {
-                    returnStringBuilder.append(line + "\n");
-                }
+                line = bufferedReader.readLine();
 
-                bufferedReader.close();
+                if (line != null)
+                {
+                    returnStringBuilder.append(line);
+
+                    while ((line = bufferedReader.readLine()) != null)
+                    {
+                        returnStringBuilder.append("\n" + line);
+                    }
+
+                    bufferedReader.close();
+                }
 
             }
             else

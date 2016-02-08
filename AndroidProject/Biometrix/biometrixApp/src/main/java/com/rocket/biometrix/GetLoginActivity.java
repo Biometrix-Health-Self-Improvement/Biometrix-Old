@@ -138,13 +138,13 @@ public class GetLoginActivity extends AppCompatActivity implements AsyncResponse
                 //If the operation succeeded
                 if ((Boolean)jsonObject.get("Verified") )
                 {
-                    //If the json object passes back an email address, that means that it was a reset, not a login
-                    if ( !jsonObject.has("EmailAddress"))
+                    //If the json object passes back a token then it was a login
+                    if ( jsonObject.has("Token"))
                     {
                         Toast.makeText(getApplicationContext(), "Login Successful!", Toast.LENGTH_LONG).show();
 
-                        //TODO retrieve JSON web token and pass to local account call
-                        LocalAccount.Login(username, null);
+                        //Logs the user in with their login token.
+                        LocalAccount.Login(username, jsonObject.getString("Token"));
 
                         /*//Create's an "intent" to passback user information with keys username and password.
                         Intent dataPassback = new Intent();
@@ -155,6 +155,7 @@ public class GetLoginActivity extends AppCompatActivity implements AsyncResponse
                         finish();
                     }
                     else
+                    //Assume it was a password reset
                     {
                         Toast.makeText(getApplicationContext(), "Check your email (and your spam folder) for your reset link", Toast.LENGTH_LONG).show();
                     }
