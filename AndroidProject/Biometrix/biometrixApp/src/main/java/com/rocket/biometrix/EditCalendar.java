@@ -1,6 +1,7 @@
 package com.rocket.biometrix;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,12 +15,12 @@ import android.widget.Toast;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link ExerciseCalendar.OnFragmentInteractionListener} interface
+ * {@link EditCalendar.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link ExerciseCalendar#newInstance} factory method to
+ * Use the {@link EditCalendar#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ExerciseCalendar extends Fragment {
+public class EditCalendar extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -31,7 +32,7 @@ public class ExerciseCalendar extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public ExerciseCalendar() {
+    public EditCalendar() {
         // Required empty public constructor
     }
 
@@ -41,11 +42,11 @@ public class ExerciseCalendar extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment ExerciseCalendar.
+     * @return A new instance of fragment EditCalendar.
      */
     // TODO: Rename and change types and number of parameters
-    public static ExerciseCalendar newInstance(String param1, String param2) {
-        ExerciseCalendar fragment = new ExerciseCalendar();
+    public static EditCalendar newInstance(String param1, String param2) {
+        EditCalendar fragment = new EditCalendar();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -87,7 +88,10 @@ public class ExerciseCalendar extends Fragment {
                 String[] dateSelected = { Integer.toString(year),Integer.toString(month),Integer.toString(dayOfMonth)};
                 String dateSelectedFormatted = ModuleStringHelper.convertCalDateString(dateSelected);
 
-                //Pass to parent activity/fragment then call selectByDate() to fill list view with cursor set
+                LocalDBAdapterExercise dbEx = new LocalDBAdapterExercise(getActivity());
+
+                //Pass selectByDate() cursor to fill ListView
+                Cursor exercise = dbEx.selectByDate(dateSelectedFormatted);
 
 
                 //getActivity() for the context.

@@ -47,7 +47,6 @@ public abstract class LocalDBAdapter extends SQLiteOpenHelper {
             }
         catch(SQLException e){
             e.printStackTrace();
-            //TODO: Error handling, validation...
         }
 
     }
@@ -58,7 +57,7 @@ public abstract class LocalDBAdapter extends SQLiteOpenHelper {
        boolean oldVersionDetected = onUpgradeAlter(db, oldVersion, newVersion);
     }
 
-    //TODO: TEST THIS
+    //TODO: ACTUALLY MAKE THIS QUERY DATERANGE
     //Query out all data related to a range of dates
     protected Cursor selectAllDatabyDateRange(String tablename){
 

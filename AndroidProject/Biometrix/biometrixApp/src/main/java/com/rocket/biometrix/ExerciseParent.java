@@ -13,7 +13,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 public class ExerciseParent extends AppCompatActivity
-                            implements ExerciseCalendar.OnFragmentInteractionListener{
+                            implements EditCalendar.OnFragmentInteractionListener{
 
     static final int ADD_ENTRY_REQUEST = 1;
     String[] usersEntryData = null; //will be filled up by ExerciseEntry on its finish();
@@ -26,7 +26,7 @@ public class ExerciseParent extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         //Fragment for Calendar
-        ExerciseCalendar  eCalendar = new ExerciseCalendar();
+        EditCalendar eCalendar = new EditCalendar();
 
         FragmentManager manager = getSupportFragmentManager();
 
