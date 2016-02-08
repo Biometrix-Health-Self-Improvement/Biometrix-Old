@@ -20,7 +20,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
                 android:text="@string/date_prompt"
-                android:id="@+id/exCreateEntryDateSelect"
+                android:id="@+id/moodCreateEntryDateSelect"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentStart="true" />
         </TableRow>

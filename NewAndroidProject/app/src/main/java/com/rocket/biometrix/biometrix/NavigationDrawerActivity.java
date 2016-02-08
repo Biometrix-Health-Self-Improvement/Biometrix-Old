@@ -11,6 +11,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.transition.Slide;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -201,7 +202,7 @@ public class NavigationDrawerActivity extends AppCompatActivity
                 //TODO: Probably will want to save the entry data. Cast activeFragment to Entry type and call a function to handle it
                 newFragment = new MoodParent();
             } else if (activeFragment.getClass() == SleepEntry.class){
-
+                ((SleepEntry) activeFragment).onDoneClick(v);
                 newFragment = new SleepParent();
             } else if (activeFragment.getClass() == ExerciseEntry.class){
 

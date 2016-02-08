@@ -7,9 +7,14 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import com.rocket.biometrix.biometrix.Database.LocalStorageAccessSleep;
 import com.rocket.biometrix.biometrix.NavigationDrawerActivity;
 import com.rocket.biometrix.biometrix.R;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,6 +29,9 @@ public class SleepParent extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
+    private LinearLayout displayEntriesLayout;
+
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -78,34 +86,68 @@ public class SleepParent extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-//        if (mListener != null) {
-//            mListener.onFragmentInteraction(getResources().getString(R.string.action_bar_title_sleep_parent));
-//        }
-        return inflater.inflate(R.layout.fragment_sleep_parent, container, false);
+        View v = inflater.inflate(R.layout.fragment_sleep_parent, container, false);
+
+        //If the module is not enabled, perform no more setup and exit the activity
+        if (CheckEnabledStatus() ) {
+            displayEntriesLayout = (LinearLayout) v.findViewById(R.id.sleepDisplayEntriesLinearLayout);
+            UpdatePreviousEntries(v);
+        }
+        return v;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-          mListener.onFragmentInteraction(uri);
+    /**
+     * Updates the scroll view with the information contained in the database for sleep.
+     */
+    private void UpdatePreviousEntries(View v)
+    {
+        LocalStorageAccessSleep fileAccess = new LocalStorageAccessSleep(v.getContext(), null, null, 1);
+
+        List<SleepData> sleepDataLinkedlist = fileAccess.GetSleepEntries();
+
+        displayEntriesLayout.removeAllViews();
+
+        for (SleepData data : sleepDataLinkedlist) {
+            TextView textView = new TextView(v.getContext());
+
+            //Creates the string that will be displayed.
+            StringBuilder dispString = new StringBuilder();
+            dispString.append(data.getStartTime());
+            dispString.append(" for ");
+            dispString.append(data.getDuration());
+            dispString.append(". Quality: ");
+            dispString.append(data.getSleepQuality());
+
+            textView.setText(dispString);
+            displayEntriesLayout.addView(textView);
         }
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
+
+    /**
+     * If the sleep module is not enabled for the current user, ask if they would like to re-enable it
+     */
+    protected boolean CheckEnabledStatus()
+    {
+        boolean enabled = true;
+
+/*
+        try
+        {
+            if (!LocalAccount.GetInstance().isSleepEnabled(getApplicationContext()))
+            {
+                enabled = false;
+            }
+        }
+        catch(NullPointerException except)
+        {
+            //Since the default is enabled, if the user is not logged in set it to enabled for now
+            enabled = true;
+        }
+*/
+
+        return enabled;
     }
 
     /**

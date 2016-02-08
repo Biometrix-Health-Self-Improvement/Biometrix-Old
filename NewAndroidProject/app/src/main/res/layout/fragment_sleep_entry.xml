@@ -42,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/sleep_display_hours"
                 android:id="@+id/sleepHoursSleptTextView"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <SeekBar
                 android:layout_width="fill_parent"
@@ -64,7 +64,7 @@
                 android:layout_height="wrap_content"
                 android:text="Minutes slept: "
                 android:id="@+id/sleepMinutesSleptTextView"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+                android:textAppearance="?android:attr/textAppearanceMedium"/>
 
             <SeekBar
                 android:layout_width="fill_parent"
@@ -84,14 +84,14 @@
             android:layout_height="wrap_content"
             android:id="@+id/sleepTimeSleptTextView"
             android:text="@string/sleep_time_slept_base"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_weight="1" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/sleepEndTimeTextView"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="@string/sleep_end_time_base"
             android:layout_weight="1" />
 
@@ -106,7 +106,7 @@
             android:layout_height="wrap_content"
             android:text="@string/sleep_quality"
             android:id="@+id/sleepQualityTextView"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_weight="1" />
 
         <LinearLayout
@@ -135,13 +135,13 @@
             android:layout_height="wrap_content"
             android:text="@string/sleep_gen_health_text"
             android:id="@+id/textView2"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <Spinner
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/sleepGeneralHealthSpinner"
-            android:layout_column="0" />
+             />
 
         <EditText
             android:layout_width="fill_parent"
@@ -150,16 +150,14 @@
             android:layout_weight="1"
             android:hint="@string/sleep_comment_hint" />
 
+
+
         <Button
-            style="@color/colorButtonBackground"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="DONE"
+            style="@style/done_button"
             android:id="@+id/submitSleepButton"
-            android:layout_marginBottom="86dp"
-            android:background="@color/colorButtonBackground"
-            android:onClick="onDoneClick"
-            android:layout_weight="1" />
+            android:onClick="EntryDoneOnClick"
+            />
+
     </LinearLayout>
 
 </RelativeLayout>

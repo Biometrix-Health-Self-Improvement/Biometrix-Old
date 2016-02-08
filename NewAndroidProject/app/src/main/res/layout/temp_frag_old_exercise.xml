@@ -82,7 +82,7 @@
     <Button
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:text="@string/ex_ok"
+
         android:id="@+id/ex_b_done"
         android:textAlignment="center"
         android:shadowColor="#00ffff"

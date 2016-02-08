@@ -5,7 +5,6 @@
     <string name="newEntryButton">+ Add Exercise</string>
 
     <!--Add New Entry Styling-->
-    <string name="ex_ok">D O N E</string>
     <string name="ex_time">Minutes:</string>
     <string name="ex_prompt">How many minutes Exercised? :)</string>
     <string name="ex_ex_name">Enter Exercise Name</string>
@@ -22,8 +21,8 @@
         <item>120</item>
         <item>180</item>
     </string-array>
-    <string name="ex_reps">REPS / LAPS</string>
-    <string name="ex_weight">WEIGHT / INTENSITY</string>
+    <string name="ex_reps">Reps/Laps: </string>
+    <string name="ex_weight">Weight/Intensity: </string>
     <string name="ex_plan">Add To Plan?</string>
     <string name="ex_update">Logging Exercise at This Time:</string>
     <string name="ex_tp">Time:</string>
