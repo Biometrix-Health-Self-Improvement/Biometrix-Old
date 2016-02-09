@@ -102,7 +102,7 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
     <string name="section_format">Hello World from section: %1$d</string>
-<<<<<<< HEAD
+
     <string-array name="Meal_Type">
         <item>Breakfast</item>
         <item>Lunch</item>
@@ -115,10 +115,7 @@
         <item>Tablespoons</item>
         <item>Cups</item>
     </string-array>
-=======
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
->>>>>>> 4.6-Edit-Past-Entries-+-Test-Driven-Development-Framework
 </resources>
