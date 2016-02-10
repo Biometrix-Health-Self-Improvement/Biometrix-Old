@@ -205,7 +205,7 @@ public class NavigationDrawerActivity extends AppCompatActivity
                 ((SleepEntry) activeFragment).onDoneClick(v);
                 newFragment = new SleepParent();
             } else if (activeFragment.getClass() == ExerciseEntry.class){
-
+                ((ExerciseEntry) activeFragment).onDoneClick(v);
                 newFragment = new ExerciseParent();
             } else if (activeFragment.getClass() == DietEntry.class){
 

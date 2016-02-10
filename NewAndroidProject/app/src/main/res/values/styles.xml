@@ -36,7 +36,7 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">1dp</item>
         <item name="android:background">@color/colorBackgroundDark</item>
-        <item name="android:layout_marginBottom">1dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
         <item name="android:layout_marginTop">6dp</item>
     </style>
 
@@ -46,4 +46,18 @@
         <item name="android:background">@color/colorAccent</item>
         <item name="android:layout_margin">2dp</item>
     </style>
+
+
+    <style name="scrollview_parent_list" parent="@android:style/Widget.ScrollView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:fillViewport">false</item>
+    </style>
+
+
+
+
+
 </resources>

@@ -6,14 +6,17 @@ package com.rocket.biometrix.biometrix.Common;
 
 import android.app.Activity;
 import android.content.Context;
+import android.view.View;
 import android.widget.EditText;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.TimeZone;
 
-public class StringDateTimeConverter //TODO: Add more functionality, convert from string to date/time, convert date/time to string in format we want
+public class StringDateTimeConverter
 {
     //Function given an <<EditText>> resource ID (R.id.ex_et_weight) and Activity, e.g. ExerciseEntry.this will return its text contents as a string.
     //Soft error handling will just mess up the returned string if you gave a bad id, not crash the app.
@@ -51,6 +54,23 @@ public class StringDateTimeConverter //TODO: Add more functionality, convert fro
         return time;
     }
 
+    public static String GetStringFromEditText(int id, View act) {
+        String endResult = "ERROR in GetStringFromEditText: Resource ID does not exist";
+        //0 is always an invalid resource. And if a view can't be found by its ID, findViewById returns null
+        //http://developer.android.com/reference/android/content/res/Resources.html#getIdentifier%28java.lang.String,%20java.lang.String,%20java.lang.String%29
+        //http://developer.android.com/reference/android/app/Activity.html#findViewById%28int%29
+        if (id != 0) {
+            if (act.findViewById(id) != null)
+                try {
+                    final EditText et = (EditText) act.findViewById(id);
+                    endResult = et.getText().toString();
+                }//end try
+                catch (IllegalArgumentException | ClassCastException exceptionName) {
+                    endResult = "ERROR in GetStringFromEditText: try block";
+                }
+        }
+        return endResult;
+    }
 
     //String cleaner, just removes a number of characters from the front of the string.
     //http://docs.oracle.com/javase/7/docs/api/java/lang/StringBuffer.html#delete%28int,%20int%29

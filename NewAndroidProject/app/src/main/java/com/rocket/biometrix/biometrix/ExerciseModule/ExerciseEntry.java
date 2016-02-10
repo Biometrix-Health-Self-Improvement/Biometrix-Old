@@ -1,17 +1,29 @@
 package com.rocket.biometrix.biometrix.ExerciseModule;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.rocket.biometrix.biometrix.Common.*;
+import com.rocket.biometrix.biometrix.Database.LocalStorageAccessSleep;
 import com.rocket.biometrix.biometrix.NavigationDrawerActivity;
 import com.rocket.biometrix.biometrix.R;
+import com.rocket.biometrix.biometrix.SleepModule.SleepData;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,14 +34,29 @@ import com.rocket.biometrix.biometrix.R;
  * create an instance of this fragment.
  */
 public class ExerciseEntry extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    public static TextView timeTV; //Used by the DateTimePopulateTextView in the onCreate event
+    public static TextView dateTV;
+
+    String minSelected; //string to save minutes exercised spinner result
+    String typeSelected; //string to save type of exercise selected in the radio 'bubble' buttons
+
+    Spinner minuteSpinner;
+    boolean toasted = false; //Used to display encouraging messages ONCE in minuteSpinner.
+    //To avoid 'hard coded' strings...These are implemented in the minuteSpinners listener in the onCreate event
+    String lowestSpinnerValueThreshold = "5"; //5 minutes
+    String lowSpinnerValueThreshold = "10"; //10 minutes (idea is to encourage user to exercise more but still celebrate their 'baby' gains)
+    String lowSpinnerMessage = "Keep it up :)"; //The encouraging message
+    String highSpinnerMessage = "Nice!"; //The BEST message users strive for
+
+    String[] exerciseEntryData = {}; //String array that will store all user entered data, used in bundles and SQLite insert
+
 
     private OnFragmentInteractionListener mListener;
 
@@ -45,7 +72,6 @@ public class ExerciseEntry extends Fragment {
      * @param param2 Parameter 2.
      * @return A new instance of fragment ExerciseEntry.
      */
-    // TODO: Rename and change types and number of parameters
     public static ExerciseEntry newInstance(String param1, String param2) {
         ExerciseEntry fragment = new ExerciseEntry();
         Bundle args = new Bundle();
@@ -72,44 +98,207 @@ public class ExerciseEntry extends Fragment {
 
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_exercise_entry, container, false);
+        final View v = inflater.inflate(R.layout.fragment_exercise_entry, container, false);
 
 
-        Spinner minuteSpinner = (Spinner) v.findViewById(R.id.ex_min_spinner);
+        minuteSpinner = (Spinner) v.findViewById(R.id.ex_min_spinner);
         //Array adapter from exer_strings resource
         ArrayAdapter minSpin = ArrayAdapter.createFromResource(
                 getActivity(), R.array.ex_min_array, android.R.layout.simple_spinner_item);
 
         minuteSpinner.setAdapter(minSpin);
+
+        //Listener for selected minute taps and getting the tapped minutes as strings.
+        minuteSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            protected Adapter initializedAdapter = null;
+
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                if (initializedAdapter != parentView.getAdapter()) {
+                    initializedAdapter = parentView.getAdapter();
+                    return;
+                }
+                //Set string
+                minSelected = parentView.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // defaulted to 5 min already.
+            }
+        });
+
+
+        RadioGroup rg = (RadioGroup) v.findViewById(R.id.ex_radioGroup);
+        //When a bubble is poked, update a string to match the bubble poked.
+        rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId) {
+                    case R.id.ex_rb_a:
+                        //Extract CharSequences from UI and convert them to string array
+                        final RadioButton ETa1 = (RadioButton) v.findViewById(R.id.ex_rb_a);
+                        typeSelected = ETa1.getText().toString();
+                        break;
+
+                    case R.id.ex_rb_b:
+                        final RadioButton ETa2 = (RadioButton) v.findViewById(R.id.ex_rb_b);
+                        typeSelected = ETa2.getText().toString();
+                        break;
+
+                    case R.id.ex_rb_c:
+                        final RadioButton ETa3 = (RadioButton) v.findViewById(R.id.ex_rb_c);
+                        typeSelected = ETa3.getText().toString();
+                        break;
+
+                    case R.id.ex_rb_d:
+                        final RadioButton ETa4 = (RadioButton) v.findViewById(R.id.ex_rb_d);
+                        typeSelected = ETa4.getText().toString();
+                        break;
+
+                }
+            }
+        });
+
+
+        //Linking contexts likes non-null variables.
+        timeTV = (TextView) v.findViewById(R.id.ex_tv_time);
+        dateTV = (TextView) v.findViewById(R.id.ex_tv_date);
+
+        //Slick calls to fill date and time textviews.
+        DateTimeSelectorPopulateTextView DTPOWAH = new DateTimeSelectorPopulateTextView(getActivity(), v,R.id.ex_tv_date, R.id.ex_tv_time);
+        DTPOWAH.Populate(); //Change the text
+
+
+
+        //TODO: Change the way the data is stored. The way TJ did it still works with fragments.
+        /**Done click event saves entered data to string array
+         *Bundles string array for transport across activities
+         * Receives bundle from parent, changes the data inside and sends it back to parent with error checking
+         *Saves entry to SQLlite DB using LocalStorageAccess
+         *And, Adds this exercise to the 'plan' if it needs to be added
+         *Lastly, it closes up the entry activity with finish() which will activate the onActivityResult() in ExerciseParent.
+         * */
+/*
+        Button ExerciseEntryDone = (Button) v.findViewById(R.id.ex_b_done);
+        ExerciseEntryDone.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                //Filling a string that holds title
+                String titleString = StringDateTimeConverter.GetStringFromEditText(R.id.ex_title, v);
+
+                //Filling date and time strings for bundle's string array
+                String dateString = dateTV.getText().toString();
+                String timeString = timeTV.getText().toString();
+
+                //Cleaning date and time strings with helper class
+                dateString = StringDateTimeConverter.fixDate(dateString);
+                timeString = StringDateTimeConverter.fixTime(timeString);
+
+                //Filling reps/laps string
+                String repsString = StringDateTimeConverter.GetStringFromEditText(R.id.ex_et_reps, v);
+
+                //Filling weight/intensity string from its editText found @content_exercise_entry.xml
+                String weightString = StringDateTimeConverter.GetStringFromEditText(R.id.ex_et_weight, v);
+
+                //Filling notes string
+                String notesString = StringDateTimeConverter.GetStringFromEditText(R.id.ex_notes, v);
+
+                //Make string array to hold all the strings extracted from the user's input on this entry activity
+                //{TITLE, TYPE, MINUTES, REPS, LAPS, WEIGHT, INTY, NOTES, DATE, TIME}; //No distinction between reps and laps, weight and intensity.
+                exerciseEntryData = new String[]{titleString, typeSelected, minSelected, repsString, repsString, weightString, weightString, notesString, dateString, timeString};
+
+                //https://developer.android.com/reference/android/os/Bundle.html
+                //Put string array that has all the entries data points in it into a Bundle. This bundle is for future extensibility it is NOT for the parent class.
+                Bundle exerciseEntryBundle = new Bundle();
+                exerciseEntryBundle.putStringArray("exEntBundKey", exerciseEntryData);
+
+
+                //Getting PARENT bundle.
+                Bundle parentExtras = getActivity().getIntent().getExtras();
+                String[] usersEntryData = parentExtras.getStringArray("parentArray"); //Don't worry this is supposed to be redundant for extendability.
+                //Here is where the parent bundle could be used (to auto-populate an entry for editing for example) For now I will only set the parent's string array equal to exerciseEntryData.
+                usersEntryData = exerciseEntryData;
+
+                //Get PARENT intent for setResult()
+                Intent backtoParent = getActivity().getIntent();
+
+                //Another bundle specifically for giving data and results back to the PARENT
+                Bundle backtoParentBund = new Bundle();
+                backtoParentBund.putStringArray("childKey", usersEntryData);
+
+
+                backtoParent.putExtra("childKey", backtoParentBund);
+                //HERE is where extensive error checking could be done on the user's entry (IE if it is all blank don't save) but for now... if the key matched say it went OK
+                getActivity().setResult(RESULT_OK, backtoParent);
+
+
+                Context context = v.getContext();
+                //Pull keys from LSA Exercise
+                LocalDBAdapterExercise dbEx = new LocalDBAdapterExercise(context);
+
+                //You don't have to keep strings in the same order across classes, I just did to make the code easier.
+                //{TITLE, TYPE, MINUTES, REPS, LAPS, WEIGHT, INTY, NOTES, DATE, TIME};
+                String[] columnNames = dbEx.getColumns();
+
+                //Making sure I have data for each column (even if null or empty, note that this is NOT required, you can insert columns individually if you wish.) @see putNull
+                if (columnNames.length == exerciseEntryData.length) {
+                    ContentValues rowToBeInserted = new ContentValues();
+                    int dataIndex = 0;
+                    for (String column : columnNames) {
+                        //Insert column name ripped from LSA child class, and the user's entry data we gathered above
+                        rowToBeInserted.put(column, exerciseEntryData[dataIndex]);
+                        dataIndex++;
+                    }
+                    //Call insert method
+                    dbEx.insertFromContentValues(rowToBeInserted);
+                }
+
+                //Kill this thread, User will still have exercise main page open.
+                finish();
+
+            }
+        }); //end addNewEntry on click listener
+*/
+
+
+
         return v;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
+    /**
+     * Stores the information that was gathered if it is valid and then closes the activity.
+     * @param view The button that made the call to exit the activity
+     */
+    public void onDoneClick(View view)
+    {
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
+
+    /*
+        LocalStorageAccessSleep fileAccess = new LocalStorageAccessSleep(view.getContext(), null, null, 1);
+
+        String dateText = startDateTextView.getText().toString();
+        String timeText = startTimeTextView.getText().toString();
+        String duration = sleptTimeTextView.getText().toString();
+
+        dateText = dateText.substring(dateText.indexOf(",") + 1).trim();
+        timeText = timeText.substring(timeText.indexOf(":") + 2).trim();
+        duration = duration.substring(duration.indexOf(":") + 2).trim();
+
+        int quality = qualitySeekBar.getProgress();
+
+        String notes = noteTextView.getText().toString();
+        String status = generalHealthSpinner.getSelectedItem().toString();
+
+
+        SleepData sleepData = new SleepData(dateText + " " + timeText, duration, quality, status, notes);
+
+        fileAccess.AddSleepEntry(sleepData);
+
+       */
     }
 
     /**
@@ -123,7 +312,6 @@ public class ExerciseEntry extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
 }

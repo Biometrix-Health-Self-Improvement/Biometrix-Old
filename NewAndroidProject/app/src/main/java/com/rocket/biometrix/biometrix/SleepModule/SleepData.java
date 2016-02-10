@@ -1,6 +1,6 @@
 package com.rocket.biometrix.biometrix.SleepModule;
 
-/**         TODO: Test Class copied over from previous project
+/**
  * Created by TJ on 11/30/2015.
  */
 public class SleepData

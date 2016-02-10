@@ -5,6 +5,7 @@ import android.app.TimePickerDialog;
 import android.app.Activity;
 import android.view.View;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -59,8 +60,6 @@ public class DateTimeSelectorPopulateTextView {
         setDate(current.get(Calendar.YEAR), current.get(Calendar.MONTH), current.get(Calendar.DAY_OF_MONTH));
         setTime(current.get(Calendar.HOUR_OF_DAY), current.get(Calendar.MINUTE));
     }
-
-
 
     //Sets the default date and time values on the activity and sets the onClickListener for the time and date views
     //dateID is TextView id you want to have filled.
