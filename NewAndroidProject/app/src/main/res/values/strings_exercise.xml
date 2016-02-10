@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--Exercise Module Strings-->
+    <string name="newEntryButton">+ Add Exercise</string>
+
+    <!--Add New Entry Styling-->
+    <string name="ex_time">Minutes:</string>
+    <string name="ex_prompt">How many minutes Exercised? :)</string>
+    <string name="ex_ex_name">Enter Exercise Name</string>
+    <string-array name="ex_min_array">
+        <item>5</item>
+        <item>10</item>
+        <item>15</item>
+        <item>30</item>
+        <item>45</item>
+        <item>60</item>
+        <item>75</item>
+        <item>90</item>
+        <item>105</item>
+        <item>120</item>
+        <item>180</item>
+    </string-array>
+    <string name="ex_reps">Reps/Laps: </string>
+    <string name="ex_weight">Weight/Intensity: </string>
+    <string name="ex_plan">Add To Plan?</string>
+    <string name="ex_update">Logging Exercise at This Time:</string>
+    <string name="ex_tp">Time:</string>
+    <string name="ex_dp">Date:</string>
+    <string name="ex_date"> </string>
+    <string name="ex_rb_a_t">Light</string>
+    <string name="ex_rb_b_t">Cardio</string>
+    <string name="ex_rb_c_t">Strength</string>
+    <string name="ex_rb_d_t">Heavy</string>
+
+    <!--Add new Entry's User Input-->
+    <string name="ex_et_title"> </string>
+    <string name="ex_et_notes"> </string>
+    <string name="ex_et_reps"> </string>
+    <string name="ex_et_weight"> </string>
+
+</resources>
