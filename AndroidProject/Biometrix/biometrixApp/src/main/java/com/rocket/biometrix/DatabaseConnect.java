@@ -7,10 +7,14 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.StringWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+
+import javax.net.ssl.HttpsURLConnection;
 
 
 /**
@@ -105,7 +109,7 @@ public class DatabaseConnect extends AsyncTask<String, Void, Void>
 
 
         //The http url connection that will be used to talk to the webserver
-        HttpURLConnection urlConnection = null;
+        HttpsURLConnection urlConnection = null;
         try
         {
             //The stream to pass data to the webserver
@@ -113,10 +117,10 @@ public class DatabaseConnect extends AsyncTask<String, Void, Void>
 
             //The stream to read responses from the server
             DataInputStream webInput;
-            URL url = new URL("http://www.biometrixapp.com/do_operation.php");
+            URL url = new URL("https://www.biometrixapp.com/do_operation.php");
 
             //Opens the connection to the webserver
-            urlConnection = (HttpURLConnection) url.openConnection();
+            urlConnection = (HttpsURLConnection) url.openConnection();
 
             //Miscellaneous settings for the connection
             urlConnection.setDoInput(true);
@@ -124,7 +128,9 @@ public class DatabaseConnect extends AsyncTask<String, Void, Void>
             urlConnection.setConnectTimeout(10000);
             urlConnection.setChunkedStreamingMode(0);
             urlConnection.setUseCaches(false);
-            urlConnection.setRequestProperty("Host", "biometrixapp.com");
+
+            //Apparently this breaks https connections, but is needed for http ones.
+            /*urlConnection.setRequestProperty("Host", "biometrixapp.com");*/
 
             //Sets the type of content passed to be json
             urlConnection.setRequestProperty("Content-Type", "application/json");
@@ -135,12 +141,13 @@ public class DatabaseConnect extends AsyncTask<String, Void, Void>
             webOutput.flush();
             webOutput.close();
 
-            //Starts the actual HTTP connection
+            //Starts the actual HTTPS connection
             urlConnection.connect();
 
             //Ensures that the webserver was actually able to be accessed
-            int HttpResult = urlConnection.getResponseCode();
-            if(HttpResult ==HttpURLConnection.HTTP_OK)
+            int HttpsResult = urlConnection.getResponseCode();
+
+            if(HttpsResult == HttpsURLConnection.HTTP_OK)
             {
                 //Reads in all of the input from the stream to the string builder
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(
@@ -158,7 +165,21 @@ public class DatabaseConnect extends AsyncTask<String, Void, Void>
             }
             else
             {
-                returnResult = DatabaseConnectionTypes.CONNECTION_FAIL;
+                //Debug info
+                InputStream inputStream = urlConnection.getErrorStream();
+
+                BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+                StringBuilder debugInfo = new StringBuilder();
+                String line;
+                while ((line = reader.readLine()) != null)
+                {
+                    debugInfo.append(line);
+                }
+                reader.close();
+
+                inputStream.close();
+
+                returnResult = debugInfo + DatabaseConnectionTypes.CONNECTION_FAIL;
             }
         }
         catch (java.io.IOException except)

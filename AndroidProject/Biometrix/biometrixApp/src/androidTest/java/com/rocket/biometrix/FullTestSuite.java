@@ -7,6 +7,7 @@ import junit.framework.TestSuite;
 
 /**
  * Created by JP on 1/21/2016.
+ *
  */
 public class FullTestSuite extends TestSuite {
     public static Test suite(){
@@ -19,3 +20,15 @@ public class FullTestSuite extends TestSuite {
     }
 
 }
+
+
+
+/* within android hash
+*testOptions.unitTests.all {
+    testLogging {
+        events 'passed', 'skipped', 'failed', 'standardOut', 'standardError'
+        outputs.upToDateWhen { false }
+        showStandardStreams = true
+    }
+}
+ */
