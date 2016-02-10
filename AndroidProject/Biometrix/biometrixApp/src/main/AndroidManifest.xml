@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.rocket.biometrix" >
+    package="com.rocket.biometrix">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -9,7 +9,7 @@
         android:icon="@drawable/sproutsmaller"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
             android:name=".NavigationDrawer"
             android:label="@string/title_activity_navigation_drawer"
@@ -17,36 +17,31 @@
         <activity
             android:name=".HomeScreen"
             android:label="@string/title_activity_home_screen"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
         <activity
             android:name=".ExerciseParent"
             android:label="@string/title_activity_exercise_parent"
             android:parentActivityName=".HomeScreen"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.rocket.biometrix.HomeScreen" />
         </activity>
-
         <activity
             android:name=".ExerciseEntry"
             android:label="@string/title_activity_exercise_entry"
             android:parentActivityName=".ExerciseParent"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.rocket.biometrix.ExerciseParent" />
         </activity>
-
-
         <activity
             android:name=".CreateLoginActivity"
             android:parentActivityName=".HomeScreen"
@@ -55,35 +50,24 @@
             android:name=".GetLoginActivity"
             android:parentActivityName=".HomeScreen"
             android:theme="@style/AppTheme.NoActionBar" />
-
-
         <activity
             android:name=".SleepParent"
-            android:parentActivityName=".HomeScreen"
-            android:label="@string/title_activity_sleep_parent"/>
+            android:label="@string/title_activity_sleep_parent"
+            android:parentActivityName=".HomeScreen" />
         <activity
             android:name=".SleepEntry"
-            android:parentActivityName=".SleepParent"
-            android:label="@string/title_activity_sleep_entry"/>
-
-
+            android:label="@string/title_activity_sleep_entry"
+            android:parentActivityName=".SleepParent" />
         <activity
             android:name=".MoodParent"
             android:label="@string/title_activity_mood_parent"
             android:parentActivityName=".HomeScreen"
-            android:theme="@style/AppTheme.NoActionBar"  >
-        </activity>
-
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".MoodEntry"
             android:label="@string/title_activity_mood_entry"
             android:parentActivityName=".MoodParent"
-            android:theme="@style/AppTheme.NoActionBar"  >
-        </activity>
-
-
-
-
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".DietParent"
             android:label="@string/title_activity_diet_parent"
@@ -92,10 +76,18 @@
         <activity
             android:name=".DietEntry"
             android:label="@string/title_activity_diet_entry"
+            android:parentActivityName=".DietParent"
             android:theme="@style/AppTheme.NoActionBar" />
-
-
-
+        <activity 
+            android:name=".MedicationEntry"
+            android:label="@string/title_activity_medication_entry"
+            android:parentActivityName=".MedicationParent"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity 
+            android:name=".MedicationParent"
+            android:label="@string/title_activity_medication_parent"
+            android:parentActivityName=".HomeScreen"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

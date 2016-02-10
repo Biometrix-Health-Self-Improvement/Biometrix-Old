@@ -51,7 +51,7 @@ public class HomeScreen extends AppCompatActivity
         medications_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent Launch_Medications = new Intent(HomeScreen.this, HomeScreen.class);
+                Intent Launch_Medications = new Intent(HomeScreen.this, MedicationParent.class);
                 startActivity(Launch_Medications);
             }
         });
