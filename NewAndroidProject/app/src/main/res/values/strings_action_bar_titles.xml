@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="action_bar_title_home_screen">BioMetrix</string>
+
+    <string name="action_bar_title_exercise_parent">BioMetrix Exercise Tracker</string>
+    <string name="action_bar_title_exercise_entry">BioMetrix Add Exercise Entry</string>
+
+    <string name="action_bar_title_mood_parent">BioMetrix Mood Tracker</string>
+    <string name="action_bar_title_mood_entry">BioMetrix Add Mood Entry</string>
+
+    <string name="action_bar_title_diet_parent">BioMetrix Diet Tracker</string>
+    <string name="action_bar_title_diet_entry">BioMetrix Add Diet Entry</string>
+
+    <string name="action_bar_title_medication_parent">BioMetrix Medication Tracker</string>
+    <string name="action_bar_title_medication_entry">BioMetrix Add Medication</string>
+
+    <string name="action_bar_title_sleep_parent">BioMetrix Sleep Tracker</string>
+    <string name="action_bar_title_sleep_entry">BioMetrix Add Sleep Entry</string>
+
+    <string name="action_bar_title_login">BioMetrix Login</string>
+    <string name="action_bar_title_create_login">BioMetrix Create Login</string>
+
+
+</resources>

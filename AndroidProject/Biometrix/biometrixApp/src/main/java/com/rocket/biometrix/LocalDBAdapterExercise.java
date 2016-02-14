@@ -2,13 +2,14 @@ package com.rocket.biometrix;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 
 /**
  * Created by JP on 1/10/2016.
- * The exercise module's basic implementation of LocalDBAdapter
+ * The exercise module's implementation of LocalDBAdapter
  */
 public class LocalDBAdapterExercise extends LocalDBAdapter {
 
@@ -133,9 +134,19 @@ public class LocalDBAdapterExercise extends LocalDBAdapter {
         safeInsert(TABLE_NAME, columns[1], dataToBeInserted );
     }//end insert
 
+    //Notice all I had to do was put the TABLE_NAME constant (or gettablename method) defined at the top of this class.
+    @Override
+    public Cursor selectAllDatabyDateRange(String tablename) {
+        return super.selectAllDatabyDateRange(TABLE_NAME);
+    }
+
+
+    public Cursor selectByDate(String dayte){
+        //Module specific error checking could go here.
+        return super.selectByDate(dayte, TABLE_NAME, DATE);
+    }
+
     //TODO: Pull from database the exercise table.
 
-
-//context.deleteDatabase(DATABASE_NAME);
 
 }

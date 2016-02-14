@@ -6,6 +6,17 @@
 
     <string name="action_settings">Settings</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="create_entry_string">Create Entry</string>
+    <string name="done_button">Done</string>
+
+    <string name="date_prompt">Date: \u0020</string>
+    <string name="time_prompt">Time: \u0020</string>
+
+
+
+    <string name="login_username_string">Username</string>
+    <string name="login_email_string">Email</string>
+    <string name="login_password_string">Password</string>
+    <string name="login_confirm_password_string">Confirm Password</string>
+
 </resources>

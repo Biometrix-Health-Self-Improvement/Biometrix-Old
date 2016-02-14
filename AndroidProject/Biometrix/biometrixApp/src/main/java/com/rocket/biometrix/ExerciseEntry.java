@@ -170,6 +170,7 @@ public class ExerciseEntry extends AppCompatActivity implements AdapterView.OnIt
                 //Getting PARENT bundle.
                 Bundle parentExtras = getIntent().getExtras();
                 String[] usersEntryData = parentExtras.getStringArray("parentArray"); //Don't worry this is supposed to be redundant for extendability.
+
                 //Here is where the parent bundle could be used (to auto-populate an entry for editing for example) For now I will only set the parent's string array equal to exerciseEntryData.
                 usersEntryData = exerciseEntryData;
 

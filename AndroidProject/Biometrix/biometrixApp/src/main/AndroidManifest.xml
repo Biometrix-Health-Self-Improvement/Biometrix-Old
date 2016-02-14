@@ -81,7 +81,19 @@
         <activity
             android:name=".DietEntry"
             android:label="@string/title_activity_diet_entry"
+            android:parentActivityName=".DietParent"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity 
+            android:name=".MedicationEntry"
+            android:label="@string/title_activity_medication_entry"
+            android:parentActivityName=".MedicationParent"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity 
+            android:name=".MedicationParent"
+            android:label="@string/title_activity_medication_parent"
+            android:parentActivityName=".HomeScreen"
+            android:theme="@style/AppTheme.NoActionBar" />
+<<<<<<< HEAD
         <activity
             android:name=".GoogleLoginActivity"
             android:label="@string/title_activity_google_login"
@@ -91,6 +103,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.rocket.biometrix.HomeScreen" />
         </activity>
+=======
+>>>>>>> refs/remotes/origin/master
     </application>
 
 </manifest>

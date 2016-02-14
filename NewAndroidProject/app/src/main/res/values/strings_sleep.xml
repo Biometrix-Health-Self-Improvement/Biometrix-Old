@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sleep_end_time_base">End: \u0020 </string>
+    <string name="sleep_time_slept_base">Time Slept: \u0020 </string>
+
+    <string name="new_sleep_entry_text">+ New Sleep Entry</string>
+    <string name="sleep_file_name">SleepEntries.txt</string>
+    <string name="sleep_comment_hint">Enter notes here...</string>
+    <string name="sleep_display_hours">Hours slept: \u0020</string>
+
+    <string name="sleep_gen_health_text">Choose Gen Health</string>
+
+    <string name="sleep_quality">Sleep Quality (1 to 10)</string>
+    <string name="disable_sleep_string">Disable module?</string>
+    <string-array name="sleep_gen_health_array">
+        <item>"Healthy"</item>
+        <item>"Sick"</item>
+        <item>"Injured"</item>
+    </string-array>
+</resources>
