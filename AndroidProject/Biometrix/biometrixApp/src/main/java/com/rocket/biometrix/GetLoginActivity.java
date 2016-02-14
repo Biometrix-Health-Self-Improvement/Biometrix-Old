@@ -13,8 +13,8 @@ import org.json.JSONObject;
 /**
  * The activity to retrieve a user's login information (username and password) and verify it against
  * the database. It implements AsyncResponse to allow a response from an activity that is called
- * asynchronously, OnConnectionFailedListener to allow a message to be displayed if Google Services
- * cannot be contacted, and
+ * asynchronously, and OnConnectionFailedListener to allow a message to be displayed if Google Services
+ * cannot be contacted
  */
 public class GetLoginActivity extends AppCompatActivity implements AsyncResponse
 {
@@ -135,8 +135,12 @@ public class GetLoginActivity extends AppCompatActivity implements AsyncResponse
         {
             try
             {
+                if (jsonObject.has("Error"))
+                {
+                    Toast.makeText(getApplicationContext(), jsonObject.getString("Error"), Toast.LENGTH_LONG).show();
+                }
                 //If the operation succeeded
-                if ((Boolean)jsonObject.get("Verified") )
+                else if ((Boolean)jsonObject.get("Verified") )
                 {
                     //If the json object passes back a token then it was a login
                     if ( jsonObject.has("Token"))

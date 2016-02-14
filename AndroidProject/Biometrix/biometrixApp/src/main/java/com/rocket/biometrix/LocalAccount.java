@@ -62,10 +62,7 @@ public class LocalAccount
         //Since a username was specified, this is not a google account.
         googleAccount = null;
 
-        if (_instance == null)
-        {
-            _instance = new LocalAccount(jsonToken);
-        }
+        _instance = new LocalAccount(jsonToken);
 
         return _instance;
     }
@@ -83,7 +80,7 @@ public class LocalAccount
         {
             //Sets the static fields before creating the login
             googleAccount = googleSignInAccount;
-            username = googleSignInAccount.getEmail();
+            username = googleSignInAccount.getId();
 
             _instance = new LocalAccount(jsonToken);
         }

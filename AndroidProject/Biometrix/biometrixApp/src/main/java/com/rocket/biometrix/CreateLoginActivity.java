@@ -129,10 +129,14 @@ public class CreateLoginActivity extends AppCompatActivity implements AsyncRespo
         {
             try
             {
-                //If the operation succeeded
-                if ((Boolean)jsonObject.get("Verified") )
+                if (jsonObject.has("Error"))
                 {
-                    Toast.makeText(getApplicationContext(), "User created!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), jsonObject.getString("Error"), Toast.LENGTH_LONG).show();
+                }
+                //If the operation succeeded
+                else if ((Boolean)jsonObject.get("Verified") )
+                {
+                    Toast.makeText(getApplicationContext(), "You now have to verify your email address. Please check your email (and spam folder) for a link", Toast.LENGTH_LONG).show();
 
                     /*//Create's an "intent" to passback user information with keys username and password.
                     Intent dataPassback = new Intent();
@@ -140,7 +144,7 @@ public class CreateLoginActivity extends AppCompatActivity implements AsyncRespo
                     dataPassback.putExtra("password", password);*/
 
                     //Logs the user in with their username and a verification token
-                    LocalAccount.Login(username, jsonObject.getString("Token"));
+                    //LocalAccount.Login(username, jsonObject.getString("Token"));
                     setResult(RESULT_OK);
                     finish();
                 }

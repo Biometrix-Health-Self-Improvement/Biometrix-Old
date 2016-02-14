@@ -13,10 +13,10 @@ public final class DatabaseConnectionTypes
     public static final String LOGIN_CREATE = "Create User Login";
     public static final String LOGIN_DELETE = "Delete User Login";
     public static final String LOGIN_RESET = "Reset User Password";
+    public static final String GOOGLE_TOKEN = "Verify Google Token";
 
     public static final String CONNECTION_FAIL = "Unable to connect to database";
-    public static final String JSON_PARSE_FAIL = "Unable to parse the input JSON";
-    public static final String INCORRECT_CREDENTIALS = "Username or password was incorrect";
+
 
     private DatabaseConnectionTypes() {}
 }

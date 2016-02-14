@@ -95,6 +95,10 @@ public class DatabaseConnect extends AsyncTask<String, Void, Void>
                     jsonParam.put("Username", params[1]);
                     jsonParam.put("Email", params[2]);
                     break;
+                case DatabaseConnectionTypes.GOOGLE_TOKEN:
+                    db_operation = "GoogleLogin";
+                    jsonParam.put("GoogleToken", params[1]);
+                    break;
                 default:
                     db_operation = "";
                     break;

@@ -22,23 +22,28 @@ import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 /**
  * A separate activity for Google login since there are specific operations that can be done on it
  *
  * Created 2/2/2016 by Troy Riblett
  */
 public class GoogleLoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener,
-        View.OnClickListener
+        View.OnClickListener, AsyncResponse
 {
     //Google account variables
     //A reference to the Google API
     private GoogleApiClient googleApiClient;
-    //A status bar in essence
+    //A loading symbol
     private ProgressDialog progressDialog;
     //A tag that is used in debug logging
     private static final String TAG = "GoogleLoginActivity";
     //The number that corresponds to the google API "sign-in" activity
     private static final int RC_SIGN_IN = 9001;
+    //A reference to the user's google account
+    private GoogleSignInAccount acct;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -59,6 +64,7 @@ public class GoogleLoginActivity extends AppCompatActivity implements GoogleApiC
         //Creates the google sign in object with requests for email
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
+                .requestIdToken("212262655567-0na15tnrbol7g1ukjhqh98vit1je64a4.apps.googleusercontent.com")
                 .build();
 
         // Build a GoogleApiClient with access to the Google Sign-In API and the
@@ -154,15 +160,15 @@ public class GoogleLoginActivity extends AppCompatActivity implements GoogleApiC
         if (result.isSuccess())
         {
             // Signed in successfully, show authenticated UI.
-            GoogleSignInAccount acct = result.getSignInAccount();
+            acct = result.getSignInAccount();
             //mStatusTextView.setText(getString(R.string.signed_in_fmt, acct.getDisplayName()));
             updateUI(true);
 
-            //Logins the google account user with their email address as their "username"
-            //TODO get webserver token and place in call to local account
-            LocalAccount.Login(acct, null);
+            String token = acct.getIdToken();
 
-            Toast.makeText(getApplicationContext(), "Google sign in succeeded!", Toast.LENGTH_LONG).show();
+            new DatabaseConnect(this).execute(DatabaseConnectionTypes.GOOGLE_TOKEN, token);
+            showBiometrixProgressDialog();
+
         }
         else
         {
@@ -171,6 +177,59 @@ public class GoogleLoginActivity extends AppCompatActivity implements GoogleApiC
         }
     }
 
+    @Override
+    /**
+     * Retrieves the results of calling the webserver.
+     */
+    public void processFinish(String result)
+    {
+        hideProgressDialog();
+
+        JSONObject jsonObject;
+
+        //Tries to parse the returned result as a json object.
+        try
+        {
+            jsonObject = new JSONObject(result);
+        }
+        catch (JSONException jsonExcept)
+        {
+            jsonObject = null;
+        }
+
+        //If the return could not be parsed, then it was not a successful addition
+        if (jsonObject == null)
+        {
+            Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show();
+        }
+        else
+        {
+            try
+            {
+                if (jsonObject.has("Error"))
+                {
+                    Toast.makeText(getApplicationContext(), jsonObject.getString("Error"), Toast.LENGTH_LONG).show();
+                }
+                //If the operation succeeded
+                else if ((Boolean)jsonObject.get("Verified") )
+                {
+                    //Logins the google account user with their id as their "username"
+                    LocalAccount.Login(acct.getId(), jsonObject.getString("Token"));
+
+                    Toast.makeText(getApplicationContext(), "Google sign in succeeded!", Toast.LENGTH_LONG).show();
+                }
+                else
+                {
+                    Toast.makeText(getApplicationContext(), "Login failed", Toast.LENGTH_LONG).show();
+                }
+            }
+            catch (JSONException jsonExcept)
+            {
+                Toast.makeText(getApplicationContext(), "Something went wrong with the server's return", Toast.LENGTH_LONG).show();
+            }
+        }
+
+    }
 
     /**
      * Makes the buttons appear or disappear as needed. If the user is signed in, the sign-in button
@@ -215,17 +274,13 @@ public class GoogleLoginActivity extends AppCompatActivity implements GoogleApiC
                 (new ResultCallback<Status>() {
                     //Creates the function that is called when the sign out finishes executing
                     @Override
-                    public void onResult(Status status)
-                    {
-                        if (status.isSuccess())
-                        {
+                    public void onResult(Status status) {
+                        if (status.isSuccess()) {
                             Toast.makeText(getApplicationContext(), "Logged out", Toast.LENGTH_LONG).show();
                             updateUI(false);
 
                             LocalAccount.Logout();
-                        }
-                        else
-                        {
+                        } else {
                             Toast.makeText(getApplicationContext(), "Could not logout", Toast.LENGTH_LONG).show();
                         }
 
@@ -246,7 +301,7 @@ public class GoogleLoginActivity extends AppCompatActivity implements GoogleApiC
                     @Override
                     public void onResult(Status status)
                     {
-                        Toast.makeText(getApplicationContext(), "Google account rights have been revoked", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "This app has been removed from your google account", Toast.LENGTH_LONG).show();
                         LocalAccount.Logout();
                         updateUI(false);
                     }
@@ -263,6 +318,21 @@ public class GoogleLoginActivity extends AppCompatActivity implements GoogleApiC
         {
             progressDialog = new ProgressDialog(this);
             progressDialog.setMessage(getString(R.string.login_loading));
+            progressDialog.setIndeterminate(true);
+        }
+
+        progressDialog.show();
+    }
+
+    /**
+     * Creates a progress dialog if it does not exist, and then shows it
+     */
+    private void showBiometrixProgressDialog()
+    {
+        if (progressDialog == null)
+        {
+            progressDialog = new ProgressDialog(this);
+            progressDialog.setMessage(getString(R.string.login_biometrix_loading));
             progressDialog.setIndeterminate(true);
         }
 
