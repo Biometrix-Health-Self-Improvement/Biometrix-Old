@@ -150,11 +150,6 @@ public class GetLoginActivity extends AppCompatActivity implements AsyncResponse
                         //Logs the user in with their login token.
                         LocalAccount.Login(username, jsonObject.getString("Token"));
 
-                        /*//Create's an "intent" to passback user information with keys username and password.
-                        Intent dataPassback = new Intent();
-                        dataPassback.putExtra("username", username);
-                        dataPassback.putExtra("password", password);*/
-
                         setResult(RESULT_OK);
                         finish();
                     }

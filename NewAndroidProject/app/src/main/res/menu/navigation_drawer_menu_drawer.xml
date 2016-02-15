@@ -36,6 +36,9 @@
             <item
                 android:id="@+id/nav_create_account"
                 android:title="Create Account" />
+            <item
+                android:id="@+id/nav_google_login"
+                android:title="Google Login"/>
         </menu>
     </item>
 

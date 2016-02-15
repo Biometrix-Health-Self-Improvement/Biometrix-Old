@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.rocket.biometrix.biometrix.Login.GetLogin">
+    tools:context="com.rocket.biometrix.Login.GetLogin">
 
     <LinearLayout
         android:orientation="vertical"

@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.rocket.biometrix.biometrix.ExerciseModule.ExerciseParent">
+    tools:context="com.rocket.biometrix.ExerciseModule.ExerciseParent">
 
     <Button
         style="@style/create_entry_button"
