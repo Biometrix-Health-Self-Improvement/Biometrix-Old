@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="med_Notes">Enter Notes Here!</string>
-    <string name="med_brand">Brand Name: </string>
-    <string name="med_prescriber">Prescriber\'s Name: </string>
-</resources>

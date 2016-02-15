@@ -15,8 +15,7 @@
     <string name="title_activity_sleep_parent">BioMetrix Sleep Tracker</string>
     <string name="title_activity_sleep_entry">BioMetrix Add Sleep Entry</string>
 
-    <string name="title_activity_medication_parent">BioMetrix Medication Tracker</string>
-    <string name="title_activity_medication_entry">BioMetrix Add Medication Entry</string>
+
 
     <string name="title_activity_navigation_drawer">NavigationDrawer</string>
     <string name="title_activity_get_date_time">GetDateTime</string>
