@@ -1,0 +1,176 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.rocket.biometrix.ExerciseModule.ExerciseEntry">
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+        android:text="@string/date_prompt"
+        android:layout_marginBottom="4dp"
+        android:id="@+id/ex_tv_date"
+        />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+        android:layout_below="@id/ex_tv_date"
+        android:text="@string/time_prompt"
+        android:layout_marginBottom="8dp"
+        android:id="@+id/ex_tv_time"
+         />
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="@string/ex_et_title"
+        android:id="@+id/ex_title"
+        android:gravity="start"
+
+        android:layout_marginBottom="20dp"
+        android:layout_below="@id/ex_tv_time"
+        android:hint="@string/ex_ex_name"
+        android:textAlignment="center" />
+
+
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/ex_time"
+        android:layout_below="@id/ex_title"
+        android:id="@+id/ex_time"
+        />
+
+
+    <Spinner
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:minWidth="60dp"
+        android:id="@+id/ex_min_spinner"
+        android:focusable="false"
+        android:layout_marginLeft="8dp"
+        android:layout_toEndOf="@id/ex_time"
+        android:layout_below="@id/ex_title"
+        android:focusableInTouchMode="false"
+        android:gravity="start"
+        android:prompt="@string/ex_prompt"
+        />
+
+
+    <RadioGroup
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_gravity="start"
+        android:layout_below="@id/ex_time"
+        android:orientation="horizontal"
+        android:layout_marginTop="25dp"
+        android:id="@+id/ex_radioGroup">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ex_rb_a_t"
+            android:id="@+id/ex_rb_a" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ex_rb_b_t"
+            android:id="@+id/ex_rb_b" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ex_rb_c_t"
+            android:id="@+id/ex_rb_c" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ex_rb_d_t"
+            android:id="@+id/ex_rb_d" />
+    </RadioGroup>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ex_reps"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/ex_t_rep"
+        android:layout_below="@id/ex_radioGroup"
+        android:layout_marginTop="20dp"
+        android:layout_alignParentStart="false"
+
+
+       />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/ex_weight"
+        android:layout_below="@id/ex_t_rep"
+        android:layout_marginTop="20dp"
+        android:id="@+id/ex_t_weight"
+
+
+        />
+
+    <EditText
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/ex_et_reps"
+        android:inputType="number"
+        android:text="@string/ex_et_reps"
+        android:layout_below="@id/ex_radioGroup"
+        android:layout_toEndOf="@id/ex_t_rep"
+        />
+
+    <EditText
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:id="@+id/ex_et_weight"
+        android:text="@string/ex_et_weight"
+        android:singleLine="true"
+        android:layout_below="@id/ex_et_reps"
+        android:layout_toEndOf="@id/ex_t_weight" />
+
+
+
+    <Button
+        style="@style/done_button"
+        android:id="@+id/ex_entry_done_button"
+        />
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ex_plan"
+        android:id="@+id/ex_cb_plan"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@id/ex_entry_done_button"
+        android:textSize="16sp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ex_notes"
+        android:hint="@string/mood_details"
+        android:layout_above="@id/ex_cb_plan"
+        android:layout_marginBottom="20dp"
+        android:maxLines="5"
+        android:background="@color/colorBackgroundSecondary" />
+
+
+</RelativeLayout>

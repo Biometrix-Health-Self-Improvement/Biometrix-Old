@@ -1,0 +1,163 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.rocket.biometrix.SleepModule.SleepEntry">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="false">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/date_prompt"
+            android:id="@+id/sleepStartDateTextView"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:layout_weight="1" />
+
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/sleepStartTimeTextView"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:text="@string/time_prompt"
+            android:layout_weight="1" />
+
+        <Space
+            android:layout_width="20dp"
+            android:layout_height="20dp" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sleep_display_hours"
+                android:id="@+id/sleepHoursSleptTextView"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <SeekBar
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/sleepHoursSeekBar"
+                android:indeterminate="false"
+                android:max="23"
+                android:progress="1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Minutes slept: "
+                android:id="@+id/sleepMinutesSleptTextView"
+                android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+            <SeekBar
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/sleepMinutesSeekBar"
+                android:indeterminate="false"
+                android:max="59"
+                android:progress="1" />
+        </LinearLayout>
+
+        <Space
+            android:layout_width="20dp"
+            android:layout_height="20dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/sleepTimeSleptTextView"
+            android:text="@string/sleep_time_slept_base"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_weight="1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/sleepEndTimeTextView"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/sleep_end_time_base"
+            android:layout_weight="1" />
+
+
+        <Space
+            android:layout_width="20dp"
+            android:layout_height="20dp" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sleep_quality"
+            android:id="@+id/sleepQualityTextView"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+            <SeekBar
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/sleepQualitySeekBar"
+                android:layout_weight="1"
+                android:max="10"
+                android:progress="1"
+                android:indeterminate="false" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/sleepQualityNumberTextView"
+                android:text="1"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sleep_gen_health_text"
+            android:id="@+id/textView2"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/sleepGeneralHealthSpinner"
+             />
+
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/sleepNotesEditText"
+            android:layout_weight="1"
+            android:hint="@string/sleep_comment_hint" />
+
+
+
+        <Button
+            style="@style/done_button"
+            android:id="@+id/submitSleepButton"
+            android:onClick="EntryDoneOnClick"
+            />
+
+    </LinearLayout>
+
+</RelativeLayout>

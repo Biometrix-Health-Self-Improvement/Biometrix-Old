@@ -1,0 +1,31 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.rocket.biometrix.MoodModule.MoodParent">
+
+    <Button style="@style/create_entry_button"
+        android:id="@+id/createMoodEntryButton"
+        android:onClick="CreateEntryOnClick" />
+
+    <View
+        style="@style/Divider"
+        android:layout_below="@+id/createMoodEntryButton"
+        android:id="@+id/dividerUpper"
+         />
+
+
+    <ScrollView style="@style/scrollview_parent_list"
+        android:id="@+id/pastMoodEntriesScrollview"
+        android:layout_below="@+id/dividerUpper" >
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:id="@+id/pastMoodEntries"
+            android:layout_height="wrap_content">
+
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

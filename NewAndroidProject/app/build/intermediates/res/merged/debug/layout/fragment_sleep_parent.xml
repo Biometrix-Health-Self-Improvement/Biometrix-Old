@@ -1,0 +1,40 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.rocket.biometrix.SleepModule.SleepParent">
+
+    <Button
+        style="@style/create_entry_button"
+        android:id="@+id/NewSleepEntryButton"
+        android:onClick="CreateEntryOnClick" />
+
+    <View
+        style="@style/Divider"
+        android:layout_below="@+id/NewSleepEntryButton"
+        android:id="@+id/dividerUpper"
+        />
+
+    <ScrollView style="@style/scrollview_parent_list"
+        android:id="@+id/sleepDisplayEntriesScrollView"
+        android:layout_below="@+id/dividerUpper" >
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/sleepDisplayEntriesLinearLayout"/>
+    </ScrollView>
+
+ <!--
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/disable_sleep_string"
+        android:id="@+id/disableSleepButton"
+        android:onClick="onSleepDisableClick"
+        android:background="@color/colorButtonBackground"
+        android:layout_above="@+id/sleepDisplayEntriesScrollView"
+        android:layout_alignParentStart="true" />
+-->
+</RelativeLayout>

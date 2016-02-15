@@ -1,0 +1,204 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.rocket.biometrix.MoodModule.MoodEntry">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:baselineAligned="false"
+        android:id="@+id/tableLayout">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/dateTableRow">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                android:text="@string/date_prompt"
+                android:id="@+id/moodCreateEntryDateSelect"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/timeTableRow">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                android:text="@string/time_prompt"
+                android:id="@+id/moodCreateEntryTimeSelect"
+                android:layout_below="@+id/moodCreateEntryDateSelect"
+                android:layout_alignParentStart="true" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/spaceTableRow1">
+
+            <Space
+                android:layout_height="20dp"
+                android:id="@+id/space1" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:id="@+id/moodDepressedTableRow">
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Depressed: "
+                android:id="@+id/moodDepressedLabel"
+                style="@style/mood_rating_col_1_style" />
+
+            <SeekBar
+                android:layout_height="wrap_content"
+                android:id="@+id/moodDepressedRating"
+                android:layout_column="1"
+                android:max="4"
+                style="@style/mood_rating_col_2_style"
+                android:indeterminate="false" />
+
+            <TextView
+                style="@style/mood_rating_col_3_style"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/mood_rating_none"
+                android:id="@+id/moodDepressedDesc"
+                android:layout_column="2"
+                android:singleLine="true" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/moodElevatedTableRow">
+
+            <TextView
+                style="@style/mood_rating_col_1_style"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Elevated:"
+                android:id="@+id/moodElevatedLabel" />
+
+            <SeekBar
+                android:layout_height="wrap_content"
+                android:id="@+id/moodElevatedRating"
+                android:layout_column="1"
+                android:max="4"
+                style="@style/mood_rating_col_2_style" />
+
+            <TextView
+                style="@style/mood_rating_col_3_style"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/mood_rating_none"
+                android:id="@+id/moodElevatedDesc"
+                android:layout_column="2" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/moodIrritabilityTableRow">
+
+            <TextView
+                style="@style/mood_rating_col_1_style"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Irritability:"
+                android:id="@+id/moodIrritabilityLabel" />
+
+            <SeekBar
+                android:layout_height="wrap_content"
+                android:id="@+id/moodIrritabilityRating"
+                android:layout_column="1"
+                android:max="4"
+                style="@style/mood_rating_col_2_style" />
+
+            <TextView
+                style="@style/mood_rating_col_3_style"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/mood_rating_none"
+                android:id="@+id/moodIrritabilityDesc"
+                android:layout_column="2" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/moodAnxietyTableRow">
+
+
+            <TextView
+                style="@style/mood_rating_col_1_style"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Anxiety:"
+                android:id="@+id/moodAnxietyLabel" />
+
+            <SeekBar
+                style="@style/mood_rating_col_2_style"
+                android:layout_height="wrap_content"
+                android:id="@+id/moodAnxietyRating"
+                android:layout_column="1"
+                android:max="4" />
+
+            <TextView
+                style="@style/mood_rating_col_3_style"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/mood_rating_none"
+                android:id="@+id/moodAnxietyDesc"
+                android:layout_column="2" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/spaceTableRow2" >
+
+            <Space
+                android:layout_height="20dp"
+                android:id="@+id/space"
+                android:layout_width="wrap_content" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/moodDetailsTableRow">
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/moodDetailsEditText"
+                android:layout_weight="1"
+                android:hint="@string/mood_details"
+                android:maxLines="5"
+                android:background="@color/colorBackgroundSecondary" />
+        </TableRow>
+
+    </TableLayout>
+
+    <Button
+        style="@style/done_button"
+        android:id="@+id/mood_entry_done_button"
+    />
+
+</RelativeLayout>
