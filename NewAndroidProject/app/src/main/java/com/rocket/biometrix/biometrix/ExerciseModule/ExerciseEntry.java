@@ -1,6 +1,8 @@
 package com.rocket.biometrix.biometrix.ExerciseModule;
 
 import android.app.Fragment;
+import android.content.ContentValues;
+import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,12 +11,15 @@ import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.rocket.biometrix.biometrix.Common.DateTimeSelectorPopulateTextView;
+import com.rocket.biometrix.biometrix.Common.StringDateTimeConverter;
+import com.rocket.biometrix.biometrix.Database.LocalStorageAccessExercise;
 import com.rocket.biometrix.biometrix.NavigationDrawerActivity;
 import com.rocket.biometrix.biometrix.R;
 
@@ -42,7 +47,8 @@ public class ExerciseEntry extends Fragment {
 
     Spinner minuteSpinner;
     boolean toasted = false; //Used to display encouraging messages ONCE in minuteSpinner.
-    //To avoid 'hard coded' strings...These are implemented in the minuteSpinners listener in the onCreate event
+
+
     String lowestSpinnerValueThreshold = "5"; //5 minutes
     String lowSpinnerValueThreshold = "10"; //10 minutes (idea is to encourage user to exercise more but still celebrate their 'baby' gains)
     String lowSpinnerMessage = "Keep it up :)"; //The encouraging message
@@ -166,8 +172,6 @@ public class ExerciseEntry extends Fragment {
         DTPOWAH.Populate(); //Change the text
 
 
-
-        //TODO: Change the way the data is stored. The way TJ did it still works with fragments.
         /**Done click event saves entered data to string array
          *Bundles string array for transport across activities
          * Receives bundle from parent, changes the data inside and sends it back to parent with error checking
@@ -175,87 +179,62 @@ public class ExerciseEntry extends Fragment {
          *And, Adds this exercise to the 'plan' if it needs to be added
          *Lastly, it closes up the entry activity with finish() which will activate the onActivityResult() in ExerciseParent.
          * */
+        Button ExerciseEntryDone = (Button) v.findViewById(R.id.ex_entry_done_button);
+        ExerciseEntryDone.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View done_clk) {
+                //Filling a string that holds title
+                String titleString = StringDateTimeConverter.GetStringFromEditText(v.findViewById(R.id.ex_title));
 
-//        Button ExerciseEntryDone = (Button) v.findViewById(R.id.ex_b_done);
-//        ExerciseEntryDone.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v) {
-//                //Filling a string that holds title
-//                String titleString = StringDateTimeConverter.GetStringFromEditText(R.id.ex_title, v);
-//
-//                //Filling date and time strings for bundle's string array
-//                String dateString = dateTV.getText().toString();
-//                String timeString = timeTV.getText().toString();
-//
-//                //Cleaning date and time strings with helper class
-//                dateString = StringDateTimeConverter.fixDate(dateString);
-//                timeString = StringDateTimeConverter.fixTime(timeString);
-//
-//                //Filling reps/laps string
-//                String repsString = StringDateTimeConverter.GetStringFromEditText(R.id.ex_et_reps, v);
-//
-//                //Filling weight/intensity string from its editText found @content_exercise_entry.xml
-//                String weightString = StringDateTimeConverter.GetStringFromEditText(R.id.ex_et_weight, v);
-//
-//                //Filling notes string
-//                String notesString = StringDateTimeConverter.GetStringFromEditText(R.id.ex_notes, v);
-//
-//                //Make string array to hold all the strings extracted from the user's input on this entry activity
-//                //{TITLE, TYPE, MINUTES, REPS, LAPS, WEIGHT, INTY, NOTES, DATE, TIME}; //No distinction between reps and laps, weight and intensity.
-//                exerciseEntryData = new String[]{titleString, typeSelected, minSelected, repsString, repsString, weightString, weightString, notesString, dateString, timeString};
-//
-//                //https://developer.android.com/reference/android/os/Bundle.html
-//                //Put string array that has all the entries data points in it into a Bundle. This bundle is for future extensibility it is NOT for the parent class.
-//                Bundle exerciseEntryBundle = new Bundle();
-//                exerciseEntryBundle.putStringArray("exEntBundKey", exerciseEntryData);
-//
-//
-//                //Getting PARENT bundle.
-//                Bundle parentExtras = getActivity().getIntent().getExtras();
-//                String[] usersEntryData = parentExtras.getStringArray("parentArray"); //Don't worry this is supposed to be redundant for extendability.
-//                //Here is where the parent bundle could be used (to auto-populate an entry for editing for example) For now I will only set the parent's string array equal to exerciseEntryData.
-//                usersEntryData = exerciseEntryData;
-//
-//                //Get PARENT intent for setResult()
-//                Intent backtoParent = getActivity().getIntent();
-//
-//                //Another bundle specifically for giving data and results back to the PARENT
-//                Bundle backtoParentBund = new Bundle();
-//                backtoParentBund.putStringArray("childKey", usersEntryData);
-//
-//
-//                backtoParent.putExtra("childKey", backtoParentBund);
-//                //HERE is where extensive error checking could be done on the user's entry (IE if it is all blank don't save) but for now... if the key matched say it went OK
-//                getActivity().setResult(RESULT_OK, backtoParent);
-//
-//
-//                Context context = v.getContext();
-//                //Pull keys from LSA Exercise
-//                LocalDBAdapterExercise dbEx = new LocalDBAdapterExercise(context);
-//
-//                //You don't have to keep strings in the same order across classes, I just did to make the code easier.
-//                //{TITLE, TYPE, MINUTES, REPS, LAPS, WEIGHT, INTY, NOTES, DATE, TIME};
-//                String[] columnNames = dbEx.getColumns();
-//
-//                //Making sure I have data for each column (even if null or empty, note that this is NOT required, you can insert columns individually if you wish.) @see putNull
-//                if (columnNames.length == exerciseEntryData.length) {
-//                    ContentValues rowToBeInserted = new ContentValues();
-//                    int dataIndex = 0;
-//                    for (String column : columnNames) {
-//                        //Insert column name ripped from LSA child class, and the user's entry data we gathered above
-//                        rowToBeInserted.put(column, exerciseEntryData[dataIndex]);
-//                        dataIndex++;
-//                    }
-//                    //Call insert method
-//                    dbEx.insertFromContentValues(rowToBeInserted);
-//                }
-//
-//                //Kill this thread, User will still have exercise main page open.
-//                finish();
-//
-//            }
-//        }); //end addNewEntry on click listener
+                //Filling date and time strings for bundle's string array
+                String dateString = dateTV.getText().toString();
+                String timeString = timeTV.getText().toString();
 
+                //Cleaning date and time strings with helper class
+                dateString = StringDateTimeConverter.fixDate(dateString);
+                timeString = StringDateTimeConverter.fixTime(timeString);
 
+                //Filling reps/laps string
+                String repsString = StringDateTimeConverter.GetStringFromEditText(v.findViewById(R.id.ex_et_reps));
+
+                //Filling weight/intensity string from its editText found @content_exercise_entry.xml
+                String weightString = StringDateTimeConverter.GetStringFromEditText(v.findViewById(R.id.ex_et_weight));
+
+                //Filling notes string
+                String notesString = StringDateTimeConverter.GetStringFromEditText(v.findViewById(R.id.ex_notes));
+
+                //Make string array to hold all the strings extracted from the user's input on this entry activity
+                //{TITLE, TYPE, MINUTES, REPS, LAPS, WEIGHT, INTY, NOTES, DATE, TIME}; //No distinction between reps and laps, weight and intensity.
+                exerciseEntryData = new String[]{titleString, typeSelected, minSelected, repsString, repsString, weightString, weightString, notesString, dateString, timeString};
+
+                //https://developer.android.com/reference/android/os/Bundle.html
+                //Put string array that has all the entries data points in it into a Bundle. This bundle is for future extensibility it is NOT for the parent class.
+                Bundle exerciseEntryBundle = new Bundle();
+                exerciseEntryBundle.putStringArray("exEntBundKey", exerciseEntryData);
+
+                Context context = v.getContext();
+
+                //Pull keys from LSA Exercise
+                LocalStorageAccessExercise dbEx = new LocalStorageAccessExercise(context);
+
+                //You don't have to keep strings in the same order across classes, I just did to make the code easier.
+                //{TITLE, TYPE, MINUTES, REPS, LAPS, WEIGHT, INTY, NOTES, DATE, TIME};
+                String[] columnNames = dbEx.getColumns();
+
+                //Making sure I have data for each column (even if null or empty, note that this is NOT required, you can insert columns individually if you wish.) @see putNull
+                if (columnNames.length == exerciseEntryData.length) {
+                    ContentValues rowToBeInserted = new ContentValues();
+                    int dataIndex = 0;
+                    for (String column : columnNames) {
+                        //Insert column name ripped from LSA child class, and the user's entry data we gathered above
+                        rowToBeInserted.put(column, exerciseEntryData[dataIndex]);
+                        dataIndex++;
+                    }
+                    //Call insert method
+                    dbEx.insertFromContentValues(rowToBeInserted);
+                }
+
+            }
+        }); //end addNewEntry on click listener
 
 
         return v;

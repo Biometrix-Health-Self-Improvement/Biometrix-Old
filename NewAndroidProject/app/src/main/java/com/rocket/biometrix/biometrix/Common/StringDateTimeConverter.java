@@ -4,40 +4,36 @@ package com.rocket.biometrix.biometrix.Common;
  * Created by tannalynn on 1/22/2016.
  */
 
-import android.app.Activity;
-import android.content.Context;
 import android.view.View;
 import android.widget.EditText;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-import java.util.TimeZone;
 
 public class StringDateTimeConverter
 {
     //Function given an <<EditText>> resource ID (R.id.ex_et_weight) and Activity, e.g. ExerciseEntry.this will return its text contents as a string.
     //Soft error handling will just mess up the returned string if you gave a bad id, not crash the app.
- /**   public static String GetStringFromEditText(int id, Activity act) {
-        String endResult = "ERROR in GetStringFromEditText: Resource ID does not exist";
-        //0 is always an invalid resource. And if a view can't be found by its ID, findViewById returns null
-        //http://developer.android.com/reference/android/content/res/Resources.html#getIdentifier%28java.lang.String,%20java.lang.String,%20java.lang.String%29
-        //http://developer.android.com/reference/android/app/Activity.html#findViewById%28int%29
-        if (id != 0) {
-            if (act.findViewById(id) != null)
-                try {
-                    final EditText et = (EditText) act.findViewById(id);
-                    endResult = et.getText().toString();
-                }//end try
-                catch (IllegalArgumentException | ClassCastException exceptionName) {
-                    endResult = "ERROR in GetStringFromEditText: try block";
-                }
-        }
-        return endResult;
-    }
-**/
+    /**   public static String GetStringFromEditText(int id, Activity act) {
+     String endResult = "ERROR in GetStringFromEditText: Resource ID does not exist";
+     //0 is always an invalid resource. And if a view can't be found by its ID, findViewById returns null
+     //http://developer.android.com/reference/android/content/res/Resources.html#getIdentifier%28java.lang.String,%20java.lang.String,%20java.lang.String%29
+     //http://developer.android.com/reference/android/app/Activity.html#findViewById%28int%29
+     if (id != 0) {
+     if (act.findViewById(id) != null)
+     try {
+     final EditText et = (EditText) act.findViewById(id);
+     endResult = et.getText().toString();
+     }//end try
+     catch (IllegalArgumentException | ClassCastException exceptionName) {
+     endResult = "ERROR in GetStringFromEditText: try block";
+     }
+     }
+     return endResult;
+     }
+     **/
 
     //Call various helper methods to make the  edit texts
     // go from human readable to more Database friendly formats
@@ -54,21 +50,17 @@ public class StringDateTimeConverter
         return time;
     }
 
-    public static String GetStringFromEditText(int id, View act) {
+    //Example feed me with: GetStringFromEditText(EditText)v.findViewById(R.id.ex_title);
+    public static String GetStringFromEditText(View v) {
         String endResult = "ERROR in GetStringFromEditText: Resource ID does not exist";
-        //0 is always an invalid resource. And if a view can't be found by its ID, findViewById returns null
-        //http://developer.android.com/reference/android/content/res/Resources.html#getIdentifier%28java.lang.String,%20java.lang.String,%20java.lang.String%29
-        //http://developer.android.com/reference/android/app/Activity.html#findViewById%28int%29
-        if (id != 0) {
-            if (act.findViewById(id) != null)
-                try {
-                    final EditText et = (EditText) act.findViewById(id);
-                    endResult = et.getText().toString();
-                }//end try
-                catch (IllegalArgumentException | ClassCastException exceptionName) {
-                    endResult = "ERROR in GetStringFromEditText: try block";
-                }
-        }
+        if (v != null)
+            try {
+                final EditText et = (EditText) v;
+                endResult = et.getText().toString();
+            }//end try
+            catch (IllegalArgumentException | ClassCastException exceptionName) {
+                endResult = "ERROR in GetStringFromEditText: try block";
+            }
         return endResult;
     }
 
@@ -97,7 +89,7 @@ public class StringDateTimeConverter
         }
 
         //Make string with right SQL date format.
-        String formattedDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSSZ").format(date);
+        String formattedDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSSZ").format(date2);
 
         //cut out time information
         StringBuffer buf = new StringBuffer(formattedDate);
@@ -110,6 +102,7 @@ public class StringDateTimeConverter
     //Helper function to convert 07:30 PM (wall clock) to military time
     public static String convertTimeString (String time){
 
+        //Locale to prevent non USA zone breakzzz
         SimpleDateFormat sDF=new SimpleDateFormat("hh:mm aa", Locale.getDefault());
 
         Date date = null;
