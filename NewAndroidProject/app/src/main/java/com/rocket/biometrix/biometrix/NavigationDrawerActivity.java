@@ -16,14 +16,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.app.FragmentManager.*;
-import android.widget.EditText;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
-import com.rocket.biometrix.biometrix.Database.DatabaseConnect;
-import com.rocket.biometrix.biometrix.Database.DatabaseConnectionTypes;
 import com.rocket.biometrix.biometrix.DietModule.DietEntry;
 import com.rocket.biometrix.biometrix.ExerciseModule.ExerciseEntry;
 import com.rocket.biometrix.biometrix.MedicationModule.MedicationEntry;
@@ -157,7 +153,6 @@ public class NavigationDrawerActivity extends AppCompatActivity
         transaction.replace(R.id.navigation_drawer_fragment_content, frag);
         transaction.addToBackStack(null);
         transaction.commit();
-        activeFragment = frag;
     }
 
     /**************************************************************************
@@ -223,25 +218,6 @@ public class NavigationDrawerActivity extends AppCompatActivity
             //replaces the current fragment with the parent fragment
             replaceFragment(newFragment);
         }
-    }
-
-    /**
-     *  on click event for reseting password button
-     * @param v
-     */
-    public void resetPasswordButtonClick(View v){
-        ((GetLogin)activeFragment).resetPasswordClick();
-    }
-    public  void passwordSignIn(View v){
-        ((GetLogin)activeFragment).okayButtonClick(v);
-    }
-
-    public void cancelButton(View v){
-        replaceFragment(new HomeScreen());
-    }
-
-    public void createAccountButtonClick(View v){
-        ((CreateLogin)activeFragment).createAccount();
     }
 
 }

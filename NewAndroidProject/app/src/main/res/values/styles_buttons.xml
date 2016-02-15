@@ -42,4 +42,18 @@
         <item name="android:layout_centerHorizontal">true</item>
     </style>
 
+<!--
+
+    <Button
+        android:layout_width="120dp"
+        android:layout_height="35dp"
+        android:text="@string/create_entry_button"
+        android:id="@+id/createMoodEntryButton"
+        android:background="@color/colorButtonBackground"
+        android:textColor="@color/colorButtonText"
+        android:gravity="center"
+        android:layout_gravity="end"
+        android:textAlignment="center"
+        android:onClick="CreateEntryOnClick" />
+-->
 </resources>
