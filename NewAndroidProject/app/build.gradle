@@ -4,7 +4,7 @@ android {
     compileSdkVersion 23
     buildToolsVersion "23.0.1"
     defaultConfig {
-        applicationId "com.rocket.biometrix.biometrix"
+        applicationId "com.rocket.biometrix"
         minSdkVersion 19
         targetSdkVersion 23
         versionCode 1

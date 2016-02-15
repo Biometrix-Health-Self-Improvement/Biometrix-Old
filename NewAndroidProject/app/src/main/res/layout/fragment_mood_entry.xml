@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.rocket.biometrix.biometrix.MoodModule.MoodEntry">
+    tools:context="com.rocket.biometrix.MoodModule.MoodEntry">
 
     <TableLayout
         android:layout_width="match_parent"
